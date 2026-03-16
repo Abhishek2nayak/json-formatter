@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  #root {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-150 cursor-pointer select-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-blue-600 hover:bg-blue-500 text-white;
+  }
+
+  .btn-ghost {
+    @apply btn text-gray-400 hover:text-gray-200 hover:bg-white/5;
+  }
+
+  .btn-icon {
+    @apply p-1.5 rounded-md text-gray-400 hover:text-gray-200 hover:bg-white/5 transition-all duration-150 cursor-pointer;
+  }
+
+  .panel {
+    @apply bg-[#1e1e1e] border border-[#2d2d2d] rounded-lg overflow-hidden;
+  }
+
+  .panel-dark {
+    @apply bg-[#141414] border border-[#2d2d2d];
+  }
+
+  .tag {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+  }
+
+  .tag-green {
+    @apply tag bg-green-500/20 text-green-400;
+  }
+
+  .tag-red {
+    @apply tag bg-red-500/20 text-red-400;
+  }
+
+  .tag-blue {
+    @apply tag bg-blue-500/20 text-blue-400;
+  }
+
+  .tag-yellow {
+    @apply tag bg-yellow-500/20 text-yellow-400;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #3d3d3d transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #3d3d3d;
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #4d4d4d;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Monaco Editor customizations */
+.monaco-editor {
+  padding-top: 8px !important;
+}
+
+.monaco-editor .margin {
+  background: transparent !important;
+}
+
+/* Tree view animations */
+.tree-node-enter {
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Diff highlighting */
+.diff-added {
+  background-color: rgba(129, 199, 132, 0.1);
+  border-left: 2px solid #81c784;
+}
+
+.diff-removed {
+  background-color: rgba(229, 115, 115, 0.1);
+  border-left: 2px solid #e57373;
+}
+
+.diff-modified {
+  background-color: rgba(255, 183, 77, 0.1);
+  border-left: 2px solid #ffb74d;
+}
+
+/* Resizable panel handle */
+[data-panel-resize-handle-id] {
+  transition: background-color 0.15s;
+}
+
+/* Light theme overrides */
+.light body {
+  @apply bg-gray-50;
+}
