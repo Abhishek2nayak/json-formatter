@@ -147,7 +147,7 @@ export const useStore = create<AppState>()(
       setBottomPanelOpen: (open) => set({ isBottomPanelOpen: open }),
     }),
     {
-      name: 'json-formatter-store',
+      name: 'jsonmaster-store',
       partialize: (state) => ({
         theme: state.theme,
         history: state.history,

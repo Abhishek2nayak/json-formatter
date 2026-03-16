@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import {
-  Filter, SortAsc, Minimize, Maximize, Search, Copy, Check
+  Filter, SortAsc, Minimize, Maximize, Search, Copy, Check,
+  Trash2, Clock, KeyRound, Lock, Unlock, AlertTriangle, RefreshCw
 } from 'lucide-react';
 import { useStore } from '../store';
-import { parseJSON, removeNullValues, sortKeysAlphabetically, flattenJSON, unflattenJSON } from '../utils/json';
+import {
+  parseJSON, removeNullValues, removeEmptyValues, sortKeysAlphabetically,
+  flattenJSON, unflattenJSON, detectTimestamps, detectDuplicateKeys,
+  decodeBase64InJSON, encodeBase64InJSON, filterByRegex
+} from '../utils/json';
 
 const SAMPLE_JSON = `{
   "user": {
@@ -11,6 +16,8 @@ const SAMPLE_JSON = `{
     "name": "John Doe",
     "email": "john@example.com",
     "role": "admin",
+    "createdAt": 1710000000,
+    "token": "SGVsbG8gV29ybGQ=",
     "preferences": {
       "theme": "dark",
       "notifications": true,
@@ -46,10 +53,18 @@ export function QuickTools() {
   const { theme, jsonInput, setJsonInput } = useStore();
   const isDark = theme === 'dark';
   const [copiedPath, setCopiedPath] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<string | null>('transforms');
 
-  const transform = (fn: (parsed: unknown) => unknown) => {
-    const { parsed, error } = parseJSON(jsonInput);
-    if (error || !parsed) return;
+  // Regex filter state
+  const [regexPattern, setRegexPattern] = useState('');
+  const [regexTarget, setRegexTarget] = useState<'keys' | 'values' | 'both'>('both');
+  const [regexError, setRegexError] = useState('');
+
+  const { parsed, error } = parseJSON(jsonInput);
+  const isValid = !!parsed && !error;
+
+  const transform = (fn: (p: unknown) => unknown) => {
+    if (!parsed) return;
     setJsonInput(JSON.stringify(fn(parsed), null, 2));
   };
 
@@ -59,55 +74,58 @@ export function QuickTools() {
     setTimeout(() => setCopiedPath(null), 2000);
   };
 
-  const tools = [
-    {
-      icon: <Filter size={13} />,
-      label: 'Remove nulls',
-      description: 'Remove all null values',
-      action: () => transform(removeNullValues),
-    },
-    {
-      icon: <SortAsc size={13} />,
-      label: 'Sort keys',
-      description: 'Sort keys alphabetically',
-      action: () => transform(sortKeysAlphabetically),
-    },
-    {
-      icon: <Minimize size={13} />,
-      label: 'Flatten',
-      description: 'Flatten nested structure',
-      action: () => transform(v => flattenJSON(v)),
-    },
-    {
-      icon: <Maximize size={13} />,
-      label: 'Unflatten',
-      description: 'Restore nested structure',
-      action: () => {
-        const { parsed, error } = parseJSON(jsonInput);
-        if (error || !parsed || typeof parsed !== 'object') return;
-        setJsonInput(JSON.stringify(unflattenJSON(parsed as Record<string, unknown>), null, 2));
-      },
-    },
+  const handleRegexFilter = () => {
+    if (!parsed || !regexPattern) return;
+    try {
+      new RegExp(regexPattern);
+      setRegexError('');
+      const result = filterByRegex(parsed, regexPattern, regexTarget);
+      setJsonInput(JSON.stringify(result, null, 2));
+    } catch {
+      setRegexError('Invalid regex pattern');
+    }
+  };
+
+  const duplicates = isValid ? detectDuplicateKeys(jsonInput) : [];
+  const timestamps = isValid && parsed ? detectTimestamps(parsed) : [];
+
+  const transforms = [
+    { icon: <Filter size={12} />, label: 'Remove nulls', description: 'Remove all null values', action: () => transform(removeNullValues), color: 'text-red-400' },
+    { icon: <Trash2 size={12} />, label: 'Remove empty', description: 'Remove empty strings, arrays, objects', action: () => transform(removeEmptyValues), color: 'text-orange-400' },
+    { icon: <SortAsc size={12} />, label: 'Sort keys', description: 'Sort keys alphabetically (recursive)', action: () => transform(sortKeysAlphabetically), color: 'text-blue-400' },
+    { icon: <Minimize size={12} />, label: 'Flatten', description: 'Flatten nested structure to dot notation', action: () => transform(v => flattenJSON(v)), color: 'text-green-400' },
+    { icon: <Maximize size={12} />, label: 'Unflatten', description: 'Restore nested structure from dot notation', action: () => { if (!parsed || typeof parsed !== 'object') return; setJsonInput(JSON.stringify(unflattenJSON(parsed as Record<string, unknown>), null, 2)); }, color: 'text-teal-400' },
+    { icon: <Unlock size={12} />, label: 'Decode Base64', description: 'Decode all base64 string values', action: () => transform(decodeBase64InJSON), color: 'text-purple-400' },
+    { icon: <Lock size={12} />, label: 'Encode Base64', description: 'Encode all string values to base64', action: () => transform(encodeBase64InJSON), color: 'text-indigo-400' },
+    { icon: <RefreshCw size={12} />, label: 'Deep clone', description: 'Stringify and re-parse (normalizes)', action: () => { if (!parsed) return; setJsonInput(JSON.stringify(JSON.parse(JSON.stringify(parsed)), null, 2)); }, color: 'text-cyan-400' },
   ];
 
-  const { parsed } = parseJSON(jsonInput);
-  const isValid = !!parsed;
+  const Section = ({ id, title, children }: { id: string; title: string; children: React.ReactNode }) => (
+    <div className={`border-b flex-shrink-0 ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>
+      <button
+        onClick={() => setActiveSection(activeSection === id ? null : id)}
+        className={`w-full flex items-center justify-between px-3 py-2 text-xs font-medium transition-colors ${
+          isDark ? 'text-gray-500 hover:text-gray-300' : 'text-gray-500 hover:text-gray-700'
+        }`}
+      >
+        <span>{title}</span>
+        <span className={`transition-transform ${activeSection === id ? 'rotate-180' : ''}`}>▾</span>
+      </button>
+      {activeSection === id && <div className="px-3 pb-3">{children}</div>}
+    </div>
+  );
 
   return (
     <div className="flex flex-col h-full overflow-auto scrollbar-thin">
-      {/* Quick transformations */}
-      <div className={`px-3 py-2 border-b flex-shrink-0 ${
-        isDark ? 'border-[#2d2d2d]' : 'border-gray-200'
-      }`}>
-        <div className={`text-xs font-medium mb-2 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
-          Quick Transforms
-        </div>
+      {/* Quick Transforms */}
+      <Section id="transforms" title="Quick Transforms">
         <div className="grid grid-cols-2 gap-1.5">
-          {tools.map(tool => (
+          {transforms.map(tool => (
             <button
               key={tool.label}
               onClick={tool.action}
               disabled={!isValid}
+              title={tool.description}
               className={`flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-left transition-all ${
                 isValid
                   ? isDark
@@ -117,25 +135,117 @@ export function QuickTools() {
                     ? 'bg-[#1a1a1a] text-gray-600 border border-[#2a2a2a] cursor-not-allowed'
                     : 'bg-gray-50 text-gray-400 border border-gray-200 cursor-not-allowed'
               }`}
-              title={tool.description}
             >
-              <span className={isValid ? (isDark ? 'text-blue-400' : 'text-blue-600') : ''}>
-                {tool.icon}
-              </span>
+              <span className={isValid ? tool.color : ''}>{tool.icon}</span>
               {tool.label}
             </button>
           ))}
         </div>
-      </div>
+      </Section>
+
+      {/* Regex Filter */}
+      <Section id="regex" title="Regex Filter">
+        <div className="space-y-2">
+          <div className={`flex items-center gap-1.5 rounded-md border px-2 py-1.5 ${
+            isDark ? 'bg-[#1a1a1a] border-[#2d2d2d]' : 'bg-gray-50 border-gray-200'
+          }`}>
+            <Search size={11} className={isDark ? 'text-gray-600' : 'text-gray-400'} />
+            <input
+              type="text"
+              placeholder="e.g. ^user|email$"
+              value={regexPattern}
+              onChange={e => { setRegexPattern(e.target.value); setRegexError(''); }}
+              onKeyDown={e => e.key === 'Enter' && handleRegexFilter()}
+              className={`flex-1 text-xs bg-transparent outline-none font-mono ${
+                isDark ? 'text-gray-300 placeholder-gray-600' : 'text-gray-700 placeholder-gray-400'
+              }`}
+            />
+          </div>
+          {regexError && <p className="text-red-400 text-xs">{regexError}</p>}
+          <div className="flex items-center gap-2">
+            <span className={`text-xs ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>Search in:</span>
+            {(['keys', 'values', 'both'] as const).map(opt => (
+              <button
+                key={opt}
+                onClick={() => setRegexTarget(opt)}
+                className={`text-xs px-2 py-0.5 rounded-full border transition-all ${
+                  regexTarget === opt
+                    ? isDark ? 'bg-blue-500/20 border-blue-500/50 text-blue-400' : 'bg-blue-50 border-blue-300 text-blue-600'
+                    : isDark ? 'border-[#2d2d2d] text-gray-500' : 'border-gray-200 text-gray-400'
+                }`}
+              >
+                {opt}
+              </button>
+            ))}
+            <button
+              onClick={handleRegexFilter}
+              disabled={!isValid || !regexPattern}
+              className="ml-auto text-xs px-2.5 py-1 rounded-md bg-blue-600 hover:bg-blue-500 text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              Filter
+            </button>
+          </div>
+        </div>
+      </Section>
+
+      {/* Duplicate Key Detector */}
+      {isValid && (
+        <Section id="duplicates" title={`Duplicate Keys${duplicates.length ? ` (${duplicates.length})` : ''}`}>
+          {duplicates.length === 0 ? (
+            <div className={`flex items-center gap-2 text-xs ${isDark ? 'text-green-400' : 'text-green-600'}`}>
+              <Check size={12} /> No duplicate keys found
+            </div>
+          ) : (
+            <div className="space-y-1">
+              <div className="flex items-center gap-1.5 text-xs text-yellow-400 mb-2">
+                <AlertTriangle size={12} />
+                <span>{duplicates.length} duplicate key{duplicates.length > 1 ? 's' : ''} detected</span>
+              </div>
+              {duplicates.map((d, i) => (
+                <div key={i} className={`flex items-center gap-2 text-xs px-2 py-1.5 rounded-md ${
+                  isDark ? 'bg-yellow-500/10 border border-yellow-500/20' : 'bg-yellow-50 border border-yellow-200'
+                }`}>
+                  <KeyRound size={11} className="text-yellow-400 flex-shrink-0" />
+                  <code className={`font-mono flex-1 ${isDark ? 'text-yellow-300' : 'text-yellow-700'}`}>
+                    {d.path} → <span className="font-bold">"{d.key}"</span>
+                  </code>
+                </div>
+              ))}
+            </div>
+          )}
+        </Section>
+      )}
+
+      {/* Timestamp Detector */}
+      {isValid && timestamps.length > 0 && (
+        <Section id="timestamps" title={`Timestamps (${timestamps.length})`}>
+          <div className="space-y-1.5">
+            {timestamps.map((ts, i) => (
+              <div key={i} className={`rounded-md p-2 border ${
+                isDark ? 'bg-[#1a1a1a] border-[#2d2d2d]' : 'bg-gray-50 border-gray-200'
+              }`}>
+                <div className="flex items-center gap-1.5 mb-1">
+                  <Clock size={11} className="text-cyan-400" />
+                  <code className={`text-xs font-mono truncate ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>
+                    {ts.path}
+                  </code>
+                </div>
+                <div className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <span className={`font-mono ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>{ts.unix}</span>
+                  {' → '}
+                  <span className={`${isDark ? 'text-cyan-300' : 'text-cyan-600'}`}>{ts.date}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
 
       {/* JSON Path Finder */}
       {isValid && (
-        <div className={`px-3 py-2 border-b ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>
-          <div className={`text-xs font-medium mb-2 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
-            JSON Path Finder
-          </div>
+        <Section id="paths" title="JSON Path Finder">
           <PathFinder parsed={parsed} isDark={isDark} onCopy={handleCopy} copiedPath={copiedPath} />
-        </div>
+        </Section>
       )}
 
       {/* Load sample */}
@@ -188,7 +298,7 @@ function PathFinder({
 
   const filtered = search
     ? paths.filter(p => p.toLowerCase().includes(search.toLowerCase()))
-    : paths.slice(0, 15);
+    : paths.slice(0, 20);
 
   return (
     <div>

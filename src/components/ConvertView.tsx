@@ -12,6 +12,7 @@ const FORMATS: { id: ConvertFormat; label: string; ext: string; icon: string }[]
   { id: 'typescript', label: 'TypeScript', ext: 'ts', icon: '🔷' },
   { id: 'python', label: 'Python', ext: 'py', icon: '🐍' },
   { id: 'java', label: 'Java', ext: 'java', icon: '☕' },
+  { id: 'env', label: '.env', ext: 'env', icon: '⚙️' },
 ];
 
 export function ConvertView() {

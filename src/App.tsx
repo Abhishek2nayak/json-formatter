@@ -10,6 +10,7 @@ import { BottomPanel } from './components/BottomPanel';
 import { HistoryPanel } from './components/HistoryPanel';
 import { ShortcutsModal } from './components/ShortcutsModal';
 import { QuickTools } from './components/QuickTools';
+import { SchemaGenerator } from './components/SchemaGenerator';
 import { DragDropWrapper } from './components/DragDrop';
 import { useStore } from './store';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
@@ -28,7 +29,7 @@ function ResizeHandle() {
 function RightPanel() {
   const { theme, viewMode } = useStore();
   const isDark = theme === 'dark';
-  const [activeTab, setActiveTab] = React.useState<'tree' | 'table' | 'tools'>('tree');
+  const [activeTab, setActiveTab] = React.useState<'tree' | 'table' | 'tools' | 'schema'>('tree');
 
   if (viewMode === 'compare') return <CompareView />;
   if (viewMode === 'convert') return <ConvertView />;
@@ -37,6 +38,7 @@ function RightPanel() {
     { id: 'tree' as const, label: 'Tree', content: <TreeView /> },
     { id: 'table' as const, label: 'Table', content: <TableView /> },
     { id: 'tools' as const, label: 'Tools', content: <QuickTools /> },
+    { id: 'schema' as const, label: 'Schema', content: <SchemaGenerator /> },
   ];
 
   return (

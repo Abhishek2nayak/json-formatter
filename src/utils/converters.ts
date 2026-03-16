@@ -220,6 +220,37 @@ function toCamelCase(str: string): string {
   return str.replace(/[-_\s]+(.)/g, (_, c) => c.toUpperCase()).replace(/^./, c => c.toLowerCase());
 }
 
+export function toEnv(parsed: unknown, prefix: string = ''): string {
+  const lines: string[] = [];
+
+  function flatten(value: unknown, key: string) {
+    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+      for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+        flatten(v, key ? `${key}_${k.toUpperCase()}` : k.toUpperCase());
+      }
+    } else if (Array.isArray(value)) {
+      lines.push(`${key}=${JSON.stringify(value)}`);
+    } else if (value === null) {
+      lines.push(`${key}=`);
+    } else {
+      const str = String(value);
+      const needsQuotes = str.includes(' ') || str.includes('\n') || str.includes('#');
+      lines.push(`${key}=${needsQuotes ? `"${str.replace(/"/g, '\\"')}"` : str}`);
+    }
+  }
+
+  const p = prefix ? prefix.toUpperCase() + '_' : '';
+  if (typeof parsed === 'object' && parsed !== null && !Array.isArray(parsed)) {
+    for (const [k, v] of Object.entries(parsed as Record<string, unknown>)) {
+      flatten(v, `${p}${k.toUpperCase()}`);
+    }
+  } else {
+    lines.push(`${p}VALUE=${JSON.stringify(parsed)}`);
+  }
+
+  return lines.join('\n');
+}
+
 export function convert(parsed: unknown, format: ConvertFormat): string {
   switch (format) {
     case 'yaml': return toYAML(parsed);
@@ -228,6 +259,7 @@ export function convert(parsed: unknown, format: ConvertFormat): string {
     case 'typescript': return toTypeScript(parsed);
     case 'python': return toPython(parsed);
     case 'java': return toJava(parsed);
+    case 'env': return toEnv(parsed);
     default: return '';
   }
 }

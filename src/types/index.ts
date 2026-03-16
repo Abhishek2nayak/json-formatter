@@ -1,6 +1,6 @@
 export type Theme = 'dark' | 'light';
 export type ViewMode = 'editor' | 'tree' | 'table' | 'compare' | 'convert';
-export type ConvertFormat = 'yaml' | 'xml' | 'csv' | 'typescript' | 'python' | 'java';
+export type ConvertFormat = 'yaml' | 'xml' | 'csv' | 'typescript' | 'python' | 'java' | 'env';
 export type IndentSize = 2 | 4 | 'tab';
 
 export interface JsonError {

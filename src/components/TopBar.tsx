@@ -109,7 +109,7 @@ export function TopBar() {
           <Braces size={14} className="text-white" />
         </div>
         <span className={`text-sm font-semibold hidden sm:block ${isDark ? 'text-white' : 'text-gray-900'}`}>
-          JSONFlow
+          JsonMaster
         </span>
       </div>
 
