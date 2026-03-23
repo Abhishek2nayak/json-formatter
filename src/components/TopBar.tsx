@@ -1,14 +1,21 @@
 import React, { useRef } from 'react';
 import {
-  Upload, Link, Code, Minimize2, CheckCircle, GitCompare,
+  Upload, Link, Code, Minimize2, Maximize2, CheckCircle, GitCompare,
   ArrowLeftRight, Moon, Sun, Keyboard, History, ChevronDown,
-  Braces
+  Braces, Home
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store';
 import { formatJSON, minifyJSON, parseJSON, getJSONStats, suggestFix } from '../utils/json';
 import type { IndentSize, ViewMode } from '../types';
 
-export function TopBar() {
+interface TopBarProps {
+  isFullscreen: boolean;
+  onToggleFullscreen: () => void;
+}
+
+export function TopBar({ isFullscreen, onToggleFullscreen }: TopBarProps) {
+  const navigate = useNavigate();
   const {
     theme, toggleTheme,
     jsonInput, setJsonInput,
@@ -103,6 +110,17 @@ export function TopBar() {
     <div className={`flex items-center gap-2 px-3 h-12 border-b flex-shrink-0 ${
       isDark ? 'bg-[#141414] border-[#2d2d2d]' : 'bg-white border-gray-200'
     }`}>
+      {/* Back to home (fullscreen only) */}
+      {isFullscreen && (
+        <button
+          onClick={() => navigate('/')}
+          className={`btn-icon mr-1`}
+          title="Back to home"
+        >
+          <Home size={14} />
+        </button>
+      )}
+
       {/* Logo */}
       <div className="flex items-center gap-2 mr-2">
         <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center">
@@ -264,6 +282,15 @@ export function TopBar() {
         title="Keyboard shortcuts (?)"
       >
         <Keyboard size={15} />
+      </button>
+
+      {/* Minimize / Maximize */}
+      <button
+        onClick={onToggleFullscreen}
+        className={`btn-icon ${isDark ? '' : 'hover:bg-gray-100'}`}
+        title={isFullscreen ? 'Compact view' : 'Fullscreen editor'}
+      >
+        {isFullscreen ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
       </button>
 
       {/* Theme toggle */}

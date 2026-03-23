@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 import MonacoEditor from '@monaco-editor/react';
-import { Copy, Download, Trash2, ClipboardPaste } from 'lucide-react';
+import { Copy, Download, Trash2, ClipboardPaste, ZoomIn } from 'lucide-react';
 import { useStore } from '../store';
 import { parseJSON, getJSONStats, formatJSON } from '../utils/json';
 import type * as Monaco from 'monaco-editor';
@@ -162,6 +162,13 @@ export function JsonEditor({ readOnly = false, value, onChange, label, height = 
           <button onClick={handleDownload} className="btn-icon" title="Download">
             <Download size={13} />
           </button>
+          <button
+            onClick={() => editorRef.current?.getAction('editor.action.fontZoomReset')?.run()}
+            className="btn-icon"
+            title="Reset zoom (Ctrl+0)"
+          >
+            <ZoomIn size={13} />
+          </button>
           {!readOnly && (
             <button onClick={handleClear} className="btn-icon" title="Clear">
               <Trash2 size={13} />
@@ -205,6 +212,7 @@ export function JsonEditor({ readOnly = false, value, onChange, label, height = 
             insertSpaces: indentSize !== 'tab',
             bracketPairColorization: { enabled: true },
             guides: { bracketPairs: true, indentation: true },
+            mouseWheelZoom: true,
             scrollbar: {
               vertical: 'auto',
               horizontal: 'auto',

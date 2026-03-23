@@ -15,12 +15,11 @@
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow: hidden;
-    height: 100vh;
   }
 
+  /* Full-screen editor mode is handled by App.tsx via JS */
   #root {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
