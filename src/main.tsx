@@ -13,6 +13,11 @@ import { JsonToXmlPage } from './pages/tools/JsonToXmlPage'
 import { JsonToYamlPage } from './pages/tools/JsonToYamlPage'
 import { JsonComparePage } from './pages/tools/JsonComparePage'
 import { DiffCheckerPage } from './pages/tools/DiffCheckerPage'
+import { JwtDecoderPage } from './pages/tools/JwtDecoderPage'
+import { Base64Page } from './pages/tools/Base64Page'
+import { UrlEncoderPage } from './pages/tools/UrlEncoderPage'
+import { RegexTesterPage } from './pages/tools/RegexTesterPage'
+import { JsonToZodPage } from './pages/tools/JsonToZodPage'
 import App from './App'
 import './index.css'
 
@@ -36,6 +41,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path="/json-to-yaml" element={<JsonToYamlPage />} />
         <Route path="/json-compare" element={<JsonComparePage />} />
         <Route path="/diff-checker" element={<DiffCheckerPage />} />
+        <Route path="/jwt-decoder" element={<JwtDecoderPage />} />
+        <Route path="/base64" element={<Base64Page />} />
+        <Route path="/url-encoder" element={<UrlEncoderPage />} />
+        <Route path="/regex-tester" element={<RegexTesterPage />} />
+        <Route path="/json-to-zod" element={<JsonToZodPage />} />
 
         {/* Blog */}
         <Route path="/blog" element={<BlogIndexPage />} />

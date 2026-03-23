@@ -16,6 +16,14 @@ const CONVERT_LINKS = [
   { label: 'JSON → XML',        href: '/json-to-xml',    desc: 'Convert to XML format' },
   { label: 'JSON → CSV',        href: '/json-to-csv',    desc: 'Convert to CSV spreadsheet' },
   { label: 'JSON → Prettifier', href: '/json-prettifier', desc: 'Prettify with formatting' },
+  { label: 'JSON → Zod Schema', href: '/json-to-zod',    desc: 'Generate TypeScript Zod schema' },
+];
+
+const TOOLS_LINKS = [
+  { label: 'JWT Decoder',  href: '/jwt-decoder',  desc: 'Decode JSON Web Tokens' },
+  { label: 'Base64',       href: '/base64',        desc: 'Encode & decode Base64' },
+  { label: 'URL Encoder',  href: '/url-encoder',   desc: 'Encode & decode URLs' },
+  { label: 'Regex Tester', href: '/regex-tester',  desc: 'Test regular expressions' },
 ];
 
 export function SiteNav() {
@@ -24,13 +32,18 @@ export function SiteNav() {
   const isDark = theme === 'dark';
   const [mobileOpen, setMobileOpen] = useState(false);
   const [convertOpen, setConvertOpen] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const toolsDropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
+  // Close dropdowns when clicking outside
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setConvertOpen(false);
+      }
+      if (toolsDropdownRef.current && !toolsDropdownRef.current.contains(e.target as Node)) {
+        setToolsOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClick);
@@ -38,6 +51,7 @@ export function SiteNav() {
   }, []);
 
   const isConvertActive = CONVERT_LINKS.some(l => location.pathname === l.href);
+  const isToolsActive = TOOLS_LINKS.some(l => location.pathname === l.href);
 
   const navItemClass = (active: boolean) =>
     `px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
@@ -115,6 +129,49 @@ export function SiteNav() {
                 </div>
               )}
             </div>
+
+            {/* Tools dropdown */}
+            <div className="relative" ref={toolsDropdownRef}>
+              <button
+                onClick={() => setToolsOpen(o => !o)}
+                className={`inline-flex items-center gap-1 ${navItemClass(isToolsActive)}`}
+              >
+                Tools
+                <ChevronDown
+                  size={12}
+                  className={`transition-transform duration-150 ${toolsOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+
+              {toolsOpen && (
+                <div className={`absolute top-[calc(100%+6px)] left-0 z-50 w-52 rounded-xl border shadow-xl overflow-hidden animate-fade-in ${
+                  isDark ? 'bg-[#1e1e1e] border-[#3d3d3d]' : 'bg-white border-gray-200'
+                }`}>
+                  <div className={`px-3 py-2 text-[10px] font-semibold uppercase tracking-wider border-b ${
+                    isDark ? 'text-gray-600 border-[#2d2d2d]' : 'text-gray-400 border-gray-100'
+                  }`}>
+                    Developer Tools
+                  </div>
+                  {TOOLS_LINKS.map(link => (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      onClick={() => setToolsOpen(false)}
+                      className={`flex items-start gap-2.5 px-3 py-2.5 transition-colors ${
+                        location.pathname === link.href
+                          ? isDark ? 'bg-blue-600/20 text-blue-400' : 'bg-blue-50 text-blue-600'
+                          : isDark ? 'hover:bg-white/5 text-gray-300' : 'hover:bg-gray-50 text-gray-700'
+                      }`}
+                    >
+                      <div className="min-w-0">
+                        <p className="text-xs font-medium leading-none mb-0.5">{link.label}</p>
+                        <p className={`text-[10px] leading-none ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>{link.desc}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="flex items-center gap-2">
@@ -163,6 +220,27 @@ export function SiteNav() {
                 Convert JSON to…
               </p>
               {CONVERT_LINKS.map(link => (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={`block px-2 py-1.5 text-sm font-medium rounded-md ${
+                    location.pathname === link.href
+                      ? 'text-blue-400'
+                      : isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* Mobile tools section */}
+            <div className={`mt-2 px-3 pt-2 border-t ${isDark ? 'border-[#2d2d2d]' : 'border-gray-100'}`}>
+              <p className={`text-[10px] font-semibold uppercase tracking-wider mb-1 ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>
+                Developer Tools
+              </p>
+              {TOOLS_LINKS.map(link => (
                 <Link
                   key={link.href}
                   to={link.href}
