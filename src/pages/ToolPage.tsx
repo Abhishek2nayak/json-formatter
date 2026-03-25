@@ -312,6 +312,7 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
       description={seo.description}
       canonical={`https://jsonmaster.dev${seo.canonical}`}
       faqSchema={content.faq}
+      isToolPage
     />
   );
 

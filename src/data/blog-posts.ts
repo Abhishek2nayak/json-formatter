@@ -861,6 +861,461 @@ user = response.json()</code></pre>
 <p>JSON:API (jsonapi.org) is a specification for building APIs in JSON that defines a standard response envelope, relationships, and pagination. Different from regular JSON — it has a specific <code>data</code>/<code>included</code>/<code>links</code> structure.</p>
 `,
   },
+  // ─────────────────────────────────────────────────────────────
+  {
+    slug: 'how-to-parse-json-javascript',
+    title: 'How to Parse JSON in JavaScript (Complete Guide)',
+    metaTitle: 'How to Parse JSON in JavaScript — JSON.parse() Guide | JsonMaster',
+    metaDescription: 'Learn how to parse JSON in JavaScript using JSON.parse(), handle errors safely, parse nested JSON, and convert objects back to JSON strings with JSON.stringify().',
+    publishedAt: '2026-03-24',
+    readingTime: 8,
+    category: 'Tutorial',
+    tags: ['javascript', 'json', 'json parse', 'tutorial'],
+    content: `
+<h2>JSON.parse() — The Basics</h2>
+<p><code>JSON.parse()</code> is the built-in JavaScript method for converting a JSON string into a JavaScript object. It's available in every modern browser and in Node.js with no imports needed.</p>
+
+<pre><code>const json = '{"name": "Alice", "age": 30, "active": true}';
+const obj = JSON.parse(json);
+
+console.log(obj.name);   // "Alice"
+console.log(obj.age);    // 30
+console.log(obj.active); // true</code></pre>
+
+<h2>Parsing Nested JSON</h2>
+<p>JSON.parse() handles deeply nested objects and arrays automatically:</p>
+
+<pre><code>const json = \`{
+  "user": {
+    "id": 1,
+    "roles": ["admin", "editor"],
+    "address": { "city": "London" }
+  }
+}\`;
+
+const data = JSON.parse(json);
+console.log(data.user.roles[0]);       // "admin"
+console.log(data.user.address.city);   // "London"</code></pre>
+
+<h2>Handling Parse Errors Safely</h2>
+<p>If the JSON string is malformed, <code>JSON.parse()</code> throws a <code>SyntaxError</code>. Always wrap it in a try/catch in production code:</p>
+
+<pre><code>function safeParseJSON(str) {
+  try {
+    return { data: JSON.parse(str), error: null };
+  } catch (e) {
+    return { data: null, error: e.message };
+  }
+}
+
+const { data, error } = safeParseJSON('{ bad json }');
+if (error) {
+  console.error('Failed to parse JSON:', error);
+}</code></pre>
+
+<h2>Common Causes of JSON.parse() Errors</h2>
+<ul>
+  <li><strong>Single quotes</strong> instead of double quotes — <code>{'name': 'Alice'}</code> is invalid</li>
+  <li><strong>Trailing commas</strong> — <code>[1, 2, 3,]</code> is invalid JSON (but valid JS)</li>
+  <li><strong>Unquoted keys</strong> — <code>{name: "Alice"}</code> is invalid</li>
+  <li><strong>Comments</strong> — JSON does not support <code>//</code> or <code>/* */</code> comments</li>
+  <li><strong>Undefined values</strong> — <code>undefined</code> is not a valid JSON value; use <code>null</code></li>
+</ul>
+
+<h2>The Reviver Parameter</h2>
+<p>JSON.parse() accepts an optional reviver function as the second argument. This lets you transform values during parsing — useful for converting date strings into Date objects:</p>
+
+<pre><code>const json = '{"name":"Alice","createdAt":"2025-01-15T10:00:00Z"}';
+
+const obj = JSON.parse(json, (key, value) => {
+  if (key === 'createdAt') return new Date(value);
+  return value;
+});
+
+console.log(obj.createdAt instanceof Date); // true</code></pre>
+
+<h2>JSON.stringify() — Going the Other Way</h2>
+<p><code>JSON.stringify()</code> converts a JavaScript object back into a JSON string:</p>
+
+<pre><code>const obj = { name: 'Alice', age: 30, roles: ['admin'] };
+
+// Compact
+console.log(JSON.stringify(obj));
+// {"name":"Alice","age":30,"roles":["admin"]}
+
+// Pretty-printed with 2-space indent
+console.log(JSON.stringify(obj, null, 2));
+// {
+//   "name": "Alice",
+//   "age": 30,
+//   "roles": ["admin"]
+// }</code></pre>
+
+<h2>Values That JSON.stringify() Drops</h2>
+<p>Some JavaScript values are silently dropped or changed when stringified:</p>
+<ul>
+  <li><code>undefined</code> values in objects → dropped entirely</li>
+  <li><code>undefined</code> in arrays → becomes <code>null</code></li>
+  <li>Functions → dropped</li>
+  <li><code>Symbol</code> keys → dropped</li>
+  <li><code>Infinity</code>, <code>NaN</code> → become <code>null</code></li>
+</ul>
+
+<pre><code>JSON.stringify({ a: 1, b: undefined, c: () => {} });
+// '{"a":1}'  — b and c are dropped</code></pre>
+
+<h2>Parsing JSON from a Fetch API Response</h2>
+<p>When fetching JSON from an API, use the <code>.json()</code> method on the Response object — it handles parsing automatically:</p>
+
+<pre><code>const response = await fetch('https://api.example.com/users/1');
+const user = await response.json(); // returns parsed object, no JSON.parse() needed
+console.log(user.name);</code></pre>
+
+<h2>TypeScript: Typing Parsed JSON</h2>
+<p>In TypeScript, <code>JSON.parse()</code> returns <code>any</code>. Cast it to your type or use Zod for runtime validation:</p>
+
+<pre><code>// Simple cast (no runtime validation)
+interface User { name: string; age: number; }
+const user = JSON.parse(json) as User;
+
+// Safe runtime validation with Zod
+import { z } from 'zod';
+const UserSchema = z.object({ name: z.string(), age: z.number() });
+const user = UserSchema.parse(JSON.parse(json)); // throws if invalid</code></pre>
+
+<p>Use our free <a href="/json-to-zod">JSON to Zod Schema Generator</a> to instantly generate a Zod schema from any JSON sample.</p>
+
+<h2>Quick Reference</h2>
+<table>
+  <thead><tr><th>Method</th><th>Direction</th><th>Second argument</th></tr></thead>
+  <tbody>
+    <tr><td><code>JSON.parse(str)</code></td><td>JSON string → JS object</td><td>Reviver function</td></tr>
+    <tr><td><code>JSON.stringify(obj)</code></td><td>JS object → JSON string</td><td>Replacer + indent</td></tr>
+  </tbody>
+</table>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  {
+    slug: 'regex-cheat-sheet',
+    title: 'Regex Cheat Sheet — Regular Expression Reference for Developers',
+    metaTitle: 'Regex Cheat Sheet 2025 — Complete Regular Expression Reference | JsonMaster',
+    metaDescription: 'Complete regex cheat sheet covering character classes, quantifiers, anchors, groups, lookaheads, flags, and common patterns for email, URL, date, IP, and more.',
+    publishedAt: '2026-03-24',
+    readingTime: 10,
+    category: 'Reference',
+    tags: ['regex', 'regular expressions', 'cheat sheet', 'javascript'],
+    content: `
+<h2>What is a Regular Expression?</h2>
+<p>A regular expression (regex) is a sequence of characters that defines a search pattern. In JavaScript, you can create one with a literal (<code>/pattern/flags</code>) or with the <code>RegExp</code> constructor:</p>
+
+<pre><code>const re1 = /hello/i;                  // literal
+const re2 = new RegExp('hello', 'i');  // constructor — use when pattern is dynamic</code></pre>
+
+<p>Test patterns interactively with our free <a href="/regex-tester">Online Regex Tester</a>.</p>
+
+<h2>Character Classes</h2>
+<table>
+  <thead><tr><th>Pattern</th><th>Matches</th></tr></thead>
+  <tbody>
+    <tr><td><code>.</code></td><td>Any character except newline (add <code>s</code> flag to include newline)</td></tr>
+    <tr><td><code>\d</code></td><td>Digit [0-9]</td></tr>
+    <tr><td><code>\D</code></td><td>Non-digit</td></tr>
+    <tr><td><code>\w</code></td><td>Word character [a-zA-Z0-9_]</td></tr>
+    <tr><td><code>\W</code></td><td>Non-word character</td></tr>
+    <tr><td><code>\s</code></td><td>Whitespace (space, tab, newline)</td></tr>
+    <tr><td><code>\S</code></td><td>Non-whitespace</td></tr>
+    <tr><td><code>[abc]</code></td><td>One of: a, b, or c</td></tr>
+    <tr><td><code>[^abc]</code></td><td>Anything except a, b, c</td></tr>
+    <tr><td><code>[a-z]</code></td><td>Any lowercase letter</td></tr>
+    <tr><td><code>[a-zA-Z0-9]</code></td><td>Any alphanumeric character</td></tr>
+  </tbody>
+</table>
+
+<h2>Quantifiers</h2>
+<table>
+  <thead><tr><th>Quantifier</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td><code>*</code></td><td>0 or more (greedy)</td></tr>
+    <tr><td><code>+</code></td><td>1 or more (greedy)</td></tr>
+    <tr><td><code>?</code></td><td>0 or 1 (optional)</td></tr>
+    <tr><td><code>{n}</code></td><td>Exactly n times</td></tr>
+    <tr><td><code>{n,}</code></td><td>n or more times</td></tr>
+    <tr><td><code>{n,m}</code></td><td>Between n and m times</td></tr>
+    <tr><td><code>*?</code></td><td>0 or more (lazy — match as few as possible)</td></tr>
+    <tr><td><code>+?</code></td><td>1 or more (lazy)</td></tr>
+  </tbody>
+</table>
+
+<h2>Anchors</h2>
+<table>
+  <thead><tr><th>Anchor</th><th>Matches</th></tr></thead>
+  <tbody>
+    <tr><td><code>^</code></td><td>Start of string (or line with <code>m</code> flag)</td></tr>
+    <tr><td><code>$</code></td><td>End of string (or line with <code>m</code> flag)</td></tr>
+    <tr><td><code>\b</code></td><td>Word boundary</td></tr>
+    <tr><td><code>\B</code></td><td>Non-word boundary</td></tr>
+  </tbody>
+</table>
+
+<h2>Groups and Alternation</h2>
+<table>
+  <thead><tr><th>Syntax</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td><code>(abc)</code></td><td>Capturing group — captures the match</td></tr>
+    <tr><td><code>(?:abc)</code></td><td>Non-capturing group — groups without capturing</td></tr>
+    <tr><td><code>(?&lt;name&gt;abc)</code></td><td>Named capturing group</td></tr>
+    <tr><td><code>a|b</code></td><td>Alternation — match a or b</td></tr>
+    <tr><td><code>\\1</code></td><td>Backreference to group 1</td></tr>
+  </tbody>
+</table>
+
+<h2>Lookaheads and Lookbehinds</h2>
+<table>
+  <thead><tr><th>Syntax</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td><code>(?=abc)</code></td><td>Positive lookahead — followed by abc</td></tr>
+    <tr><td><code>(?!abc)</code></td><td>Negative lookahead — NOT followed by abc</td></tr>
+    <tr><td><code>(?&lt;=abc)</code></td><td>Positive lookbehind — preceded by abc</td></tr>
+    <tr><td><code>(?&lt;!abc)</code></td><td>Negative lookbehind — NOT preceded by abc</td></tr>
+  </tbody>
+</table>
+
+<h2>Flags</h2>
+<table>
+  <thead><tr><th>Flag</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td><code>g</code></td><td>Global — find all matches, not just the first</td></tr>
+    <tr><td><code>i</code></td><td>Case insensitive</td></tr>
+    <tr><td><code>m</code></td><td>Multiline — <code>^</code> and <code>$</code> match line boundaries</td></tr>
+    <tr><td><code>s</code></td><td>DotAll — <code>.</code> matches newlines</td></tr>
+    <tr><td><code>u</code></td><td>Unicode — enables full Unicode matching</td></tr>
+    <tr><td><code>y</code></td><td>Sticky — match only from <code>lastIndex</code></td></tr>
+  </tbody>
+</table>
+
+<h2>Common Regex Patterns</h2>
+
+<h3>Email address</h3>
+<pre><code>/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g</code></pre>
+
+<h3>URL (http/https)</h3>
+<pre><code>/https?:\/\/[^\s/$.?#].[^\s]*/g</code></pre>
+
+<h3>US Phone number</h3>
+<pre><code>/\(?\d{3}\)?[\s.\-]?\d{3}[\s.\-]?\d{4}/g</code></pre>
+
+<h3>Date (YYYY-MM-DD)</h3>
+<pre><code>/\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])/g</code></pre>
+
+<h3>UUID v4</h3>
+<pre><code>/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/gi</code></pre>
+
+<h3>IPv4 address</h3>
+<pre><code>/\b(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\b/g</code></pre>
+
+<h3>Hex color</h3>
+<pre><code>/#(?:[0-9a-fA-F]{3}){1,2}\b/g</code></pre>
+
+<h3>Credit card number (basic)</h3>
+<pre><code>/\b(?:\d{4}[\s\-]?){3}\d{4}\b/g</code></pre>
+
+<h3>Slug (URL-safe string)</h3>
+<pre><code>/^[a-z0-9]+(?:-[a-z0-9]+)*$/</code></pre>
+
+<h2>JavaScript Regex Methods</h2>
+<table>
+  <thead><tr><th>Method</th><th>Returns</th><th>Use when</th></tr></thead>
+  <tbody>
+    <tr><td><code>str.match(re)</code></td><td>Array of matches (or null)</td><td>Getting all matches at once</td></tr>
+    <tr><td><code>str.matchAll(re)</code></td><td>Iterator of match objects</td><td>Need groups from each match</td></tr>
+    <tr><td><code>re.test(str)</code></td><td>true / false</td><td>Just checking if a match exists</td></tr>
+    <tr><td><code>re.exec(str)</code></td><td>Match object (or null)</td><td>Iterating with a stateful regex</td></tr>
+    <tr><td><code>str.replace(re, fn)</code></td><td>New string</td><td>Replacing or transforming matches</td></tr>
+    <tr><td><code>str.split(re)</code></td><td>Array of parts</td><td>Splitting on a pattern</td></tr>
+  </tbody>
+</table>
+
+<h2>Greedy vs Lazy — Why it Matters</h2>
+<pre><code>const html = '&lt;b&gt;hello&lt;/b&gt; and &lt;b&gt;world&lt;/b&gt;';
+
+// Greedy — matches as much as possible
+html.match(/&lt;b&gt;.*&lt;\/b&gt;/)[0];
+// "&lt;b&gt;hello&lt;/b&gt; and &lt;b&gt;world&lt;/b&gt;"  ← too much
+
+// Lazy — matches as little as possible
+html.match(/&lt;b&gt;.*?&lt;\/b&gt;/)[0];
+// "&lt;b&gt;hello&lt;/b&gt;"  ← correct</code></pre>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  {
+    slug: 'json-schema-validation-guide',
+    title: 'JSON Schema Validation — Complete Guide with Examples',
+    metaTitle: 'JSON Schema Validation Guide — Types, Formats & Examples | JsonMaster',
+    metaDescription: 'Learn JSON Schema validation from scratch. Covers types, required fields, string formats, numbers, arrays, nested objects, $ref, and how to validate in JavaScript.',
+    publishedAt: '2026-03-24',
+    readingTime: 9,
+    category: 'Tutorial',
+    tags: ['json schema', 'validation', 'api', 'typescript'],
+    content: `
+<h2>What is JSON Schema?</h2>
+<p>JSON Schema is a vocabulary that lets you annotate and validate JSON documents. It describes the structure of your data — which fields are required, what types they must be, what formats are allowed, and what constraints apply. JSON Schema is widely used to validate API request/response bodies, configuration files, and database documents.</p>
+
+<p>The current stable version is <strong>Draft 2020-12</strong>. Most libraries support Draft 7 or later.</p>
+
+<h2>A Basic JSON Schema</h2>
+<pre><code>{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "name", "email"],
+  "properties": {
+    "id":     { "type": "integer" },
+    "name":   { "type": "string", "minLength": 1 },
+    "email":  { "type": "string", "format": "email" },
+    "age":    { "type": "integer", "minimum": 0, "maximum": 150 },
+    "active": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}</code></pre>
+
+<h2>JSON Schema Types</h2>
+<table>
+  <thead><tr><th>Type</th><th>JSON values it matches</th></tr></thead>
+  <tbody>
+    <tr><td><code>"string"</code></td><td>Any JSON string</td></tr>
+    <tr><td><code>"number"</code></td><td>Any JSON number (integer or float)</td></tr>
+    <tr><td><code>"integer"</code></td><td>Numbers without a fractional part</td></tr>
+    <tr><td><code>"boolean"</code></td><td><code>true</code> or <code>false</code></td></tr>
+    <tr><td><code>"null"</code></td><td><code>null</code></td></tr>
+    <tr><td><code>"array"</code></td><td>JSON arrays</td></tr>
+    <tr><td><code>"object"</code></td><td>JSON objects</td></tr>
+  </tbody>
+</table>
+
+<p>You can allow multiple types: <code>"type": ["string", "null"]</code></p>
+
+<h2>String Constraints</h2>
+<pre><code>{
+  "type": "string",
+  "minLength": 3,
+  "maxLength": 100,
+  "pattern": "^[a-zA-Z0-9_]+$",
+  "format": "email"
+}</code></pre>
+
+<p>Common <code>format</code> values: <code>"date"</code>, <code>"date-time"</code>, <code>"email"</code>, <code>"uri"</code>, <code>"uuid"</code>, <code>"ipv4"</code>, <code>"ipv6"</code>. Format validation depends on your validator library.</p>
+
+<h2>Number Constraints</h2>
+<pre><code>{
+  "type": "number",
+  "minimum": 0,
+  "maximum": 100,
+  "exclusiveMinimum": 0,
+  "multipleOf": 0.5
+}</code></pre>
+
+<h2>Array Validation</h2>
+<pre><code>{
+  "type": "array",
+  "items": { "type": "string" },
+  "minItems": 1,
+  "maxItems": 10,
+  "uniqueItems": true
+}</code></pre>
+
+<h2>Object Validation</h2>
+<pre><code>{
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "name": { "type": "string" },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  },
+  "minProperties": 1,
+  "additionalProperties": false
+}</code></pre>
+
+<p>Setting <code>"additionalProperties": false</code> rejects any fields not listed in <code>properties</code> — useful for strict API validation.</p>
+
+<h2>Reusing Schemas with $ref and $defs</h2>
+<pre><code>{
+  "$defs": {
+    "Address": {
+      "type": "object",
+      "required": ["city", "country"],
+      "properties": {
+        "city":    { "type": "string" },
+        "country": { "type": "string", "minLength": 2, "maxLength": 2 }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "name":            { "type": "string" },
+    "billingAddress":  { "$ref": "#/$defs/Address" },
+    "shippingAddress": { "$ref": "#/$defs/Address" }
+  }
+}</code></pre>
+
+<h2>Combining Schemas</h2>
+<table>
+  <thead><tr><th>Keyword</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td><code>allOf</code></td><td>Must match ALL listed schemas</td></tr>
+    <tr><td><code>anyOf</code></td><td>Must match AT LEAST ONE listed schema</td></tr>
+    <tr><td><code>oneOf</code></td><td>Must match EXACTLY ONE listed schema</td></tr>
+    <tr><td><code>not</code></td><td>Must NOT match the given schema</td></tr>
+  </tbody>
+</table>
+
+<pre><code>{
+  "oneOf": [
+    { "type": "string", "format": "email" },
+    { "type": "null" }
+  ]
+}</code></pre>
+
+<h2>Validating JSON Schema in JavaScript</h2>
+<p>The most popular JSON Schema validator for JavaScript is <strong>Ajv</strong>:</p>
+
+<pre><code>import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
+
+const ajv = new Ajv();
+addFormats(ajv); // adds format validation (email, date, etc.)
+
+const schema = {
+  type: 'object',
+  required: ['name', 'email'],
+  properties: {
+    name:  { type: 'string', minLength: 1 },
+    email: { type: 'string', format: 'email' },
+  },
+};
+
+const validate = ajv.compile(schema);
+
+const valid = validate({ name: 'Alice', email: 'alice@example.com' });
+if (!valid) console.log(validate.errors);</code></pre>
+
+<h2>JSON Schema vs Zod — Which Should You Use?</h2>
+<table>
+  <thead><tr><th></th><th>JSON Schema</th><th>Zod</th></tr></thead>
+  <tbody>
+    <tr><td>Language</td><td>Language-agnostic JSON</td><td>TypeScript only</td></tr>
+    <tr><td>Type inference</td><td>Requires separate TS types</td><td>Automatic via z.infer</td></tr>
+    <tr><td>Ecosystem</td><td>OpenAPI, JSON Schema org, many libs</td><td>tRPC, React Hook Form, Next.js</td></tr>
+    <tr><td>Runtime validation</td><td>Yes (with Ajv/etc)</td><td>Yes (built-in)</td></tr>
+    <tr><td>Best for</td><td>APIs, OpenAPI specs, cross-language</td><td>TypeScript projects, form validation</td></tr>
+  </tbody>
+</table>
+
+<p>Generate a Zod schema from your JSON instantly with our <a href="/json-to-zod">JSON to Zod Schema Generator</a>, or validate JSON structure with our <a href="/json-validator">JSON Validator</a>.</p>
+`,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

@@ -259,6 +259,7 @@ export function RegexTesterPage() {
       title="Regex Tester Online — Test Regular Expressions Free | JsonMaster"
       description="Test and debug regular expressions in real time. Highlights all matches, shows capture groups, and includes a quick reference for common patterns. Free and private."
       canonical="https://jsonmaster.dev/regex-tester"
+      isToolPage
     />
   );
 

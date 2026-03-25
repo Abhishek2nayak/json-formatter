@@ -111,6 +111,7 @@ export function JsonToZodPage() {
       title="JSON to Zod Schema Generator — Free Online | JsonMaster"
       description="Convert any JSON object to a TypeScript Zod schema instantly. Auto-infers types for strings, numbers, booleans, arrays, nested objects, and null. Free and private."
       canonical="https://jsonmaster.dev/json-to-zod"
+      isToolPage
     />
   );
 
