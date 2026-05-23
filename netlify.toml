@@ -1,5 +1,10 @@
 [[redirects]]
-from = "https://jsonmaster.netlify.app/*"
-to = "https://jsonworkspace.mythosh.com/:splat"
-status = 301
-force = true
+  from = "https://jsonmaster.netlify.app/*"
+  to = "https://jsonworkspace.mythosh.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

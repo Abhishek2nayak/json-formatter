@@ -1,1 +1,5 @@
+# Force redirect old Netlify subdomain to custom domain
+https://jsonmaster.netlify.app/* https://jsonworkspace.mythosh.com/:splat 301!
+
+# SPA fallback for client-side routing
 /* /index.html 200
