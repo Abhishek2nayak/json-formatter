@@ -240,7 +240,7 @@ export function JwtDecoderPage() {
 
   const seoHead = (
     <SEOHead
-      title="JWT Decoder Online — Decode JSON Web Tokens Free | JsonMaster"
+      title="JWT Decoder Online — Decode JSON Web Tokens Free | JsonWorkspace"
       description="Decode and inspect JWT tokens instantly in your browser. View header, payload, signature, and expiry information. 100% free, private, no data sent to server."
       canonical="https://jsonworkspace.mythosh.com/jwt-decoder"
     />

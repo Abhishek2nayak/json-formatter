@@ -5,13 +5,13 @@ export function JsonMinifierPage() {
     <ToolPage
       mode="minify"
       seo={{
-        title: 'JSON Minifier Online Free — Compress & Minify JSON | JsonMaster',
+        title: 'JSON Minifier Online Free — Compress & Minify JSON | JsonWorkspace',
         description: 'Minify and compress JSON online for free. Remove all whitespace to reduce file size by up to 60%. Perfect for production APIs and storage optimization.',
         canonical: '/json-minifier',
       }}
       content={{
         h1: 'JSON Minifier Online — Free JSON Compressor',
-        intro: 'The JsonMaster JSON Minifier removes all unnecessary whitespace, line breaks, and indentation from your JSON to produce the smallest possible output. Minified JSON loads faster, uses less bandwidth, and takes up less storage — ideal for production APIs, localStorage, and any performance-critical application.',
+        intro: 'The JsonWorkspace JSON Minifier removes all unnecessary whitespace, line breaks, and indentation from your JSON to produce the smallest possible output. Minified JSON loads faster, uses less bandwidth, and takes up less storage — ideal for production APIs, localStorage, and any performance-critical application.',
         howTo: [
           { step: 'Paste formatted JSON', desc: 'Paste your pretty-printed or formatted JSON into the input editor.' },
           { step: 'Click Minify JSON', desc: 'Click the Minify JSON button to compress your JSON into a single line.' },

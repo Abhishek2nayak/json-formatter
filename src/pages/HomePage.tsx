@@ -47,13 +47,13 @@ export function HomePage() {
   return (
     <div className={`min-h-screen flex flex-col ${bg}`} style={{ overflow: 'auto' }}>
       <SEOHead
-        title="JsonMaster — Free JSON Formatter, Validator & Converter Online"
-        description="JsonMaster is the best free online JSON formatter, validator, minifier, and converter. Format, validate, convert JSON to YAML, XML, CSV and more. Fast, private, developer-focused."
+        title="JsonWorkspace — Free JSON Formatter, Validator & Converter Online"
+        description="JsonWorkspace is the best free online JSON formatter, validator, minifier, and converter. Format, validate, convert JSON to YAML, XML, CSV and more. Fast, private, developer-focused."
         canonical="https://jsonworkspace.mythosh.com/"
         faqSchema={[
-          { question: 'Is JsonMaster free?', answer: 'Yes, all tools on JsonMaster are completely free with no sign-up required.' },
-          { question: 'Is JsonMaster safe to use with sensitive data?', answer: 'Yes. All JSON processing happens in your browser — your data never leaves your device.' },
-          { question: 'What JSON tools does JsonMaster offer?', answer: 'JsonMaster offers a JSON formatter, validator, minifier, prettifier, and converters to CSV, XML, YAML, TypeScript, Python, and Java.' },
+          { question: 'Is JsonWorkspace free?', answer: 'Yes, all tools on JsonWorkspace are completely free with no sign-up required.' },
+          { question: 'Is JsonWorkspace safe to use with sensitive data?', answer: 'Yes. All JSON processing happens in your browser — your data never leaves your device.' },
+          { question: 'What JSON tools does JsonWorkspace offer?', answer: 'JsonWorkspace offers a JSON formatter, validator, minifier, prettifier, and converters to CSV, XML, YAML, TypeScript, Python, and Java.' },
         ]}
       />
 
@@ -82,9 +82,8 @@ export function HomePage() {
               </Link>
               <Link
                 to="/json-formatter"
-                className={`inline-flex items-center gap-2 px-6 py-3 font-medium text-sm rounded-lg border transition-colors ${
-                  isDark ? 'border-[#3d3d3d] text-gray-300 hover:text-white hover:border-gray-500' : 'border-gray-300 text-gray-700 hover:text-gray-900 bg-white'
-                }`}
+                className={`inline-flex items-center gap-2 px-6 py-3 font-medium text-sm rounded-lg border transition-colors ${isDark ? 'border-[#3d3d3d] text-gray-300 hover:text-white hover:border-gray-500' : 'border-gray-300 text-gray-700 hover:text-gray-900 bg-white'
+                  }`}
               >
                 JSON Formatter <ArrowRight size={14} />
               </Link>
@@ -227,7 +226,7 @@ export function HomePage() {
               to="/app"
               className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm rounded-lg transition-colors"
             >
-              <Braces size={15} /> Open Full JsonMaster Editor
+              <Braces size={15} /> Open Full JsonWorkspace Editor
             </Link>
           </div>
         </section>

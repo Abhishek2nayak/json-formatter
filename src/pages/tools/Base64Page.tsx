@@ -123,11 +123,10 @@ export function Base64Page() {
           <button
             key={m}
             onClick={() => setMode(m)}
-            className={`px-3 py-1.5 text-xs font-medium capitalize transition-colors ${
-              mode === m
+            className={`px-3 py-1.5 text-xs font-medium capitalize transition-colors ${mode === m
                 ? 'bg-blue-600 text-white'
                 : isDark ? 'bg-transparent text-gray-400 hover:text-gray-200' : 'bg-transparent text-gray-600 hover:text-gray-900'
-            }`}
+              }`}
           >
             {m.charAt(0).toUpperCase() + m.slice(1)}
           </button>
@@ -221,7 +220,7 @@ export function Base64Page() {
 
   const seoHead = (
     <SEOHead
-      title="Base64 Encoder Decoder Online — Free Base64 Tool | JsonMaster"
+      title="Base64 Encoder Decoder Online — Free Base64 Tool | JsonWorkspace"
       description="Encode or decode Base64 strings instantly in your browser. Supports URL-safe Base64, file upload, Unicode text, and size comparison. 100% free and private."
       canonical="https://jsonworkspace.mythosh.com/base64"
     />

@@ -5,13 +5,13 @@ export function JsonValidatorPage() {
     <ToolPage
       mode="validate"
       seo={{
-        title: 'JSON Validator Online Free — Validate & Lint JSON | JsonMaster',
+        title: 'JSON Validator Online Free — Validate & Lint JSON | JsonWorkspace',
         description: 'Validate JSON online for free. Get exact error messages with line numbers and column positions. Fix invalid JSON instantly with auto-fix.',
         canonical: '/json-validator',
       }}
       content={{
         h1: 'JSON Validator Online — Free JSON Lint Tool',
-        intro: 'The JsonMaster JSON Validator checks your JSON for syntax errors in real-time and shows the exact line number and position of every problem. Paste any JSON — from API responses to config files — and get instant validation with actionable error messages. No login required, completely free.',
+        intro: 'The JsonWorkspace JSON Validator checks your JSON for syntax errors in real-time and shows the exact line number and position of every problem. Paste any JSON — from API responses to config files — and get instant validation with actionable error messages. No login required, completely free.',
         howTo: [
           { step: 'Paste your JSON', desc: 'Paste the JSON you want to validate into the input editor.' },
           { step: 'Click Validate JSON', desc: 'Hit Validate JSON to check for syntax errors. Real-time validation also runs as you type.' },
@@ -35,7 +35,7 @@ export function JsonValidatorPage() {
           },
           {
             question: 'What is the difference between JSON validation and JSON Schema validation?',
-            answer: 'Syntax validation checks whether JSON is well-formed (can be parsed). Schema validation checks whether the JSON matches a specific expected structure — correct types, required fields, value ranges. JsonMaster\'s validator handles syntax validation. Use the Schema tab in the full editor for schema validation.',
+            answer: 'Syntax validation checks whether JSON is well-formed (can be parsed). Schema validation checks whether the JSON matches a specific expected structure — correct types, required fields, value ranges. JsonWorkspace\'s validator handles syntax validation. Use the Schema tab in the full editor for schema validation.',
           },
           {
             question: 'Why is my valid-looking JSON showing an error?',
@@ -43,7 +43,7 @@ export function JsonValidatorPage() {
           },
           {
             question: 'Can I validate JSON from an API endpoint?',
-            answer: 'Yes. In the full JsonMaster editor, use the URL button to fetch JSON directly from any API endpoint and validate it automatically.',
+            answer: 'Yes. In the full JsonWorkspace editor, use the URL button to fetch JSON directly from any API endpoint and validate it automatically.',
           },
         ],
         relatedTools: [

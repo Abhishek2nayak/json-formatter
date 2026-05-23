@@ -5,13 +5,13 @@ export function JsonToCsvPage() {
     <ToolPage
       mode="to-csv"
       seo={{
-        title: 'JSON to CSV Converter Online Free | JsonMaster',
+        title: 'JSON to CSV Converter Online Free | JsonWorkspace',
         description: 'Convert JSON to CSV online for free. Transform JSON arrays into spreadsheet-ready CSV format instantly. Download or copy the result.',
         canonical: '/json-to-csv',
       }}
       content={{
         h1: 'JSON to CSV Converter Online — Free & Instant',
-        intro: 'Convert JSON arrays to CSV format in one click with JsonMaster\'s free online JSON to CSV converter. Perfect for importing API data into Excel, Google Sheets, Tableau, or any tool that accepts CSV files. Handles nested objects, special characters, and large datasets.',
+        intro: 'Convert JSON arrays to CSV format in one click with JsonWorkspace\'s free online JSON to CSV converter. Perfect for importing API data into Excel, Google Sheets, Tableau, or any tool that accepts CSV files. Handles nested objects, special characters, and large datasets.',
         howTo: [
           { step: 'Paste your JSON array', desc: 'Paste a JSON array of objects into the input editor. Each object becomes a row in the CSV.' },
           { step: 'Click Convert to CSV', desc: 'Click the Convert button to instantly generate the CSV output.' },

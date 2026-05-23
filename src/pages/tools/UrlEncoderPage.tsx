@@ -117,11 +117,10 @@ export function UrlEncoderPage() {
           <button
             key={m}
             onClick={() => setMode(m)}
-            className={`px-3 py-1.5 text-xs font-medium capitalize transition-colors ${
-              mode === m
+            className={`px-3 py-1.5 text-xs font-medium capitalize transition-colors ${mode === m
                 ? 'bg-blue-600 text-white'
                 : isDark ? 'bg-transparent text-gray-400 hover:text-gray-200' : 'bg-transparent text-gray-600 hover:text-gray-900'
-            }`}
+              }`}
           >
             {m.charAt(0).toUpperCase() + m.slice(1)}
           </button>
@@ -244,7 +243,7 @@ export function UrlEncoderPage() {
 
   const seoHead = (
     <SEOHead
-      title="URL Encoder Decoder Online — Free URL Encoding Tool | JsonMaster"
+      title="URL Encoder Decoder Online — Free URL Encoding Tool | JsonWorkspace"
       description="Encode or decode URLs and URL components instantly. Supports encodeURIComponent and encodeURI modes, URL parsing with query parameter breakdown. Free and private."
       canonical="https://jsonworkspace.mythosh.com/url-encoder"
     />

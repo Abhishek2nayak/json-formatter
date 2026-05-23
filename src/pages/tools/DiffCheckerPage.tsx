@@ -12,18 +12,18 @@ import { useStore } from '../../store';
 import { useFullscreen } from '../../hooks/useFullscreen';
 
 const LANGUAGES = [
-  { label: 'Text',       value: 'plaintext' },
-  { label: 'JSON',       value: 'json' },
+  { label: 'Text', value: 'plaintext' },
+  { label: 'JSON', value: 'json' },
   { label: 'JavaScript', value: 'javascript' },
   { label: 'TypeScript', value: 'typescript' },
-  { label: 'HTML',       value: 'html' },
-  { label: 'CSS',        value: 'css' },
-  { label: 'Python',     value: 'python' },
-  { label: 'YAML',       value: 'yaml' },
-  { label: 'XML',        value: 'xml' },
-  { label: 'Markdown',   value: 'markdown' },
-  { label: 'SQL',        value: 'sql' },
-  { label: 'Bash',       value: 'shell' },
+  { label: 'HTML', value: 'html' },
+  { label: 'CSS', value: 'css' },
+  { label: 'Python', value: 'python' },
+  { label: 'YAML', value: 'yaml' },
+  { label: 'XML', value: 'xml' },
+  { label: 'Markdown', value: 'markdown' },
+  { label: 'SQL', value: 'sql' },
+  { label: 'Bash', value: 'shell' },
 ];
 
 const SAMPLE_ORIGINAL = `function greet(name) {
@@ -71,7 +71,7 @@ export function DiffCheckerPage() {
   const originalRef = useRef('');
   const modifiedRef = useRef('');
 
-  const [language, setLanguage]       = useState('plaintext');
+  const [language, setLanguage] = useState('plaintext');
   const { isFullscreen, toggleFullscreen, showHint } = useFullscreen();
   const [showLangMenu, setShowLangMenu] = useState(false);
   const [renderSideBySide, setRenderSideBySide] = useState(true);
@@ -79,8 +79,8 @@ export function DiffCheckerPage() {
   const [hasContent, setHasContent] = useState(false);
 
   const origFileRef = useRef<HTMLInputElement>(null);
-  const modFileRef  = useRef<HTMLInputElement>(null);
-  const editorRef   = useRef<any>(null);
+  const modFileRef = useRef<HTMLInputElement>(null);
+  const editorRef = useRef<any>(null);
 
   useEffect(() => {
     document.body.style.overflow = isFullscreen ? 'hidden' : '';
@@ -127,7 +127,7 @@ export function DiffCheckerPage() {
       const txt = ev.target?.result as string;
       // Drive Monaco imperatively — onDidChangeModelContent fires and updates refs/stats
       if (side === 'orig') editorRef.current?.getOriginalEditor().setValue(txt);
-      else                 editorRef.current?.getModifiedEditor().setValue(txt);
+      else editorRef.current?.getModifiedEditor().setValue(txt);
     };
     reader.readAsText(file);
     e.target.value = '';
@@ -144,8 +144,8 @@ export function DiffCheckerPage() {
     editorRef.current?.getModifiedEditor().setValue(SAMPLE_MODIFIED);
   };
 
-  const bg     = isDark ? 'bg-[#141414] text-gray-200' : 'bg-gray-50 text-gray-900';
-  const bgBar  = isDark ? 'bg-[#1a1a1a] border-[#2d2d2d]' : 'bg-white border-gray-200';
+  const bg = isDark ? 'bg-[#141414] text-gray-200' : 'bg-gray-50 text-gray-900';
+  const bgBar = isDark ? 'bg-[#1a1a1a] border-[#2d2d2d]' : 'bg-white border-gray-200';
   const btnGhost = isDark
     ? 'border-[#3d3d3d] text-gray-400 hover:text-gray-200 hover:border-[#5d5d5d] bg-transparent'
     : 'border-gray-300 text-gray-600 hover:text-gray-900 bg-white';
@@ -154,7 +154,7 @@ export function DiffCheckerPage() {
   const Toolbar = (
     <div className={`flex flex-wrap items-center gap-2 px-4 py-2.5 border-b flex-shrink-0 ${bgBar}`}>
       <input ref={origFileRef} type="file" className="hidden" onChange={e => uploadFile('orig', e)} />
-      <input ref={modFileRef}  type="file" className="hidden" onChange={e => uploadFile('mod', e)} />
+      <input ref={modFileRef} type="file" className="hidden" onChange={e => uploadFile('mod', e)} />
 
       <button onClick={() => origFileRef.current?.click()}
         className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border transition-colors ${btnGhost}`}>
@@ -184,9 +184,8 @@ export function DiffCheckerPage() {
             {LANGUAGES.map(l => (
               <button key={l.value}
                 onClick={() => { setLanguage(l.value); setShowLangMenu(false); }}
-                className={`block w-full text-left px-3 py-1.5 text-xs transition-colors ${
-                  language === l.value ? 'text-blue-400 bg-blue-500/10' : isDark ? 'text-gray-300 hover:bg-white/5' : 'text-gray-700 hover:bg-gray-50'
-                }`}>
+                className={`block w-full text-left px-3 py-1.5 text-xs transition-colors ${language === l.value ? 'text-blue-400 bg-blue-500/10' : isDark ? 'text-gray-300 hover:bg-white/5' : 'text-gray-700 hover:bg-gray-50'
+                  }`}>
                 {l.label}
               </button>
             ))}
@@ -274,7 +273,7 @@ export function DiffCheckerPage() {
   if (isFullscreen) {
     return (
       <div className={`flex flex-col h-screen overflow-hidden ${bg}`}>
-        <SEOHead title="Diff Checker — Compare Text, Code & Files Online | JsonMaster" description="Free online diff checker tool. Compare any text, code, or files side by side with live syntax highlighting. Supports JSON, JavaScript, Python, HTML, CSS and more." canonical="https://jsonworkspace.mythosh.com/diff-checker" />
+        <SEOHead title="Diff Checker — Compare Text, Code & Files Online | JsonWorkspace" description="Free online diff checker tool. Compare any text, code, or files side by side with live syntax highlighting. Supports JSON, JavaScript, Python, HTML, CSS and more." canonical="https://jsonworkspace.mythosh.com/diff-checker" />
         {Toolbar}
         {PanelLabels}
         <div className="flex-1 overflow-hidden">
@@ -286,7 +285,7 @@ export function DiffCheckerPage() {
 
   return (
     <div className={`min-h-screen flex flex-col ${bg}`}>
-      <SEOHead title="Diff Checker — Compare Text, Code & Files Online | JsonMaster" description="Free online diff checker tool. Compare any text, code, or files side by side with live syntax highlighting. Supports JSON, JavaScript, Python, HTML, CSS and more." canonical="https://jsonworkspace.mythosh.com/diff-checker" />
+      <SEOHead title="Diff Checker — Compare Text, Code & Files Online | JsonWorkspace" description="Free online diff checker tool. Compare any text, code, or files side by side with live syntax highlighting. Supports JSON, JavaScript, Python, HTML, CSS and more." canonical="https://jsonworkspace.mythosh.com/diff-checker" />
       <SiteNav />
       <main className="flex-1">
         <div className={`border-b ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>

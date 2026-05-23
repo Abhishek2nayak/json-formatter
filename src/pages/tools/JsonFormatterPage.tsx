@@ -5,13 +5,13 @@ export function JsonFormatterPage() {
     <ToolPage
       mode="format"
       seo={{
-        title: 'JSON Formatter Online Free — Beautify & Pretty Print JSON | JsonMaster',
+        title: 'JSON Formatter Online Free — Beautify & Pretty Print JSON | JsonWorkspace',
         description: 'Format and beautify JSON online for free. Paste your JSON, click Format, and get clean, indented output instantly. Supports 2-space, 4-space, and tab indentation.',
         canonical: '/json-formatter',
       }}
       content={{
         h1: 'JSON Formatter Online — Free JSON Beautifier',
-        intro: 'The JsonMaster JSON Formatter instantly beautifies and pretty-prints your JSON with proper indentation and syntax highlighting. Whether you\'re debugging an API response or cleaning up a config file, this tool makes messy JSON readable in one click. All processing is 100% client-side — your JSON never leaves your browser.',
+        intro: 'The JsonWorkspace JSON Formatter instantly beautifies and pretty-prints your JSON with proper indentation and syntax highlighting. Whether you\'re debugging an API response or cleaning up a config file, this tool makes messy JSON readable in one click. All processing is 100% client-side — your JSON never leaves your browser.',
         howTo: [
           { step: 'Paste your JSON', desc: 'Paste raw or minified JSON into the input editor on the left.' },
           { step: 'Click Format JSON', desc: 'Hit the Format JSON button or press Ctrl+Shift+F for instant formatting.' },
@@ -38,7 +38,7 @@ export function JsonFormatterPage() {
           },
           {
             question: 'Can I format large JSON files?',
-            answer: 'Yes. JsonMaster supports files up to 50MB with virtualized rendering for smooth performance even with very large JSON documents.',
+            answer: 'Yes. JsonWorkspace supports files up to 50MB with virtualized rendering for smooth performance even with very large JSON documents.',
           },
           {
             question: 'Is my JSON data safe?',

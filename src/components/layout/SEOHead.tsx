@@ -43,69 +43,69 @@ export function SEOHead({
   const faqJsonLd =
     faqSchema && faqSchema.length > 0
       ? JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: faqSchema.map(({ question, answer }) => ({
-            '@type': 'Question',
-            name: question,
-            acceptedAnswer: { '@type': 'Answer', text: answer },
-          })),
-        })
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqSchema.map(({ question, answer }) => ({
+          '@type': 'Question',
+          name: question,
+          acceptedAnswer: { '@type': 'Answer', text: answer },
+        })),
+      })
       : null;
 
   const toolJsonLd = isToolPage
     ? JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'WebApplication',
-        name: title.split('|')[0].split('—')[0].trim(),
-        url: canonical,
-        description,
-        applicationCategory: 'DeveloperApplication',
-        operatingSystem: 'Web',
-        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-        publisher: {
-          '@type': 'Organization',
-          name: 'JsonMaster',
-          url: SITE_URL,
-        },
-      })
+      '@context': 'https://schema.org',
+      '@type': 'WebApplication',
+      name: title.split('|')[0].split('—')[0].trim(),
+      url: canonical,
+      description,
+      applicationCategory: 'DeveloperApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      publisher: {
+        '@type': 'Organization',
+        name: 'JsonWorkspace',
+        url: SITE_URL,
+      },
+    })
     : null;
 
   const articleJsonLd = articleSchema
     ? JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: articleSchema.headline,
-        description: articleSchema.description,
-        url: canonical,
-        datePublished: articleSchema.datePublished,
-        dateModified: articleSchema.dateModified ?? articleSchema.datePublished,
-        author: {
-          '@type': 'Organization',
-          name: 'JsonMaster',
-          url: SITE_URL,
-        },
-        publisher: {
-          '@type': 'Organization',
-          name: 'JsonMaster',
-          url: SITE_URL,
-        },
-        mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-      })
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: articleSchema.headline,
+      description: articleSchema.description,
+      url: canonical,
+      datePublished: articleSchema.datePublished,
+      dateModified: articleSchema.dateModified ?? articleSchema.datePublished,
+      author: {
+        '@type': 'Organization',
+        name: 'JsonWorkspace',
+        url: SITE_URL,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'JsonWorkspace',
+        url: SITE_URL,
+      },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+    })
     : null;
 
   const breadcrumbJsonLd =
     breadcrumbs && breadcrumbs.length > 0
       ? JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: breadcrumbs.map((item, index) => ({
-            '@type': 'ListItem',
-            position: index + 1,
-            name: item.name,
-            item: item.url,
-          })),
-        })
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs.map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.name,
+          item: item.url,
+        })),
+      })
       : null;
 
   return (
@@ -116,7 +116,7 @@ export function SEOHead({
       <link rel="canonical" href={canonical} />
 
       <meta property="og:type" content={ogType} />
-      <meta property="og:site_name" content="JsonMaster" />
+      <meta property="og:site_name" content="JsonWorkspace" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />

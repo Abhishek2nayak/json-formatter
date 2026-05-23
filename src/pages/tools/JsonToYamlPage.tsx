@@ -5,13 +5,13 @@ export function JsonToYamlPage() {
     <ToolPage
       mode="to-yaml"
       seo={{
-        title: 'JSON to YAML Converter Online Free | JsonMaster',
+        title: 'JSON to YAML Converter Online Free | JsonWorkspace',
         description: 'Convert JSON to YAML online for free. Instant conversion for Kubernetes configs, Docker Compose, GitHub Actions, and CI/CD pipelines.',
         canonical: '/json-to-yaml',
       }}
       content={{
         h1: 'JSON to YAML Converter Online — Free & Instant',
-        intro: 'Convert JSON to YAML format instantly with JsonMaster\'s free online converter. YAML is the preferred format for Kubernetes manifests, Docker Compose files, GitHub Actions workflows, Ansible playbooks, and most modern DevOps configuration files. Convert your JSON config to YAML in one click.',
+        intro: 'Convert JSON to YAML format instantly with JsonWorkspace\'s free online converter. YAML is the preferred format for Kubernetes manifests, Docker Compose files, GitHub Actions workflows, Ansible playbooks, and most modern DevOps configuration files. Convert your JSON config to YAML in one click.',
         howTo: [
           { step: 'Paste your JSON', desc: 'Paste any valid JSON into the input editor on the left.' },
           { step: 'Click Convert to YAML', desc: 'Hit Convert and get clean YAML output with proper indentation instantly.' },

@@ -5,13 +5,13 @@ export function JsonPrettifierPage() {
     <ToolPage
       mode="prettify"
       seo={{
-        title: 'JSON Prettifier Online Free — Pretty Print JSON | JsonMaster',
+        title: 'JSON Prettifier Online Free — Pretty Print JSON | JsonWorkspace',
         description: 'Prettify JSON online for free. Transform minified, ugly JSON into clean, indented, human-readable format instantly.',
         canonical: '/json-prettifier',
       }}
       content={{
         h1: 'JSON Prettifier Online — Pretty Print JSON for Free',
-        intro: 'The JsonMaster JSON Prettifier transforms compact, unreadable JSON into a clean, properly indented format. Whether you got a minified API response, a one-liner config file, or raw JSON data, our prettifier makes it instantly readable. Paste and prettify in one click.',
+        intro: 'The JsonWorkspace JSON Prettifier transforms compact, unreadable JSON into a clean, properly indented format. Whether you got a minified API response, a one-liner config file, or raw JSON data, our prettifier makes it instantly readable. Paste and prettify in one click.',
         howTo: [
           { step: 'Paste your minified JSON', desc: 'Paste compact or minified JSON into the input editor on the left.' },
           { step: 'Click Prettify JSON', desc: 'Click Prettify JSON to add indentation and line breaks automatically.' },
@@ -30,11 +30,11 @@ export function JsonPrettifierPage() {
         faq: [
           {
             question: 'What is the difference between prettify and format?',
-            answer: 'They are the same operation. "Prettify", "format", "beautify", and "pretty print" all refer to adding whitespace and indentation to make JSON human-readable. JsonMaster uses 2-space indentation by default.',
+            answer: 'They are the same operation. "Prettify", "format", "beautify", and "pretty print" all refer to adding whitespace and indentation to make JSON human-readable. JsonWorkspace uses 2-space indentation by default.',
           },
           {
             question: 'Can I choose the indentation level?',
-            answer: 'Yes. In the full JsonMaster editor (/app), you can choose 2 spaces, 4 spaces, or tabs from the indent menu. The prettifier tool uses 2-space indentation as the standard.',
+            answer: 'Yes. In the full JsonWorkspace editor (/app), you can choose 2 spaces, 4 spaces, or tabs from the indent menu. The prettifier tool uses 2-space indentation as the standard.',
           },
           {
             question: 'Does prettifying affect the data?',

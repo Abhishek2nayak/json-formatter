@@ -257,7 +257,7 @@ export function RegexTesterPage() {
 
   const seoHead = (
     <SEOHead
-      title="Regex Tester Online — Test Regular Expressions Free | JsonMaster"
+      title="Regex Tester Online — Test Regular Expressions Free | JsonWorkspace"
       description="Test and debug regular expressions in real time. Highlights all matches, shows capture groups, and includes a quick reference for common patterns. Free and private."
       canonical="https://jsonworkspace.mythosh.com/regex-tester"
       isToolPage

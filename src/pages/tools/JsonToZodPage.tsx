@@ -43,13 +43,13 @@ export function JsonToZodPage() {
   const isDark = theme === 'dark';
   const navigate = useNavigate();
 
-  const [input, setInput]               = useState('');
-  const [output, setOutput]             = useState('');
-  const [error, setError]               = useState<string | null>(null);
-  const [copied, setCopied]             = useState(false);
+  const [input, setInput] = useState('');
+  const [output, setOutput] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
   const { isFullscreen, toggleFullscreen, showHint } = useFullscreen();
 
-  const fileInputRef  = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const inputEditorRef = useRef<Monaco.editor.IStandaloneCodeEditor | null>(null);
 
   useEffect(() => {
@@ -85,8 +85,8 @@ export function JsonToZodPage() {
 
   const handleDownload = () => {
     const blob = new Blob([output], { type: 'text/plain' });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
     a.href = url; a.download = 'schema.ts'; a.click();
     URL.revokeObjectURL(url);
   };
@@ -99,8 +99,8 @@ export function JsonToZodPage() {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  const bg       = isDark ? 'bg-[#141414] text-gray-200' : 'bg-gray-50 text-gray-900';
-  const bgBar    = isDark ? 'bg-[#1a1a1a] border-[#2d2d2d]' : 'bg-white border-gray-200';
+  const bg = isDark ? 'bg-[#141414] text-gray-200' : 'bg-gray-50 text-gray-900';
+  const bgBar = isDark ? 'bg-[#1a1a1a] border-[#2d2d2d]' : 'bg-white border-gray-200';
   const textMuted = isDark ? 'text-gray-600' : 'text-gray-400';
   const btnGhost = isDark
     ? 'border-[#3d3d3d] text-gray-400 hover:text-gray-200 hover:border-[#5d5d5d] bg-transparent'
@@ -109,7 +109,7 @@ export function JsonToZodPage() {
 
   const seoHead = (
     <SEOHead
-      title="JSON to Zod Schema Generator — Free Online | JsonMaster"
+      title="JSON to Zod Schema Generator — Free Online | JsonWorkspace"
       description="Convert any JSON object to a TypeScript Zod schema instantly. Auto-infers types for strings, numbers, booleans, arrays, nested objects, and null. Free and private."
       canonical="https://jsonworkspace.mythosh.com/json-to-zod"
       isToolPage
@@ -192,16 +192,14 @@ export function JsonToZodPage() {
           {output && (
             <div className="flex items-center gap-1">
               <button onClick={handleCopy}
-                className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors ${
-                  copied ? 'bg-green-500/20 text-green-400'
+                className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors ${copied ? 'bg-green-500/20 text-green-400'
                     : isDark ? 'text-gray-500 hover:text-gray-300 hover:bg-white/5' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
-                }`}>
+                  }`}>
                 <Copy size={11} />{copied ? 'Copied!' : 'Copy'}
               </button>
               <button onClick={handleDownload}
-                className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors ${
-                  isDark ? 'text-gray-500 hover:text-gray-300 hover:bg-white/5' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
-                }`}>
+                className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors ${isDark ? 'text-gray-500 hover:text-gray-300 hover:bg-white/5' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+                  }`}>
                 <Download size={11} /> Download .ts
               </button>
             </div>

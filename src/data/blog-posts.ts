@@ -14,7 +14,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: 'what-is-json-and-how-it-works',
     title: 'What is JSON and How Does it Work?',
-    metaTitle: 'What is JSON? Complete Guide for Developers | JsonMaster',
+    metaTitle: 'What is JSON? Complete Guide for Developers | JsonWorkspace',
     metaDescription: 'Learn what JSON is, how it works, its syntax rules, data types, and why it became the standard data format for APIs and web applications.',
     publishedAt: '2025-11-01',
     readingTime: 7,
@@ -73,7 +73,7 @@ export const BLOG_POSTS: BlogPost[] = [
   <li>Using <code>NaN</code> or <code>Infinity</code> as number values</li>
 </ol>
 
-<h2>Try the JsonMaster Tools</h2>
+<h2>Try the JsonWorkspace Tools</h2>
 <p>Use our <a href="/json-formatter">JSON Formatter</a> to beautify raw JSON, or the <a href="/json-validator">JSON Validator</a> to check your JSON for errors instantly.</p>
 
 <h2>FAQ</h2>
@@ -90,8 +90,8 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: 'how-to-format-json-online',
     title: 'How to Format JSON Online — The Complete Guide',
-    metaTitle: 'How to Format JSON Online Free — Step by Step | JsonMaster',
-    metaDescription: 'Learn how to format JSON online for free. Step-by-step guide to beautify, indent, and pretty-print JSON using JsonMaster.',
+    metaTitle: 'How to Format JSON Online Free — Step by Step | JsonWorkspace',
+    metaDescription: 'Learn how to format JSON online for free. Step-by-step guide to beautify, indent, and pretty-print JSON using JsonWorkspace.',
     publishedAt: '2025-11-05',
     readingTime: 5,
     category: 'How-To',
@@ -116,7 +116,7 @@ export const BLOG_POSTS: BlogPost[] = [
   }
 }</code></pre>
 
-<h2>How to Format JSON with JsonMaster</h2>
+<h2>How to Format JSON with JsonWorkspace</h2>
 <ol>
   <li>Go to the <a href="/json-formatter">JSON Formatter</a> page</li>
   <li>Paste your JSON into the editor on the left</li>
@@ -126,7 +126,7 @@ export const BLOG_POSTS: BlogPost[] = [
 </ol>
 
 <h2>Choosing the Right Indentation</h2>
-<p>JsonMaster supports three indentation styles:</p>
+<p>JsonWorkspace supports three indentation styles:</p>
 <ul>
   <li><strong>2 spaces</strong> — Most common, used by JavaScript, React, JSON Schema</li>
   <li><strong>4 spaces</strong> — Preferred by Python, Java, C# developers</li>
@@ -137,7 +137,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <p>Working with an API? Use the <strong>URL</strong> button to fetch JSON directly from an endpoint and format it in one click. No copy-paste needed.</p>
 
 <h2>Auto-Format on Paste</h2>
-<p>JsonMaster automatically formats JSON when you paste it into the editor. This saves you a click every time.</p>
+<p>JsonWorkspace automatically formats JSON when you paste it into the editor. This saves you a click every time.</p>
 
 <h2>Keyboard Shortcuts</h2>
 <ul>
@@ -155,14 +155,14 @@ export const BLOG_POSTS: BlogPost[] = [
 <p>No. Formatting only adds whitespace for readability. The actual data values, keys, and structure remain identical.</p>
 
 <h3>Can I format large JSON files?</h3>
-<p>Yes. JsonMaster handles files up to 50MB with lazy rendering for smooth performance.</p>
+<p>Yes. JsonWorkspace handles files up to 50MB with lazy rendering for smooth performance.</p>
 `,
   },
   {
     slug: 'fix-json-parse-error',
     title: 'How to Fix JSON Parse Errors Easily',
-    metaTitle: 'Fix JSON Parse Error — Common Causes & Solutions | JsonMaster',
-    metaDescription: 'JSON parse errors stopping you? Learn the most common JSON syntax errors and how to fix them fast using JsonMaster\'s auto-fix feature.',
+    metaTitle: 'Fix JSON Parse Error — Common Causes & Solutions | JsonWorkspace',
+    metaDescription: 'JSON parse errors stopping you? Learn the most common JSON syntax errors and how to fix them fast using JsonWorkspace\'s auto-fix feature.',
     publishedAt: '2025-11-10',
     readingTime: 6,
     category: 'Debugging',
@@ -237,7 +237,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>8. Mismatched Brackets</h3>
 <p>Every <code>{</code> needs a <code>}</code> and every <code>[</code> needs a <code>]</code>.</p>
 
-<h2>How to Fix JSON Errors with JsonMaster</h2>
+<h2>How to Fix JSON Errors with JsonWorkspace</h2>
 <ol>
   <li>Paste your broken JSON into the <a href="/json-validator">JSON Validator</a></li>
   <li>The error message shows the exact line and column of the problem</li>
@@ -246,7 +246,7 @@ export const BLOG_POSTS: BlogPost[] = [
 </ol>
 
 <h2>Auto-Fix Capabilities</h2>
-<p>JsonMaster's smart fixer automatically handles:</p>
+<p>JsonWorkspace's smart fixer automatically handles:</p>
 <ul>
   <li>Trailing commas</li>
   <li>Single quotes → double quotes</li>
@@ -259,13 +259,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <p>JSON.parse is strict — it follows the JSON spec exactly. JavaScript object literals are more lenient (allowing trailing commas, single quotes), which causes confusion when developers use JS object syntax in JSON contexts.</p>
 
 <h3>How do I find the error position?</h3>
-<p>The error message usually includes "at position N". Paste into JsonMaster and it highlights exactly which line and column has the problem.</p>
+<p>The error message usually includes "at position N". Paste into JsonWorkspace and it highlights exactly which line and column has the problem.</p>
 `,
   },
   {
     slug: 'json-vs-xml',
     title: 'JSON vs XML — Which Should You Use in 2025?',
-    metaTitle: 'JSON vs XML: Key Differences & When to Use Each | JsonMaster',
+    metaTitle: 'JSON vs XML: Key Differences & When to Use Each | JsonWorkspace',
     metaDescription: 'JSON vs XML comparison: performance, readability, use cases, and when to choose each format in modern web development.',
     publishedAt: '2025-11-15',
     readingTime: 8,
@@ -355,7 +355,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: 'best-json-formatter-tools',
     title: 'Best JSON Formatter Tools for Developers in 2025',
-    metaTitle: 'Best JSON Formatter Tools in 2025 — Reviewed | JsonMaster',
+    metaTitle: 'Best JSON Formatter Tools in 2025 — Reviewed | JsonWorkspace',
     metaDescription: 'Compare the best online JSON formatter tools: features, speed, and which one is right for your workflow.',
     publishedAt: '2025-11-20',
     readingTime: 6,
@@ -365,8 +365,8 @@ export const BLOG_POSTS: BlogPost[] = [
 <h2>What to Look for in a JSON Formatter</h2>
 <p>Not all JSON formatters are equal. When choosing one, evaluate: editor quality, speed with large files, extra features (tree view, conversion), keyboard shortcuts, and whether it respects your privacy (client-side vs server-side processing).</p>
 
-<h2>JsonMaster — Best Overall</h2>
-<p><a href="/json-formatter">JsonMaster</a> leads the pack with a Monaco editor (the same engine powering VS Code), real-time validation, tree view, table view, 7 conversion formats, diff comparison, history panel, and keyboard shortcuts for everything. All processing is client-side — your JSON never leaves your browser.</p>
+<h2>JsonWorkspace — Best Overall</h2>
+<p><a href="/json-formatter">JsonWorkspace</a> leads the pack with a Monaco editor (the same engine powering VS Code), real-time validation, tree view, table view, 7 conversion formats, diff comparison, history panel, and keyboard shortcuts for everything. All processing is client-side — your JSON never leaves your browser.</p>
 
 <p><strong>Standout features:</strong></p>
 <ul>
@@ -393,23 +393,23 @@ export const BLOG_POSTS: BlogPost[] = [
 <p>Full API client with excellent JSON formatting built in. Overkill if you just need to format a snippet, but powerful for API workflows.</p>
 
 <h2>Why Client-Side Processing Matters</h2>
-<p>If you're formatting API responses that contain auth tokens, PII, or sensitive business data, you should use a tool that processes JSON in the browser — never sending it to a server. JsonMaster and most modern tools do this correctly.</p>
+<p>If you're formatting API responses that contain auth tokens, PII, or sensitive business data, you should use a tool that processes JSON in the browser — never sending it to a server. JsonWorkspace and most modern tools do this correctly.</p>
 
 <h2>Built-in vs Online Tools</h2>
 <p>VS Code's built-in formatter (<kbd>Shift+Alt+F</kbd>) is excellent for files. Online tools shine when you're dealing with API responses, sharing formatted JSON, or on a machine without your editor installed.</p>
 
 <h2>FAQ</h2>
 <h3>Is it safe to paste sensitive JSON into online formatters?</h3>
-<p>Only if the tool processes JSON client-side. JsonMaster does all processing in your browser — nothing is sent to any server.</p>
+<p>Only if the tool processes JSON client-side. JsonWorkspace does all processing in your browser — nothing is sent to any server.</p>
 
 <h3>Which JSON formatter works offline?</h3>
-<p>JsonMaster works offline once cached by your browser. VS Code also works offline with its built-in formatter.</p>
+<p>JsonWorkspace works offline once cached by your browser. VS Code also works offline with its built-in formatter.</p>
 `,
   },
   {
     slug: 'how-to-convert-json-to-csv',
     title: 'How to Convert JSON to CSV — Step by Step Guide',
-    metaTitle: 'Convert JSON to CSV Online Free — Complete Guide | JsonMaster',
+    metaTitle: 'Convert JSON to CSV Online Free — Complete Guide | JsonWorkspace',
     metaDescription: 'Learn how to convert JSON to CSV online for free. Handle nested JSON, arrays, and download your CSV file instantly.',
     publishedAt: '2025-11-25',
     readingTime: 5,
@@ -441,7 +441,7 @@ Alice,30,London
 Bob,25,Paris
 Carol,35,Tokyo</code></pre>
 
-<h2>Step-by-Step: Convert JSON to CSV with JsonMaster</h2>
+<h2>Step-by-Step: Convert JSON to CSV with JsonWorkspace</h2>
 <ol>
   <li>Open the <a href="/json-to-csv">JSON to CSV converter</a></li>
   <li>Paste or upload your JSON</li>
@@ -474,16 +474,16 @@ Alice,30</code></pre>
 
 <h2>FAQ</h2>
 <h3>Can I convert CSV back to JSON?</h3>
-<p>Not yet in JsonMaster, but it's on the roadmap. For now, use a dedicated CSV to JSON tool.</p>
+<p>Not yet in JsonWorkspace, but it's on the roadmap. For now, use a dedicated CSV to JSON tool.</p>
 
 <h3>Does it handle large JSON files?</h3>
-<p>Yes — JsonMaster handles files up to 50MB efficiently.</p>
+<p>Yes — JsonWorkspace handles files up to 50MB efficiently.</p>
 `,
   },
   {
     slug: 'json-validator-explained',
     title: 'JSON Validator Explained — How Validation Works',
-    metaTitle: 'JSON Validator: How It Works & What to Check | JsonMaster',
+    metaTitle: 'JSON Validator: How It Works & What to Check | JsonWorkspace',
     metaDescription: 'Understand how JSON validation works, the difference between syntax and schema validation, and how to use a JSON validator effectively.',
     publishedAt: '2025-12-01',
     readingTime: 6,
@@ -522,7 +522,7 @@ Alice,30</code></pre>
   }
 }</code></pre>
 
-<h2>How JsonMaster Validates</h2>
+<h2>How JsonWorkspace Validates</h2>
 <ol>
   <li>As you type, JSON is validated in real-time</li>
   <li>Errors show exact line number and column</li>
@@ -568,7 +568,7 @@ def is_valid_json(text):
   {
     slug: 'common-json-mistakes',
     title: '8 Common JSON Mistakes Developers Make (and How to Fix Them)',
-    metaTitle: '8 Common JSON Mistakes & How to Fix Them | JsonMaster',
+    metaTitle: '8 Common JSON Mistakes & How to Fix Them | JsonWorkspace',
     metaDescription: 'Avoid the most common JSON mistakes: trailing commas, single quotes, missing brackets, and more. With examples and fixes.',
     publishedAt: '2025-12-05',
     readingTime: 7,
@@ -651,8 +651,8 @@ def is_valid_json(text):
 ["first", "second"]             ← array
 { "name": "Alice" }             ← object</code></pre>
 
-<h2>Quick Fix: Use JsonMaster</h2>
-<p>Paste your broken JSON into <a href="/json-formatter">JsonMaster</a> and click ⚡ Fix. It automatically fixes trailing commas, single quotes, and unquoted keys. For remaining errors, the validator shows exact line and column numbers.</p>
+<h2>Quick Fix: Use JsonWorkspace</h2>
+<p>Paste your broken JSON into <a href="/json-formatter">JsonWorkspace</a> and click ⚡ Fix. It automatically fixes trailing commas, single quotes, and unquoted keys. For remaining errors, the validator shows exact line and column numbers.</p>
 
 <h2>FAQ</h2>
 <h3>Why does JavaScript allow what JSON doesn't?</h3>
@@ -662,7 +662,7 @@ def is_valid_json(text):
   {
     slug: 'json-minify-vs-prettify',
     title: 'JSON Minify vs Prettify — When to Use Each',
-    metaTitle: 'JSON Minify vs Prettify: Differences & When to Use | JsonMaster',
+    metaTitle: 'JSON Minify vs Prettify: Differences & When to Use | JsonWorkspace',
     metaDescription: 'Understand the difference between JSON minification and prettification, and when each is appropriate in development and production.',
     publishedAt: '2025-12-10',
     readingTime: 5,
@@ -716,7 +716,7 @@ def is_valid_json(text):
   <li>Parsing speed (slightly faster for minified)</li>
 </ul>
 
-<h2>How to Minify/Prettify with JsonMaster</h2>
+<h2>How to Minify/Prettify with JsonWorkspace</h2>
 <ul>
   <li>Go to <a href="/json-minifier">JSON Minifier</a> to compress JSON</li>
   <li>Go to <a href="/json-prettifier">JSON Prettifier</a> to beautify JSON</li>
@@ -740,7 +740,7 @@ def is_valid_json(text):
   {
     slug: 'how-apis-use-json',
     title: 'How APIs Use JSON — A Developer\'s Guide',
-    metaTitle: 'How REST APIs Use JSON — Developer Guide | JsonMaster',
+    metaTitle: 'How REST APIs Use JSON — Developer Guide | JsonWorkspace',
     metaDescription: 'Learn how REST APIs use JSON for requests and responses, JSON structure conventions, HTTP headers, and best practices for API developers.',
     publishedAt: '2025-12-15',
     readingTime: 8,
@@ -845,7 +845,7 @@ user = response.json()</code></pre>
 <p>When an API call fails or returns unexpected data:</p>
 <ol>
   <li>Copy the raw response body</li>
-  <li>Paste into <a href="/json-formatter">JsonMaster</a> and format it</li>
+  <li>Paste into <a href="/json-formatter">JsonWorkspace</a> and format it</li>
   <li>Use Tree View to explore the structure</li>
   <li>Click any value to see its JSONPath</li>
 </ol>
@@ -865,7 +865,7 @@ user = response.json()</code></pre>
   {
     slug: 'how-to-parse-json-javascript',
     title: 'How to Parse JSON in JavaScript (Complete Guide)',
-    metaTitle: 'How to Parse JSON in JavaScript — JSON.parse() Guide | JsonMaster',
+    metaTitle: 'How to Parse JSON in JavaScript — JSON.parse() Guide | JsonWorkspace',
     metaDescription: 'Learn how to parse JSON in JavaScript using JSON.parse(), handle errors safely, parse nested JSON, and convert objects back to JSON strings with JSON.stringify().',
     publishedAt: '2026-03-24',
     readingTime: 8,
@@ -1000,7 +1000,7 @@ const user = UserSchema.parse(JSON.parse(json)); // throws if invalid</code></pr
   {
     slug: 'regex-cheat-sheet',
     title: 'Regex Cheat Sheet — Regular Expression Reference for Developers',
-    metaTitle: 'Regex Cheat Sheet 2025 — Complete Regular Expression Reference | JsonMaster',
+    metaTitle: 'Regex Cheat Sheet 2025 — Complete Regular Expression Reference | JsonWorkspace',
     metaDescription: 'Complete regex cheat sheet covering character classes, quantifiers, anchors, groups, lookaheads, flags, and common patterns for email, URL, date, IP, and more.',
     publishedAt: '2026-03-24',
     readingTime: 10,
@@ -1154,7 +1154,7 @@ html.match(/&lt;b&gt;.*?&lt;\/b&gt;/)[0];
   {
     slug: 'json-schema-validation-guide',
     title: 'JSON Schema Validation — Complete Guide with Examples',
-    metaTitle: 'JSON Schema Validation Guide — Types, Formats & Examples | JsonMaster',
+    metaTitle: 'JSON Schema Validation Guide — Types, Formats & Examples | JsonWorkspace',
     metaDescription: 'Learn JSON Schema validation from scratch. Covers types, required fields, string formats, numbers, arrays, nested objects, $ref, and how to validate in JavaScript.',
     publishedAt: '2026-03-24',
     readingTime: 9,

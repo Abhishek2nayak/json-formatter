@@ -24,8 +24,8 @@ export function BlogIndexPage() {
   return (
     <div className={`min-h-screen flex flex-col ${bg}`} style={{ overflow: 'auto' }}>
       <SEOHead
-        title="JSON Blog — Developer Guides & Tutorials | JsonMaster"
-        description="Learn JSON fundamentals, debugging tips, conversion guides, and best practices for developers. Free articles from the JsonMaster team."
+        title="JSON Blog — Developer Guides & Tutorials | JsonWorkspace"
+        description="Learn JSON fundamentals, debugging tips, conversion guides, and best practices for developers. Free articles from the JsonWorkspace team."
         canonical="https://jsonworkspace.mythosh.com/blog"
       />
 

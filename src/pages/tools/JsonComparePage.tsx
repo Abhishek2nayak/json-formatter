@@ -27,12 +27,12 @@ export function JsonComparePage() {
   const { theme } = useStore();
   const isDark = theme === 'dark';
   const navigate = useNavigate();
-  const [left, setLeft]               = useState('');
-  const [right, setRight]             = useState('');
+  const [left, setLeft] = useState('');
+  const [right, setRight] = useState('');
   const { isFullscreen, toggleFullscreen, showHint } = useFullscreen();
-  const [leftError, setLeftError]     = useState<string | null>(null);
-  const [rightError, setRightError]   = useState<string | null>(null);
-  const leftFileRef  = useRef<HTMLInputElement>(null);
+  const [leftError, setLeftError] = useState<string | null>(null);
+  const [rightError, setRightError] = useState<string | null>(null);
+  const leftFileRef = useRef<HTMLInputElement>(null);
   const rightFileRef = useRef<HTMLInputElement>(null);
   const leftEditorRef = useRef<Monaco.editor.IStandaloneCodeEditor | null>(null);
 
@@ -52,7 +52,7 @@ export function JsonComparePage() {
     set(error ? error.message : null);
   };
 
-  const handleLeft  = (val: string | undefined) => { const v = val ?? ''; setLeft(v); validateSide(v, setLeftError); };
+  const handleLeft = (val: string | undefined) => { const v = val ?? ''; setLeft(v); validateSide(v, setLeftError); };
   const handleRight = (val: string | undefined) => { const v = val ?? ''; setRight(v); validateSide(v, setRightError); };
 
   const formatBoth = () => {
@@ -84,7 +84,7 @@ export function JsonComparePage() {
   const totalChanges = diff ? diff.added.length + diff.removed.length + diff.modified.length : 0;
   const identical = diff && totalChanges === 0;
 
-  const bg    = isDark ? 'bg-[#141414] text-gray-200' : 'bg-gray-50 text-gray-900';
+  const bg = isDark ? 'bg-[#141414] text-gray-200' : 'bg-gray-50 text-gray-900';
   const bgBar = isDark ? 'bg-[#1a1a1a] border-[#2d2d2d]' : 'bg-white border-gray-200';
   const btnGhost = isDark
     ? 'border-[#3d3d3d] text-gray-400 hover:text-gray-200 hover:border-[#5d5d5d] bg-transparent'
@@ -99,7 +99,7 @@ export function JsonComparePage() {
 
   const Toolbar = (
     <div className={`flex flex-wrap items-center gap-2 px-4 py-2.5 border-b flex-shrink-0 ${bgBar}`}>
-      <input ref={leftFileRef}  type="file" accept=".json,.txt" className="hidden" onChange={e => uploadFile('left', e)} />
+      <input ref={leftFileRef} type="file" accept=".json,.txt" className="hidden" onChange={e => uploadFile('left', e)} />
       <input ref={rightFileRef} type="file" accept=".json,.txt" className="hidden" onChange={e => uploadFile('right', e)} />
 
       <button onClick={() => leftFileRef.current?.click()}
@@ -216,13 +216,13 @@ export function JsonComparePage() {
       <div className={`border-t px-4 py-3 flex flex-wrap gap-4 overflow-auto ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`} style={{ maxHeight: '180px' }}>
         {diff.added.length > 0 && (
           <div className="min-w-[160px]">
-            <p className="text-xs font-semibold text-green-400 mb-1 flex items-center gap-1"><Plus size={11}/> Added ({diff.added.length})</p>
+            <p className="text-xs font-semibold text-green-400 mb-1 flex items-center gap-1"><Plus size={11} /> Added ({diff.added.length})</p>
             {diff.added.map(k => <p key={k} className="text-xs font-mono text-green-400/80 truncate">{k}</p>)}
           </div>
         )}
         {diff.removed.length > 0 && (
           <div className="min-w-[160px]">
-            <p className="text-xs font-semibold text-red-400 mb-1 flex items-center gap-1"><Minus size={11}/> Removed ({diff.removed.length})</p>
+            <p className="text-xs font-semibold text-red-400 mb-1 flex items-center gap-1"><Minus size={11} /> Removed ({diff.removed.length})</p>
             {diff.removed.map(k => <p key={k} className="text-xs font-mono text-red-400/80 truncate">{k}</p>)}
           </div>
         )}
@@ -239,7 +239,7 @@ export function JsonComparePage() {
   if (isFullscreen) {
     return (
       <div className={`flex flex-col h-screen overflow-hidden ${bg}`}>
-        <SEOHead title="JSON Compare — Side-by-Side JSON Diff | JsonMaster" description="Compare two JSON files side by side. Instantly see added, removed, and modified keys with JsonMaster's free JSON compare tool." canonical="https://jsonworkspace.mythosh.com/json-compare" />
+        <SEOHead title="JSON Compare — Side-by-Side JSON Diff | JsonWorkspace" description="Compare two JSON files side by side. Instantly see added, removed, and modified keys with JsonWorkspace's free JSON compare tool." canonical="https://jsonworkspace.mythosh.com/json-compare" />
         {Toolbar}
         <div className="flex-1 overflow-hidden flex flex-col">
           <div className="flex-1 overflow-hidden">
@@ -253,7 +253,7 @@ export function JsonComparePage() {
 
   return (
     <div className={`min-h-screen flex flex-col ${bg}`}>
-      <SEOHead title="JSON Compare — Side-by-Side JSON Diff | JsonMaster" description="Compare two JSON files side by side. Instantly see added, removed, and modified keys with JsonMaster's free JSON compare tool." canonical="https://jsonworkspace.mythosh.com/json-compare" />
+      <SEOHead title="JSON Compare — Side-by-Side JSON Diff | JsonWorkspace" description="Compare two JSON files side by side. Instantly see added, removed, and modified keys with JsonWorkspace's free JSON compare tool." canonical="https://jsonworkspace.mythosh.com/json-compare" />
       <SiteNav />
       <main className="flex-1">
         <div className={`border-b ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>

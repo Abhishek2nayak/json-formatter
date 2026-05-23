@@ -5,13 +5,13 @@ export function JsonToXmlPage() {
     <ToolPage
       mode="to-xml"
       seo={{
-        title: 'JSON to XML Converter Online Free | JsonMaster',
+        title: 'JSON to XML Converter Online Free | JsonWorkspace',
         description: 'Convert JSON to XML format online for free. Instant conversion with proper XML structure, attributes, and formatting.',
         canonical: '/json-to-xml',
       }}
       content={{
         h1: 'JSON to XML Converter Online — Free & Instant',
-        intro: 'Convert JSON to XML format instantly with JsonMaster\'s free online converter. Whether you\'re integrating with legacy SOAP services, working with RSS feeds, or need XML for enterprise systems, this tool generates clean, well-formed XML from any JSON structure.',
+        intro: 'Convert JSON to XML format instantly with JsonWorkspace\'s free online converter. Whether you\'re integrating with legacy SOAP services, working with RSS feeds, or need XML for enterprise systems, this tool generates clean, well-formed XML from any JSON structure.',
         howTo: [
           { step: 'Paste your JSON', desc: 'Paste any valid JSON object or array into the input editor.' },
           { step: 'Click Convert to XML', desc: 'Click Convert and get properly formatted XML output immediately.' },
@@ -30,7 +30,7 @@ export function JsonToXmlPage() {
         faq: [
           {
             question: 'Is the generated XML valid?',
-            answer: 'Yes. JsonMaster generates well-formed XML with a proper XML declaration, correct nesting, and UTF-8 encoding. The output can be validated against XML standards.',
+            answer: 'Yes. JsonWorkspace generates well-formed XML with a proper XML declaration, correct nesting, and UTF-8 encoding. The output can be validated against XML standards.',
           },
           {
             question: 'How are JSON arrays converted to XML?',
@@ -38,7 +38,7 @@ export function JsonToXmlPage() {
           },
           {
             question: 'Can I specify the root element name?',
-            answer: 'The default root element is <root>. For custom root element names, use the full JsonMaster editor which provides more conversion options.',
+            answer: 'The default root element is <root>. For custom root element names, use the full JsonWorkspace editor which provides more conversion options.',
           },
           {
             question: 'What is the difference between JSON and XML?',

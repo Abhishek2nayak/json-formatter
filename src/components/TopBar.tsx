@@ -107,9 +107,8 @@ export function TopBar({ isFullscreen, onToggleFullscreen }: TopBarProps) {
   ];
 
   return (
-    <div className={`flex items-center gap-2 px-3 h-12 border-b flex-shrink-0 ${
-      isDark ? 'bg-[#141414] border-[#2d2d2d]' : 'bg-white border-gray-200'
-    }`}>
+    <div className={`flex items-center gap-2 px-3 h-12 border-b flex-shrink-0 ${isDark ? 'bg-[#141414] border-[#2d2d2d]' : 'bg-white border-gray-200'
+      }`}>
       {/* Back to home (fullscreen only) */}
       {isFullscreen && (
         <button
@@ -127,7 +126,7 @@ export function TopBar({ isFullscreen, onToggleFullscreen }: TopBarProps) {
           <Braces size={14} className="text-white" />
         </div>
         <span className={`text-sm font-semibold hidden sm:block ${isDark ? 'text-white' : 'text-gray-900'}`}>
-          JsonMaster
+          JsonWorkspace
         </span>
       </div>
 
@@ -153,9 +152,8 @@ export function TopBar({ isFullscreen, onToggleFullscreen }: TopBarProps) {
           <span className="hidden sm:block">URL</span>
         </button>
         {showUrlInput && (
-          <div className={`absolute top-8 left-0 z-50 p-2 rounded-lg border shadow-xl flex gap-2 w-72 ${
-            isDark ? 'bg-[#1e1e1e] border-[#3d3d3d]' : 'bg-white border-gray-200'
-          }`}>
+          <div className={`absolute top-8 left-0 z-50 p-2 rounded-lg border shadow-xl flex gap-2 w-72 ${isDark ? 'bg-[#1e1e1e] border-[#3d3d3d]' : 'bg-white border-gray-200'
+            }`}>
             <input
               type="text"
               placeholder="https://api.example.com/data"
@@ -163,11 +161,10 @@ export function TopBar({ isFullscreen, onToggleFullscreen }: TopBarProps) {
               onChange={(e) => setUrlValue(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleFetchUrl()}
               autoFocus
-              className={`flex-1 text-xs px-2 py-1.5 rounded-md outline-none border ${
-                isDark
+              className={`flex-1 text-xs px-2 py-1.5 rounded-md outline-none border ${isDark
                   ? 'bg-[#2a2a2a] border-[#3d3d3d] text-gray-200 placeholder-gray-600'
                   : 'bg-gray-50 border-gray-300 text-gray-900 placeholder-gray-400'
-              }`}
+                }`}
             />
             <button
               onClick={handleFetchUrl}
@@ -226,16 +223,14 @@ export function TopBar({ isFullscreen, onToggleFullscreen }: TopBarProps) {
           <ChevronDown size={10} />
         </button>
         {showIndentMenu && (
-          <div className={`absolute top-8 left-0 z-50 rounded-lg border shadow-xl overflow-hidden ${
-            isDark ? 'bg-[#1e1e1e] border-[#3d3d3d]' : 'bg-white border-gray-200'
-          }`}>
+          <div className={`absolute top-8 left-0 z-50 rounded-lg border shadow-xl overflow-hidden ${isDark ? 'bg-[#1e1e1e] border-[#3d3d3d]' : 'bg-white border-gray-200'
+            }`}>
             {([2, 4, 'tab'] as IndentSize[]).map(size => (
               <button
                 key={size}
                 onClick={() => { setIndentSize(size); setShowIndentMenu(false); }}
-                className={`block w-full text-left px-3 py-1.5 text-xs hover:bg-blue-500/20 ${
-                  indentSize === size ? 'text-blue-400' : isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}
+                className={`block w-full text-left px-3 py-1.5 text-xs hover:bg-blue-500/20 ${indentSize === size ? 'text-blue-400' : isDark ? 'text-gray-300' : 'text-gray-700'
+                  }`}
               >
                 {size === 'tab' ? 'Tab' : `${size} spaces`}
               </button>
@@ -252,11 +247,10 @@ export function TopBar({ isFullscreen, onToggleFullscreen }: TopBarProps) {
           <button
             key={item.id}
             onClick={() => setViewMode(item.id)}
-            className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-medium transition-all ${
-              viewMode === item.id
+            className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-medium transition-all ${viewMode === item.id
                 ? isDark ? 'bg-[#3d3d3d] text-white' : 'bg-white text-gray-900 shadow-sm'
                 : isDark ? 'text-gray-500 hover:text-gray-300' : 'text-gray-500 hover:text-gray-700'
-            }`}
+              }`}
           >
             {item.icon}
             <span className="hidden sm:block">{item.label}</span>

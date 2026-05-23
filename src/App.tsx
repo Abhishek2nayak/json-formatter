@@ -141,7 +141,7 @@ export default function App() {
         isDark ? 'bg-[#141414] text-gray-200' : 'bg-gray-50 text-gray-900'
       }`}>
         <Helmet>
-          <title>JsonMaster — Full JSON Editor</title>
+          <title>JsonWorkspace — Full JSON Editor</title>
           <meta name="robots" content="noindex, follow" />
         </Helmet>
         <TopBar isFullscreen={isFullscreen} onToggleFullscreen={() => setIsFullscreen(false)} />
