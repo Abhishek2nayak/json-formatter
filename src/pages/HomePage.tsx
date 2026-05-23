@@ -49,7 +49,7 @@ export function HomePage() {
       <SEOHead
         title="JsonMaster — Free JSON Formatter, Validator & Converter Online"
         description="JsonMaster is the best free online JSON formatter, validator, minifier, and converter. Format, validate, convert JSON to YAML, XML, CSV and more. Fast, private, developer-focused."
-        canonical="https://jsonmaster.dev/"
+        canonical="https://jsonworkspace.mythosh.com/"
         faqSchema={[
           { question: 'Is JsonMaster free?', answer: 'Yes, all tools on JsonMaster are completely free with no sign-up required.' },
           { question: 'Is JsonMaster safe to use with sensitive data?', answer: 'Yes. All JSON processing happens in your browser — your data never leaves your device.' },

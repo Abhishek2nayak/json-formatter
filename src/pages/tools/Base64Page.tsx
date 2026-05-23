@@ -5,6 +5,7 @@ import { SiteNav } from '../../components/layout/SiteNav';
 import { Footer } from '../../components/layout/Footer';
 import { SEOHead } from '../../components/layout/SEOHead';
 import { useStore } from '../../store';
+import { useFullscreen } from '../../hooks/useFullscreen';
 
 type Mode = 'encode' | 'decode';
 
@@ -41,7 +42,7 @@ export function Base64Page() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [urlSafe, setUrlSafe] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(true);
+  const { isFullscreen, toggleFullscreen, showHint } = useFullscreen();
   const [copyMsg, setCopyMsg] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -173,7 +174,7 @@ export function Base64Page() {
 
       <div className="flex-1" />
 
-      <button onClick={() => setIsFullscreen(f => !f)}
+      <button onClick={toggleFullscreen}
         className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border transition-colors ${btnGhost}`}>
         {isFullscreen ? <><Minimize2 size={13} /> Minimize</> : <><Maximize2 size={13} /> Fullscreen</>}
       </button>
@@ -222,7 +223,7 @@ export function Base64Page() {
     <SEOHead
       title="Base64 Encoder Decoder Online — Free Base64 Tool | JsonMaster"
       description="Encode or decode Base64 strings instantly in your browser. Supports URL-safe Base64, file upload, Unicode text, and size comparison. 100% free and private."
-      canonical="https://jsonmaster.dev/base64"
+      canonical="https://jsonworkspace.mythosh.com/base64"
     />
   );
 
@@ -251,6 +252,12 @@ export function Base64Page() {
       <main className="flex-1">
         <div className={`border-b ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>
           {Toolbar}
+          {showHint && (
+            <div className={`flex items-center justify-between px-4 py-1.5 border-b text-xs ${isDark ? 'bg-blue-600/5 border-blue-600/15 text-blue-400' : 'bg-blue-50 border-blue-200 text-blue-600'}`}>
+              <span>Open in fullscreen for the best experience</span>
+              <button onClick={toggleFullscreen} className="font-medium underline whitespace-nowrap ml-4">Go Fullscreen →</button>
+            </div>
+          )}
           <div className="flex" style={{ height: '400px' }}>
             <div className="flex-1 p-3 overflow-hidden flex flex-col">
               {InputArea}

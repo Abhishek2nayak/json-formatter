@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { HelmetProvider } from 'react-helmet-async'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
 import { BlogIndexPage } from './pages/BlogIndexPage'
@@ -23,8 +24,9 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
         {/* Landing page */}
         <Route path="/" element={<HomePage />} />
 
@@ -53,7 +55,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   </React.StrictMode>,
 )

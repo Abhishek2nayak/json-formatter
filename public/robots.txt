@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jsonmaster.dev/sitemap.xml
+Sitemap: https://jsonworkspace.mythosh.com/sitemap.xml

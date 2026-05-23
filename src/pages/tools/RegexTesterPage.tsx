@@ -5,6 +5,7 @@ import { SiteNav } from '../../components/layout/SiteNav';
 import { Footer } from '../../components/layout/Footer';
 import { SEOHead } from '../../components/layout/SEOHead';
 import { useStore } from '../../store';
+import { useFullscreen } from '../../hooks/useFullscreen';
 import { buildRegex, getMatches } from '../../utils/regex';
 import type { FlagState, RegexMatch } from '../../utils/regex';
 
@@ -58,7 +59,7 @@ export function RegexTesterPage() {
   const [pattern, setPattern] = useState('');
   const [flags, setFlags] = useState<FlagState>({ g: true, i: false, m: false, s: false, u: false });
   const [testString, setTestString] = useState('');
-  const [isFullscreen, setIsFullscreen] = useState(true);
+  const { isFullscreen, toggleFullscreen, showHint } = useFullscreen();
   const [copyMsg, setCopyMsg] = useState('');
 
   useEffect(() => {
@@ -134,7 +135,7 @@ export function RegexTesterPage() {
 
       <div className="flex-1" />
 
-      <button onClick={() => setIsFullscreen(f => !f)}
+      <button onClick={toggleFullscreen}
         className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border transition-colors ${btnGhost}`}>
         {isFullscreen ? <><Minimize2 size={13} /> Minimize</> : <><Maximize2 size={13} /> Fullscreen</>}
       </button>
@@ -258,7 +259,7 @@ export function RegexTesterPage() {
     <SEOHead
       title="Regex Tester Online — Test Regular Expressions Free | JsonMaster"
       description="Test and debug regular expressions in real time. Highlights all matches, shows capture groups, and includes a quick reference for common patterns. Free and private."
-      canonical="https://jsonmaster.dev/regex-tester"
+      canonical="https://jsonworkspace.mythosh.com/regex-tester"
       isToolPage
     />
   );
@@ -292,6 +293,12 @@ export function RegexTesterPage() {
       <main className="flex-1">
         <div className={`border-b ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>
           {Toolbar}
+          {showHint && (
+            <div className={`flex items-center justify-between px-4 py-1.5 border-b text-xs ${isDark ? 'bg-blue-600/5 border-blue-600/15 text-blue-400' : 'bg-blue-50 border-blue-200 text-blue-600'}`}>
+              <span>Open in fullscreen for the best experience</span>
+              <button onClick={toggleFullscreen} className="font-medium underline whitespace-nowrap ml-4">Go Fullscreen →</button>
+            </div>
+          )}
           <div className={`${bgPanel} border-b ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>
             {PatternRow}
             {QuickRef}

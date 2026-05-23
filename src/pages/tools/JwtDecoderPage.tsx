@@ -5,6 +5,7 @@ import { SiteNav } from '../../components/layout/SiteNav';
 import { Footer } from '../../components/layout/Footer';
 import { SEOHead } from '../../components/layout/SEOHead';
 import { useStore } from '../../store';
+import { useFullscreen } from '../../hooks/useFullscreen';
 
 const SAMPLE_JWT =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3IxMjMiLCJuYW1lIjoiQWxpY2UgSm9obnNvbiIsImVtYWlsIjoiYWxpY2VAZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDU4NjA2MDAsImV4cCI6OTk5OTk5OTk5OX0.signature';
@@ -79,7 +80,7 @@ export function JwtDecoderPage() {
 
   const [token, setToken] = useState('');
   const [decoded, setDecoded] = useState<DecodedJwt | null>(null);
-  const [isFullscreen, setIsFullscreen] = useState(true);
+  const { isFullscreen, toggleFullscreen, showHint } = useFullscreen();
   const [copyMsg, setCopyMsg] = useState('');
 
   useEffect(() => {
@@ -145,7 +146,7 @@ export function JwtDecoderPage() {
 
       <div className="flex-1" />
 
-      <button onClick={() => setIsFullscreen(f => !f)}
+      <button onClick={toggleFullscreen}
         className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border transition-colors ${btnGhost}`}>
         {isFullscreen ? <><Minimize2 size={13} /> Minimize</> : <><Maximize2 size={13} /> Fullscreen</>}
       </button>
@@ -241,7 +242,7 @@ export function JwtDecoderPage() {
     <SEOHead
       title="JWT Decoder Online — Decode JSON Web Tokens Free | JsonMaster"
       description="Decode and inspect JWT tokens instantly in your browser. View header, payload, signature, and expiry information. 100% free, private, no data sent to server."
-      canonical="https://jsonmaster.dev/jwt-decoder"
+      canonical="https://jsonworkspace.mythosh.com/jwt-decoder"
     />
   );
 
@@ -270,6 +271,12 @@ export function JwtDecoderPage() {
       <main className="flex-1">
         <div className={`border-b ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>
           {Toolbar}
+          {showHint && (
+            <div className={`flex items-center justify-between px-4 py-1.5 border-b text-xs ${isDark ? 'bg-blue-600/5 border-blue-600/15 text-blue-400' : 'bg-blue-50 border-blue-200 text-blue-600'}`}>
+              <span>Open in fullscreen for the best experience</span>
+              <button onClick={toggleFullscreen} className="font-medium underline whitespace-nowrap ml-4">Go Fullscreen →</button>
+            </div>
+          )}
           <div className="flex" style={{ height: '600px' }}>
             <div className="w-[40%] p-3 overflow-hidden flex flex-col">
               {InputPanel}

@@ -41,21 +41,37 @@ export function BlogPostPage() {
   const textMuted = isDark ? 'text-gray-500' : 'text-gray-500';
   const cardBg = isDark ? 'bg-[#1e1e1e] border-[#2d2d2d]' : 'bg-white border-gray-200';
 
-  // Extract FAQ from content for structured data
-  const faqItems = post.content.match(/<h3>(.*?)<\/h3>\s*<p>(.*?)<\/p>/gs)?.map(match => {
-    const q = match.match(/<h3>(.*?)<\/h3>/)?.[1] ?? '';
-    const a = match.match(/<p>(.*?)<\/p>/)?.[1]?.replace(/<[^>]*>/g, '') ?? '';
-    return { question: q, answer: a };
-  }) ?? [];
+  // Extract FAQ only from the explicit FAQ section (after <h2>FAQ</h2>)
+  const faqSection = post.content.match(/<h2>FAQ<\/h2>([\s\S]*?)(?=<h2>|$)/)?.[1] ?? '';
+  const faqItems = faqSection
+    .match(/<h3>(.*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)
+    ?.map(match => {
+      const q = match.match(/<h3>(.*?)<\/h3>/)?.[1] ?? '';
+      const a = match.match(/<p>([\s\S]*?)<\/p>/)?.[1]?.replace(/<[^>]*>/g, '') ?? '';
+      return { question: q, answer: a };
+    })
+    .filter(item => item.question.trim().endsWith('?')) ?? [];
+
+  const canonicalUrl = `https://jsonworkspace.mythosh.com/blog/${post.slug}`;
 
   return (
     <div className={`min-h-screen flex flex-col ${bg}`} style={{ overflow: 'auto' }}>
       <SEOHead
         title={post.metaTitle}
         description={post.metaDescription}
-        canonical={`https://jsonmaster.dev/blog/${post.slug}`}
+        canonical={canonicalUrl}
         ogType="article"
         faqSchema={faqItems.length > 0 ? faqItems : undefined}
+        articleSchema={{
+          headline: post.title,
+          description: post.metaDescription,
+          datePublished: post.publishedAt,
+        }}
+        breadcrumbs={[
+          { name: 'Home', url: 'https://jsonworkspace.mythosh.com/' },
+          { name: 'Blog', url: 'https://jsonworkspace.mythosh.com/blog' },
+          { name: post.title, url: canonicalUrl },
+        ]}
       />
 
       <SiteNav />

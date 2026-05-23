@@ -12,6 +12,8 @@ import { SEOHead } from '../components/layout/SEOHead';
 import { useStore } from '../store';
 import { parseJSON, formatJSON, minifyJSON, suggestFix } from '../utils/json';
 import { toYAML, toXML, toCSV } from '../utils/converters';
+import { useFullscreen } from '../hooks/useFullscreen';
+import { SITE_URL } from '../constants';
 
 export type ToolMode = 'format' | 'validate' | 'minify' | 'prettify' | 'to-csv' | 'to-xml' | 'to-yaml';
 
@@ -106,7 +108,7 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
   const [error, setError]       = useState<string | null>(null);
   const [copied, setCopied]     = useState(false);
   const [isValid, setIsValid]   = useState<boolean | null>(null);
-  const [isFullscreen, setIsFullscreen] = useState(true);
+  const { isFullscreen, toggleFullscreen, showHint } = useFullscreen();
 
   // Lock body scroll in fullscreen
   useEffect(() => {
@@ -217,7 +219,7 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
 
       {/* Minimize / Maximize */}
       <button
-        onClick={() => setIsFullscreen(fs => !fs)}
+        onClick={toggleFullscreen}
         title={isFullscreen ? 'Compact view' : 'Fullscreen editor'}
         className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border transition-colors ${btnGhost}`}
       >
@@ -310,9 +312,13 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
     <SEOHead
       title={seo.title}
       description={seo.description}
-      canonical={`https://jsonmaster.dev${seo.canonical}`}
+      canonical={`${SITE_URL}${seo.canonical}`}
       faqSchema={content.faq}
       isToolPage
+      breadcrumbs={[
+        { name: 'Home', url: `${SITE_URL}/` },
+        { name: content.h1, url: `${SITE_URL}${seo.canonical}` },
+      ]}
     />
   );
 
@@ -343,6 +349,14 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
         {/* Tool UI */}
         <div className={`border-b ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>
           {Toolbar}
+          {showHint && (
+            <div className={`flex items-center justify-between px-4 py-1.5 border-b text-xs ${isDark ? 'bg-blue-600/5 border-blue-600/15 text-blue-400' : 'bg-blue-50 border-blue-200 text-blue-600'}`}>
+              <span>Open in fullscreen for the best editor experience</span>
+              <button onClick={toggleFullscreen} className="font-medium underline whitespace-nowrap ml-4">
+                Go Fullscreen →
+              </button>
+            </div>
+          )}
           <div className={`rounded-none border-0 overflow-hidden`} style={{ height: '500px' }}>
             {EditorPanels('500px')}
           </div>

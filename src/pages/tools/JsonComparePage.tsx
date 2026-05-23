@@ -6,6 +6,7 @@ import { SiteNav } from '../../components/layout/SiteNav';
 import { Footer } from '../../components/layout/Footer';
 import { SEOHead } from '../../components/layout/SEOHead';
 import { useStore } from '../../store';
+import { useFullscreen } from '../../hooks/useFullscreen';
 import { parseJSON, formatJSON, diffJSON } from '../../utils/json';
 import type * as Monaco from 'monaco-editor';
 
@@ -28,7 +29,7 @@ export function JsonComparePage() {
   const navigate = useNavigate();
   const [left, setLeft]               = useState('');
   const [right, setRight]             = useState('');
-  const [isFullscreen, setIsFullscreen] = useState(true);
+  const { isFullscreen, toggleFullscreen, showHint } = useFullscreen();
   const [leftError, setLeftError]     = useState<string | null>(null);
   const [rightError, setRightError]   = useState<string | null>(null);
   const leftFileRef  = useRef<HTMLInputElement>(null);
@@ -155,7 +156,7 @@ export function JsonComparePage() {
         className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border transition-colors ${btnGhost}`}>
         <ZoomIn size={13} /> Reset Zoom
       </button>
-      <button onClick={() => setIsFullscreen(f => !f)}
+      <button onClick={toggleFullscreen}
         className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border transition-colors ${btnGhost}`}>
         {isFullscreen ? <><Minimize2 size={13} /> Minimize</> : <><Maximize2 size={13} /> Fullscreen</>}
       </button>
@@ -238,7 +239,7 @@ export function JsonComparePage() {
   if (isFullscreen) {
     return (
       <div className={`flex flex-col h-screen overflow-hidden ${bg}`}>
-        <SEOHead title="JSON Compare — Side-by-Side JSON Diff | JsonMaster" description="Compare two JSON files side by side. Instantly see added, removed, and modified keys with JsonMaster's free JSON compare tool." canonical="https://jsonmaster.dev/json-compare" />
+        <SEOHead title="JSON Compare — Side-by-Side JSON Diff | JsonMaster" description="Compare two JSON files side by side. Instantly see added, removed, and modified keys with JsonMaster's free JSON compare tool." canonical="https://jsonworkspace.mythosh.com/json-compare" />
         {Toolbar}
         <div className="flex-1 overflow-hidden flex flex-col">
           <div className="flex-1 overflow-hidden">
@@ -252,11 +253,17 @@ export function JsonComparePage() {
 
   return (
     <div className={`min-h-screen flex flex-col ${bg}`}>
-      <SEOHead title="JSON Compare — Side-by-Side JSON Diff | JsonMaster" description="Compare two JSON files side by side. Instantly see added, removed, and modified keys with JsonMaster's free JSON compare tool." canonical="https://jsonmaster.dev/json-compare" />
+      <SEOHead title="JSON Compare — Side-by-Side JSON Diff | JsonMaster" description="Compare two JSON files side by side. Instantly see added, removed, and modified keys with JsonMaster's free JSON compare tool." canonical="https://jsonworkspace.mythosh.com/json-compare" />
       <SiteNav />
       <main className="flex-1">
         <div className={`border-b ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>
           {Toolbar}
+          {showHint && (
+            <div className={`flex items-center justify-between px-4 py-1.5 border-b text-xs ${isDark ? 'bg-blue-600/5 border-blue-600/15 text-blue-400' : 'bg-blue-50 border-blue-200 text-blue-600'}`}>
+              <span>Open in fullscreen for the best experience</span>
+              <button onClick={toggleFullscreen} className="font-medium underline whitespace-nowrap ml-4">Go Fullscreen →</button>
+            </div>
+          )}
           <div style={{ height: '480px' }} className="overflow-hidden">
             {EditorPanels('480px')}
           </div>

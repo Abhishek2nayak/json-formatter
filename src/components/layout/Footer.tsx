@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Braces } from 'lucide-react';
 import { useStore } from '../../store';
 
 const TOOL_LINKS = [
@@ -32,12 +31,10 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center">
-                <Braces size={14} className="text-white" />
-              </div>
-              <span className={`font-bold text-sm ${isDark ? 'text-white' : 'text-gray-900'}`}>JsonMaster</span>
-            </div>
+            <div className="mb-3">
+              <img src="/logo-with-name.png" alt="JSONWorkspace" className="w-auto" style={{
+                height: "100px"
+              }} />            </div>
             <p className={`text-xs leading-relaxed ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
               The best free JSON formatter, validator, and converter for developers. Fast, private, and always free.
             </p>
@@ -92,11 +89,10 @@ export function Footer() {
               <input
                 type="email"
                 placeholder="you@example.com"
-                className={`flex-1 text-xs px-3 py-2 rounded-md border outline-none focus:border-blue-500 ${
-                  isDark
-                    ? 'bg-[#1e1e1e] border-[#3d3d3d] text-gray-200 placeholder-gray-600'
-                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
-                }`}
+                className={`flex-1 text-xs px-3 py-2 rounded-md border outline-none focus:border-blue-500 ${isDark
+                  ? 'bg-[#1e1e1e] border-[#3d3d3d] text-gray-200 placeholder-gray-600'
+                  : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                  }`}
               />
               <button className="px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs rounded-md transition-colors whitespace-nowrap">
                 Subscribe
@@ -107,7 +103,7 @@ export function Footer() {
 
         <div className={`mt-10 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-3 ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>
           <p className={`text-xs ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>
-            © {new Date().getFullYear()} JsonMaster. All rights reserved. All processing is 100% client-side — your data never leaves your browser.
+            © {new Date().getFullYear()} JSONWorkspace. All rights reserved. All processing is 100% client-side — your data never leaves your browser.
           </p>
           <div className="flex items-center gap-4">
             <Link to="/sitemap.xml" className={`text-xs hover:text-blue-400 ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>Sitemap</Link>

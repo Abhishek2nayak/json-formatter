@@ -1,14 +1,29 @@
-import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { SITE_URL } from '../../constants';
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
 
 interface SEOHeadProps {
   title: string;
   description: string;
-  canonical?: string;
+  canonical: string;
   ogType?: string;
   ogImage?: string;
+  noindex?: boolean;
   faqSchema?: Array<{ question: string; answer: string }>;
-  /** Set to true on tool pages to emit WebApplication structured data */
+  /** Emits WebApplication structured data */
   isToolPage?: boolean;
+  /** Emits Article structured data for blog posts */
+  articleSchema?: {
+    headline: string;
+    datePublished: string;
+    dateModified?: string;
+    description: string;
+  };
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 export function SEOHead({
@@ -16,104 +31,114 @@ export function SEOHead({
   description,
   canonical,
   ogType = 'website',
-  ogImage = 'https://jsonmaster.dev/og-image.png',
+  ogImage = `${SITE_URL}/og-image.png`,
+  noindex = false,
   faqSchema,
   isToolPage = false,
+  articleSchema,
+  breadcrumbs,
 }: SEOHeadProps) {
-  useEffect(() => {
-    document.title = title;
+  const robotsContent = noindex ? 'noindex, follow' : 'index, follow';
 
-    const setMeta = (name: string, content: string, property = false) => {
-      const attr = property ? 'property' : 'name';
-      let el = document.querySelector(`meta[${attr}="${name}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attr, name);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', content);
-    };
+  const faqJsonLd =
+    faqSchema && faqSchema.length > 0
+      ? JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faqSchema.map(({ question, answer }) => ({
+            '@type': 'Question',
+            name: question,
+            acceptedAnswer: { '@type': 'Answer', text: answer },
+          })),
+        })
+      : null;
 
-    const canonicalHref = canonical || window.location.href;
-
-    // Primary meta
-    setMeta('description', description);
-    setMeta('robots', 'index, follow');
-
-    // Open Graph
-    setMeta('og:title', title, true);
-    setMeta('og:description', description, true);
-    setMeta('og:type', ogType, true);
-    setMeta('og:site_name', 'JsonMaster', true);
-    setMeta('og:url', canonicalHref, true);
-    setMeta('og:image', ogImage, true);
-
-    // Twitter Card
-    setMeta('twitter:card', 'summary_large_image');
-    setMeta('twitter:title', title);
-    setMeta('twitter:description', description);
-    setMeta('twitter:image', ogImage);
-
-    // Canonical link
-    let canonicalEl = document.querySelector('link[rel="canonical"]');
-    if (!canonicalEl) {
-      canonicalEl = document.createElement('link');
-      canonicalEl.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonicalEl);
-    }
-    canonicalEl.setAttribute('href', canonicalHref);
-
-    // FAQ structured data
-    let faqEl = document.getElementById('faq-schema');
-    if (faqSchema && faqSchema.length > 0) {
-      if (!faqEl) {
-        faqEl = document.createElement('script');
-        faqEl.id = 'faq-schema';
-        faqEl.setAttribute('type', 'application/ld+json');
-        document.head.appendChild(faqEl);
-      }
-      faqEl.textContent = JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: faqSchema.map(({ question, answer }) => ({
-          '@type': 'Question',
-          name: question,
-          acceptedAnswer: { '@type': 'Answer', text: answer },
-        })),
-      });
-    } else if (faqEl) {
-      faqEl.remove();
-    }
-
-    // WebApplication structured data for tool pages
-    let toolEl = document.getElementById('tool-schema');
-    if (isToolPage) {
-      if (!toolEl) {
-        toolEl = document.createElement('script');
-        toolEl.id = 'tool-schema';
-        toolEl.setAttribute('type', 'application/ld+json');
-        document.head.appendChild(toolEl);
-      }
-      toolEl.textContent = JSON.stringify({
+  const toolJsonLd = isToolPage
+    ? JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'WebApplication',
-        name: title.split('|')[0].trim(),
-        url: canonicalHref,
+        name: title.split('|')[0].split('—')[0].trim(),
+        url: canonical,
         description,
         applicationCategory: 'DeveloperApplication',
         operatingSystem: 'Web',
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-        publisher: { '@type': 'Organization', name: 'JsonMaster', url: 'https://jsonmaster.dev' },
-      });
-    } else if (toolEl) {
-      toolEl.remove();
-    }
+        publisher: {
+          '@type': 'Organization',
+          name: 'JsonMaster',
+          url: SITE_URL,
+        },
+      })
+    : null;
 
-    return () => {
-      document.getElementById('faq-schema')?.remove();
-      document.getElementById('tool-schema')?.remove();
-    };
-  }, [title, description, canonical, ogType, ogImage, faqSchema, isToolPage]);
+  const articleJsonLd = articleSchema
+    ? JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: articleSchema.headline,
+        description: articleSchema.description,
+        url: canonical,
+        datePublished: articleSchema.datePublished,
+        dateModified: articleSchema.dateModified ?? articleSchema.datePublished,
+        author: {
+          '@type': 'Organization',
+          name: 'JsonMaster',
+          url: SITE_URL,
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'JsonMaster',
+          url: SITE_URL,
+        },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+      })
+    : null;
 
-  return null;
+  const breadcrumbJsonLd =
+    breadcrumbs && breadcrumbs.length > 0
+      ? JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: breadcrumbs.map((item, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: item.name,
+            item: item.url,
+          })),
+        })
+      : null;
+
+  return (
+    <Helmet>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <meta name="robots" content={robotsContent} />
+      <link rel="canonical" href={canonical} />
+
+      <meta property="og:type" content={ogType} />
+      <meta property="og:site_name" content="JsonMaster" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={canonical} />
+      <meta property="og:image" content={ogImage} />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={ogImage} />
+
+      {faqJsonLd && (
+        <script type="application/ld+json">{faqJsonLd}</script>
+      )}
+      {toolJsonLd && (
+        <script type="application/ld+json">{toolJsonLd}</script>
+      )}
+      {articleJsonLd && (
+        <script type="application/ld+json">{articleJsonLd}</script>
+      )}
+      {breadcrumbJsonLd && (
+        <script type="application/ld+json">{breadcrumbJsonLd}</script>
+      )}
+    </Helmet>
+  );
 }

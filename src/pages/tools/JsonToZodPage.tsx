@@ -10,6 +10,7 @@ import { SiteNav } from '../../components/layout/SiteNav';
 import { Footer } from '../../components/layout/Footer';
 import { SEOHead } from '../../components/layout/SEOHead';
 import { useStore } from '../../store';
+import { useFullscreen } from '../../hooks/useFullscreen';
 import { jsonToZodSchema } from '../../utils/zodSchema';
 
 const SAMPLE_JSON = JSON.stringify({
@@ -46,7 +47,7 @@ export function JsonToZodPage() {
   const [output, setOutput]             = useState('');
   const [error, setError]               = useState<string | null>(null);
   const [copied, setCopied]             = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(true);
+  const { isFullscreen, toggleFullscreen, showHint } = useFullscreen();
 
   const fileInputRef  = useRef<HTMLInputElement>(null);
   const inputEditorRef = useRef<Monaco.editor.IStandaloneCodeEditor | null>(null);
@@ -110,7 +111,7 @@ export function JsonToZodPage() {
     <SEOHead
       title="JSON to Zod Schema Generator — Free Online | JsonMaster"
       description="Convert any JSON object to a TypeScript Zod schema instantly. Auto-infers types for strings, numbers, booleans, arrays, nested objects, and null. Free and private."
-      canonical="https://jsonmaster.dev/json-to-zod"
+      canonical="https://jsonworkspace.mythosh.com/json-to-zod"
       isToolPage
     />
   );
@@ -151,7 +152,7 @@ export function JsonToZodPage() {
         className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border transition-colors ${btnGhost}`}>
         <ZoomIn size={13} /> Reset Zoom
       </button>
-      <button onClick={() => setIsFullscreen(f => !f)}
+      <button onClick={toggleFullscreen}
         className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border transition-colors ${btnGhost}`}>
         {isFullscreen ? <><Minimize2 size={13} /> Minimize</> : <><Maximize2 size={13} /> Fullscreen</>}
       </button>
@@ -254,6 +255,12 @@ export function JsonToZodPage() {
       <main className="flex-1">
         <div className={`border-b ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>
           {Toolbar}
+          {showHint && (
+            <div className={`flex items-center justify-between px-4 py-1.5 border-b text-xs ${isDark ? 'bg-blue-600/5 border-blue-600/15 text-blue-400' : 'bg-blue-50 border-blue-200 text-blue-600'}`}>
+              <span>Open in fullscreen for the best experience</span>
+              <button onClick={toggleFullscreen} className="font-medium underline whitespace-nowrap ml-4">Go Fullscreen →</button>
+            </div>
+          )}
           <div style={{ height: '500px' }} className="overflow-hidden">
             {EditorPanels('500px')}
           </div>

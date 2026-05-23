@@ -26,7 +26,7 @@ export function BlogIndexPage() {
       <SEOHead
         title="JSON Blog — Developer Guides & Tutorials | JsonMaster"
         description="Learn JSON fundamentals, debugging tips, conversion guides, and best practices for developers. Free articles from the JsonMaster team."
-        canonical="https://jsonmaster.dev/blog"
+        canonical="https://jsonworkspace.mythosh.com/blog"
       />
 
       <SiteNav />

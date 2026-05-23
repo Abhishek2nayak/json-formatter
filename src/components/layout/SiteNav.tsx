@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Braces, Moon, Sun, Menu, X, ChevronDown } from 'lucide-react';
+import { Moon, Sun, Menu, X, ChevronDown } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { useStore } from '../../store';
 
@@ -12,18 +12,18 @@ const SIMPLE_LINKS = [
 ];
 
 const CONVERT_LINKS = [
-  { label: 'JSON → YAML',       href: '/json-to-yaml',   desc: 'Convert to YAML format' },
-  { label: 'JSON → XML',        href: '/json-to-xml',    desc: 'Convert to XML format' },
-  { label: 'JSON → CSV',        href: '/json-to-csv',    desc: 'Convert to CSV spreadsheet' },
+  { label: 'JSON → YAML', href: '/json-to-yaml', desc: 'Convert to YAML format' },
+  { label: 'JSON → XML', href: '/json-to-xml', desc: 'Convert to XML format' },
+  { label: 'JSON → CSV', href: '/json-to-csv', desc: 'Convert to CSV spreadsheet' },
   { label: 'JSON → Prettifier', href: '/json-prettifier', desc: 'Prettify with formatting' },
-  { label: 'JSON → Zod Schema', href: '/json-to-zod',    desc: 'Generate TypeScript Zod schema' },
+  { label: 'JSON → Zod Schema', href: '/json-to-zod', desc: 'Generate TypeScript Zod schema' },
 ];
 
 const TOOLS_LINKS = [
-  { label: 'JWT Decoder',  href: '/jwt-decoder',  desc: 'Decode JSON Web Tokens' },
-  { label: 'Base64',       href: '/base64',        desc: 'Encode & decode Base64' },
-  { label: 'URL Encoder',  href: '/url-encoder',   desc: 'Encode & decode URLs' },
-  { label: 'Regex Tester', href: '/regex-tester',  desc: 'Test regular expressions' },
+  { label: 'JWT Decoder', href: '/jwt-decoder', desc: 'Decode JSON Web Tokens' },
+  { label: 'Base64', href: '/base64', desc: 'Encode & decode Base64' },
+  { label: 'URL Encoder', href: '/url-encoder', desc: 'Encode & decode URLs' },
+  { label: 'Regex Tester', href: '/regex-tester', desc: 'Test regular expressions' },
 ];
 
 export function SiteNav() {
@@ -54,12 +54,11 @@ export function SiteNav() {
   const isToolsActive = TOOLS_LINKS.some(l => location.pathname === l.href);
 
   const navItemClass = (active: boolean) =>
-    `px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-      active
-        ? 'bg-blue-600 text-white'
-        : isDark
-          ? 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
-          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+    `px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${active
+      ? 'bg-blue-600 text-white'
+      : isDark
+        ? 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
+        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
     }`;
 
   return (
@@ -68,11 +67,10 @@ export function SiteNav() {
         <div className="flex items-center justify-between h-14">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center">
-              <Braces size={14} className="text-white" />
-            </div>
-            <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>JsonMaster</span>
+          <Link to="/" className="flex items-center">
+            <img src="/logo-with-name.png" alt="JSONWorkspace" className="w-auto" style={{
+              height: "100px"
+            }} />
           </Link>
 
           {/* Desktop nav */}
@@ -101,12 +99,10 @@ export function SiteNav() {
               </button>
 
               {convertOpen && (
-                <div className={`absolute top-[calc(100%+6px)] left-0 z-50 w-52 rounded-xl border shadow-xl overflow-hidden animate-fade-in ${
-                  isDark ? 'bg-[#1e1e1e] border-[#3d3d3d]' : 'bg-white border-gray-200'
-                }`}>
-                  <div className={`px-3 py-2 text-[10px] font-semibold uppercase tracking-wider border-b ${
-                    isDark ? 'text-gray-600 border-[#2d2d2d]' : 'text-gray-400 border-gray-100'
+                <div className={`absolute top-[calc(100%+6px)] left-0 z-50 w-52 rounded-xl border shadow-xl overflow-hidden animate-fade-in ${isDark ? 'bg-[#1e1e1e] border-[#3d3d3d]' : 'bg-white border-gray-200'
                   }`}>
+                  <div className={`px-3 py-2 text-[10px] font-semibold uppercase tracking-wider border-b ${isDark ? 'text-gray-600 border-[#2d2d2d]' : 'text-gray-400 border-gray-100'
+                    }`}>
                     Convert JSON to…
                   </div>
                   {CONVERT_LINKS.map(link => (
@@ -114,11 +110,10 @@ export function SiteNav() {
                       key={link.href}
                       to={link.href}
                       onClick={() => setConvertOpen(false)}
-                      className={`flex items-start gap-2.5 px-3 py-2.5 transition-colors ${
-                        location.pathname === link.href
-                          ? isDark ? 'bg-blue-600/20 text-blue-400' : 'bg-blue-50 text-blue-600'
-                          : isDark ? 'hover:bg-white/5 text-gray-300' : 'hover:bg-gray-50 text-gray-700'
-                      }`}
+                      className={`flex items-start gap-2.5 px-3 py-2.5 transition-colors ${location.pathname === link.href
+                        ? isDark ? 'bg-blue-600/20 text-blue-400' : 'bg-blue-50 text-blue-600'
+                        : isDark ? 'hover:bg-white/5 text-gray-300' : 'hover:bg-gray-50 text-gray-700'
+                        }`}
                     >
                       <div className="min-w-0">
                         <p className="text-xs font-medium leading-none mb-0.5">{link.label}</p>
@@ -144,12 +139,10 @@ export function SiteNav() {
               </button>
 
               {toolsOpen && (
-                <div className={`absolute top-[calc(100%+6px)] left-0 z-50 w-52 rounded-xl border shadow-xl overflow-hidden animate-fade-in ${
-                  isDark ? 'bg-[#1e1e1e] border-[#3d3d3d]' : 'bg-white border-gray-200'
-                }`}>
-                  <div className={`px-3 py-2 text-[10px] font-semibold uppercase tracking-wider border-b ${
-                    isDark ? 'text-gray-600 border-[#2d2d2d]' : 'text-gray-400 border-gray-100'
+                <div className={`absolute top-[calc(100%+6px)] left-0 z-50 w-52 rounded-xl border shadow-xl overflow-hidden animate-fade-in ${isDark ? 'bg-[#1e1e1e] border-[#3d3d3d]' : 'bg-white border-gray-200'
                   }`}>
+                  <div className={`px-3 py-2 text-[10px] font-semibold uppercase tracking-wider border-b ${isDark ? 'text-gray-600 border-[#2d2d2d]' : 'text-gray-400 border-gray-100'
+                    }`}>
                     Developer Tools
                   </div>
                   {TOOLS_LINKS.map(link => (
@@ -157,11 +150,10 @@ export function SiteNav() {
                       key={link.href}
                       to={link.href}
                       onClick={() => setToolsOpen(false)}
-                      className={`flex items-start gap-2.5 px-3 py-2.5 transition-colors ${
-                        location.pathname === link.href
-                          ? isDark ? 'bg-blue-600/20 text-blue-400' : 'bg-blue-50 text-blue-600'
-                          : isDark ? 'hover:bg-white/5 text-gray-300' : 'hover:bg-gray-50 text-gray-700'
-                      }`}
+                      className={`flex items-start gap-2.5 px-3 py-2.5 transition-colors ${location.pathname === link.href
+                        ? isDark ? 'bg-blue-600/20 text-blue-400' : 'bg-blue-50 text-blue-600'
+                        : isDark ? 'hover:bg-white/5 text-gray-300' : 'hover:bg-gray-50 text-gray-700'
+                        }`}
                     >
                       <div className="min-w-0">
                         <p className="text-xs font-medium leading-none mb-0.5">{link.label}</p>
@@ -204,11 +196,10 @@ export function SiteNav() {
                 key={link.href}
                 to={link.href}
                 onClick={() => setMobileOpen(false)}
-                className={`block px-3 py-2 text-sm font-medium mt-1 rounded-md ${
-                  location.pathname === link.href
-                    ? 'bg-blue-600 text-white'
-                    : isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-600 hover:text-gray-900'
-                }`}
+                className={`block px-3 py-2 text-sm font-medium mt-1 rounded-md ${location.pathname === link.href
+                  ? 'bg-blue-600 text-white'
+                  : isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-600 hover:text-gray-900'
+                  }`}
               >
                 {link.label}
               </Link>
@@ -224,11 +215,10 @@ export function SiteNav() {
                   key={link.href}
                   to={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`block px-2 py-1.5 text-sm font-medium rounded-md ${
-                    location.pathname === link.href
-                      ? 'text-blue-400'
-                      : isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-600 hover:text-gray-900'
-                  }`}
+                  className={`block px-2 py-1.5 text-sm font-medium rounded-md ${location.pathname === link.href
+                    ? 'text-blue-400'
+                    : isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-600 hover:text-gray-900'
+                    }`}
                 >
                   {link.label}
                 </Link>
@@ -245,11 +235,10 @@ export function SiteNav() {
                   key={link.href}
                   to={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`block px-2 py-1.5 text-sm font-medium rounded-md ${
-                    location.pathname === link.href
-                      ? 'text-blue-400'
-                      : isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-600 hover:text-gray-900'
-                  }`}
+                  className={`block px-2 py-1.5 text-sm font-medium rounded-md ${location.pathname === link.href
+                    ? 'text-blue-400'
+                    : isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-600 hover:text-gray-900'
+                    }`}
                 >
                   {link.label}
                 </Link>

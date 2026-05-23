@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Panel, Group as PanelGroup, Separator as PanelResizeHandle } from 'react-resizable-panels';
 import { TopBar } from './components/TopBar';
 import { JsonEditor } from './components/JsonEditor';
@@ -139,6 +140,10 @@ export default function App() {
       <div className={`flex flex-col h-screen overflow-hidden ${
         isDark ? 'bg-[#141414] text-gray-200' : 'bg-gray-50 text-gray-900'
       }`}>
+        <Helmet>
+          <title>JsonMaster — Full JSON Editor</title>
+          <meta name="robots" content="noindex, follow" />
+        </Helmet>
         <TopBar isFullscreen={isFullscreen} onToggleFullscreen={() => setIsFullscreen(false)} />
         <EditorArea />
         {showHistory && <HistoryPanel />}
