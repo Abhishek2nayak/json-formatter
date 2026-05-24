@@ -6,15 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 
-  <!-- Default title/meta (overridden per-route by react-helmet-async) -->
-  <title>JsonWorkspace — Free JSON Formatter, Validator & Developer Tools</title>
-  <meta name="description"
-    content="Free online JSON formatter, validator, minifier, and converter. Also includes JWT decoder, Base64, URL encoder, Regex tester, Zod schema generator, and more. Fast, private, no login." />
+  <!-- Default title/meta — overridden per route via scripts/inject-meta.mjs at build time -->
+  <title>JsonWorkspace — Free JSON Formatter, Validator &amp; Developer Tools</title>
+  <meta name="description" content="Free online JSON formatter, validator, minifier, and converter. Also includes JWT decoder, Base64, URL encoder, Regex tester, Zod schema generator, and more. Fast, private, no login." />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="JsonWorkspace" />
 
+  <!-- Canonical -->
+  <link rel="canonical" href="https://jsonworkspace.mythosh.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="JsonWorkspace" />
+  <meta property="og:title" content="JsonWorkspace — Free JSON Formatter, Validator &amp; Developer Tools" />
+  <meta property="og:description" content="Free online JSON formatter, validator, minifier, and converter. Also includes JWT decoder, Base64, URL encoder, Regex tester, Zod schema generator, and more. Fast, private, no login." />
+  <meta property="og:url" content="https://jsonworkspace.mythosh.com/" />
+  <meta property="og:image" content="https://jsonworkspace.mythosh.com/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="JsonWorkspace — Free JSON Formatter &amp; Developer Tools" />
+  <meta name="twitter:description" content="Free online JSON formatter, validator, minifier, and converter. Also includes JWT decoder, Base64, URL encoder, Regex tester, Zod schema generator, and more." />
+  <meta name="twitter:image" content="https://jsonworkspace.mythosh.com/og-image.png" />
+
   <!-- Google Site Verification -->
-  <meta name="google-site-verification" content="nxkzM0PDGBbgXmWRyanSikl_1qlUeK6JbI2eTOUgGfU" /> <!-- Favicon -->
+  <meta name="google-site-verification" content="nxkzM0PDGBbgXmWRyanSikl_1qlUeK6JbI2eTOUgGfU" />
+
+  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
