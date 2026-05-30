@@ -79,14 +79,14 @@ export function BlogPostPage() {
       <main className="flex-1">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           {/* Back */}
-          <Link to="/blog" className={`inline-flex items-center gap-1.5 text-xs mb-6 hover:text-blue-400 transition-colors ${textMuted}`}>
+          <Link to="/blog" className={`inline-flex items-center gap-1.5 text-xs mb-6 hover:text-brand-400 transition-colors ${textMuted}`}>
             <ArrowLeft size={13} /> All Articles
           </Link>
 
           {/* Header */}
           <header className="mb-8">
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-xs font-medium text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded">
+              <span className="text-xs font-medium text-brand-400 bg-brand-500/10 px-2 py-0.5 rounded">
                 {post.category}
               </span>
               <span className={`text-xs flex items-center gap-1 ${textMuted}`}>
@@ -109,15 +109,15 @@ export function BlogPostPage() {
           </header>
 
           {/* CTA banner */}
-          <div className={`mb-8 p-4 rounded-lg border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${isDark ? 'bg-blue-600/5 border-blue-600/20' : 'bg-blue-50 border-blue-200'}`}>
-            <p className={`text-sm ${isDark ? 'text-blue-300' : 'text-blue-800'}`}>
+          <div className={`mb-8 p-4 rounded-lg border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${isDark ? 'bg-brand-600/5 border-brand-600/20' : 'bg-brand-50 border-brand-200'}`}>
+            <p className={`text-sm ${isDark ? 'text-brand-300' : 'text-brand-800'}`}>
               Try our free JSON tools — no sign-up required
             </p>
             <div className="flex gap-2">
-              <Link to="/json-formatter" className="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium rounded-md transition-colors whitespace-nowrap">
+              <Link to="/json-formatter" className="px-3 py-1.5 bg-blue-600 hover:bg-brand-500 text-white text-xs font-medium rounded-md transition-colors whitespace-nowrap">
                 JSON Formatter →
               </Link>
-              <Link to="/json-validator" className={`px-3 py-1.5 text-xs font-medium rounded-md border transition-colors whitespace-nowrap ${isDark ? 'border-[#3d3d3d] text-gray-300 hover:text-white' : 'border-blue-300 text-blue-700 bg-white'}`}>
+              <Link to="/json-validator" className={`px-3 py-1.5 text-xs font-medium rounded-md border transition-colors whitespace-nowrap ${isDark ? 'border-[#3d3d3d] text-gray-300 hover:text-white' : 'border-brand-300 text-brand-700 bg-white'}`}>
                 Validator
               </Link>
             </div>
@@ -136,7 +136,7 @@ export function BlogPostPage() {
               prose-li:my-1
               prose-code:text-xs prose-code:bg-transparent
               prose-pre:my-4
-              prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
+              prose-a:text-brand-400 prose-a:no-underline hover:prose-a:underline
               [&_pre]:rounded-lg [&_pre]:border [&_pre]:overflow-x-auto [&_pre]:p-4 [&_pre]:text-xs
               [&_code]:font-mono
               ${isDark
@@ -157,7 +157,7 @@ export function BlogPostPage() {
                 <Link
                   key={t.href}
                   to={t.href}
-                  className={`px-3 py-1.5 rounded-md text-xs font-medium border transition-colors hover:text-blue-400 hover:border-blue-500/40 ${
+                  className={`px-3 py-1.5 rounded-md text-xs font-medium border transition-colors hover:text-brand-400 hover:border-blue-500/40 ${
                     isDark ? 'border-[#3d3d3d] text-gray-400' : 'border-gray-200 text-gray-600'
                   }`}
                 >
@@ -172,12 +172,12 @@ export function BlogPostPage() {
             {prevPost && (
               <Link
                 to={`/blog/${prevPost.slug}`}
-                className={`p-4 rounded-xl border transition-all group hover:border-blue-500/30 ${cardBg}`}
+                className={`p-4 rounded-xl border transition-all group hover:border-brand-500/30 ${cardBg}`}
               >
                 <p className={`text-xs mb-1 flex items-center gap-1 ${textMuted}`}>
                   <ArrowLeft size={11} /> Previous
                 </p>
-                <p className={`text-sm font-medium group-hover:text-blue-400 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                <p className={`text-sm font-medium group-hover:text-brand-400 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>
                   {prevPost.title}
                 </p>
               </Link>
@@ -185,12 +185,12 @@ export function BlogPostPage() {
             {nextPost && (
               <Link
                 to={`/blog/${nextPost.slug}`}
-                className={`p-4 rounded-xl border transition-all group hover:border-blue-500/30 text-right ${cardBg} ${!prevPost ? 'sm:col-start-2' : ''}`}
+                className={`p-4 rounded-xl border transition-all group hover:border-brand-500/30 text-right ${cardBg} ${!prevPost ? 'sm:col-start-2' : ''}`}
               >
                 <p className={`text-xs mb-1 flex items-center justify-end gap-1 ${textMuted}`}>
                   Next <ArrowRight size={11} />
                 </p>
-                <p className={`text-sm font-medium group-hover:text-blue-400 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                <p className={`text-sm font-medium group-hover:text-brand-400 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>
                   {nextPost.title}
                 </p>
               </Link>

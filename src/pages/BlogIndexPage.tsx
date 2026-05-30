@@ -16,10 +16,14 @@ export function BlogIndexPage() {
     document.documentElement.classList.toggle('light', !isDark);
   }, [isDark]);
 
-  const bg = isDark ? 'bg-[#141414] text-gray-200' : 'bg-gray-50 text-gray-900';
-  const cardBg = isDark ? 'bg-[#1e1e1e] border-[#2d2d2d]' : 'bg-white border-gray-200';
+  const bg = isDark ? 'bg-[#0f0f0f] text-gray-200' : 'bg-white text-gray-900';
+  const cardBg = isDark ? 'bg-[#141414] border-[#1e1e1e] hover:border-[#2a2a2a]' : 'bg-white border-gray-100 hover:border-gray-200';
   const textSecondary = isDark ? 'text-gray-400' : 'text-gray-600';
   const textMuted = isDark ? 'text-gray-500' : 'text-gray-500';
+
+  const sortedPosts = [...BLOG_POSTS].sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  );
 
   return (
     <div className={`min-h-screen flex flex-col ${bg}`} style={{ overflow: 'auto' }}>
@@ -45,7 +49,7 @@ export function BlogIndexPage() {
         {/* Posts grid */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="space-y-4">
-            {BLOG_POSTS.map(post => (
+            {sortedPosts.map(post => (
               <Link
                 key={post.slug}
                 to={`/blog/${post.slug}`}
@@ -53,7 +57,7 @@ export function BlogIndexPage() {
               >
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-medium text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded">
+                    <span className="text-xs font-medium text-brand-400 bg-brand-500/10 px-2 py-0.5 rounded">
                       {post.category}
                     </span>
                     <span className={`text-xs flex items-center gap-1 ${textMuted}`}>
@@ -63,7 +67,7 @@ export function BlogIndexPage() {
                       {new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </span>
                   </div>
-                  <h2 className={`text-base font-semibold mb-2 leading-snug group-hover:text-blue-400 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  <h2 className={`text-base font-semibold mb-2 leading-snug group-hover:text-brand-400 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>
                     {post.title}
                   </h2>
                   <p className={`text-sm leading-relaxed ${textSecondary}`}>{post.metaDescription}</p>
@@ -76,7 +80,7 @@ export function BlogIndexPage() {
                   </div>
                 </div>
                 <div className="flex-shrink-0 flex items-center">
-                  <ArrowRight size={16} className={`${textMuted} group-hover:text-blue-400 transition-colors group-hover:translate-x-0.5 transform`} />
+                  <ArrowRight size={16} className={`${textMuted} group-hover:text-brand-400 transition-colors group-hover:translate-x-0.5 transform`} />
                 </div>
               </Link>
             ))}

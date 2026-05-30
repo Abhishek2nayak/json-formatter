@@ -159,7 +159,7 @@ export function BottomPanel() {
             <div className="p-2 flex items-center gap-2">
               <span className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>Selected path:</span>
               <code className={`text-xs font-mono px-2 py-1 rounded flex-1 ${
-                isDark ? 'bg-[#1e1e1e] text-blue-400' : 'bg-gray-100 text-blue-600'
+                isDark ? 'bg-[#1e1e1e] text-brand-400' : 'bg-gray-100 text-blue-600'
               }`}>
                 {selectedPath || '$'}
               </code>

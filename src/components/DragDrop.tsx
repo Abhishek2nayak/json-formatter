@@ -55,8 +55,8 @@ export function DragDropWrapper({ children }: DragDropProps) {
       {isDragging && (
         <div className={`absolute inset-0 z-50 flex items-center justify-center border-2 border-dashed rounded-lg m-2 ${
           isDark
-            ? 'bg-blue-500/10 border-blue-500 text-blue-400'
-            : 'bg-blue-50 border-blue-400 text-blue-600'
+            ? 'bg-brand-500/10 border-brand-500 text-brand-400'
+            : 'bg-brand-50 border-brand-400 text-brand-600'
         }`}>
           <div className="text-center">
             <div className="text-4xl mb-2">📂</div>

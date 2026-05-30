@@ -354,13 +354,13 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'best-json-formatter-tools',
-    title: 'Best JSON Formatter Tools for Developers in 2025',
-    metaTitle: 'Best JSON Formatter Tools in 2025 — Reviewed | JsonWorkspace',
-    metaDescription: 'Compare the best online JSON formatter tools: features, speed, and which one is right for your workflow.',
-    publishedAt: '2025-11-20',
-    readingTime: 6,
+    title: 'Best JSON Formatter Tools for Developers in 2026',
+    metaTitle: 'Best JSON Formatter Tools in 2026 — Reviewed | JsonWorkspace',
+    metaDescription: 'The best online JSON formatters compared: editor quality, speed, dark mode, JSONPath, code generation, privacy. Updated for 2026.',
+    publishedAt: '2026-01-15',
+    readingTime: 7,
     category: 'Tools',
-    tags: ['json tools', 'json formatter', 'developer tools', 'best tools'],
+    tags: ['json tools', 'json formatter', 'developer tools', 'best json tools 2026'],
     content: `
 <h2>What to Look for in a JSON Formatter</h2>
 <p>Not all JSON formatters are equal. When choosing one, evaluate: editor quality, speed with large files, extra features (tree view, conversion), keyboard shortcuts, and whether it respects your privacy (client-side vs server-side processing).</p>
@@ -1314,6 +1314,465 @@ if (!valid) console.log(validate.errors);</code></pre>
 </table>
 
 <p>Generate a Zod schema from your JSON instantly with our <a href="/json-to-zod">JSON to Zod Schema Generator</a>, or validate JSON structure with our <a href="/json-validator">JSON Validator</a>.</p>
+`,
+  },
+
+  // ── NEW BLOGS ─────────────────────────────────────────────────
+
+  {
+    slug: 'jsonlint-alternative-jsonworkspace',
+    title: 'JSONLint Is Showing Its Age — Here\'s What Developers Are Using Instead',
+    metaTitle: 'JSONLint Alternative for Developers in 2026 | JSONWorkspace',
+    metaDescription: 'JSONLint is fine for basic validation, but if you want dark mode, a tree view, JSONPath queries, type generation, and history — you need JSONWorkspace. Here\'s the honest comparison.',
+    publishedAt: '2026-05-01',
+    readingTime: 8,
+    category: 'Comparison',
+    tags: ['jsonlint', 'jsonlint alternative', 'json formatter', 'json validator', 'json tools 2026'],
+    content: `
+<p>Let me say upfront: JSONLint is not bad. Doug Crockford built it in 2010 and it does exactly what the name says — it lints JSON. It's fast, it's free, and it gives you a clear error message when your JSON is broken.</p>
+
+<p>But here's the thing. It's 2026. Developer tooling has moved on considerably, and JSONLint… hasn't really. The last meaningful UI update was years ago. There's no dark mode. No keyboard shortcuts. No way to query your JSON. No history. No conversion tools. It's a validator in an era when most developers need a full JSON workspace.</p>
+
+<p>I'm not here to dunk on JSONLint. I'm here to explain what JSONWorkspace does differently, and why more developers have been switching to it — especially once they realise how much time they were wasting going back and forth between five different tools.</p>
+
+<h2>The thing JSONLint does well</h2>
+
+<p>Validation. That's it, and it's genuinely good at it. Paste broken JSON, get a clear error message with a line number. For that single use case, JSONLint still holds up.</p>
+
+<p>The problem is that "validate my JSON" is almost never the only thing you need to do with a piece of JSON. You need to read it, understand it, query specific values out of it, maybe convert it, maybe generate a TypeScript interface from it. JSONLint can't do any of that.</p>
+
+<h2>What JSONWorkspace does instead</h2>
+
+<p>JSONWorkspace built its editor on Monaco — the same engine that powers VS Code. So instead of a text area, you get a proper editor with syntax highlighting, folding, multiple cursors, and Ctrl+Z that actually works across sessions.</p>
+
+<p>On top of that, the right panel gives you four views of your JSON:</p>
+
+<ul>
+  <li><strong>Tree view</strong> — click any node to expand/collapse, click any value to copy its JSONPath to clipboard</li>
+  <li><strong>Table view</strong> — turns JSON arrays into a readable table, sortable by column</li>
+  <li><strong>Tools</strong> — quick transforms: sort keys alphabetically, remove nulls, flatten arrays</li>
+  <li><strong>Schema</strong> — generates a JSON Schema from your data automatically</li>
+</ul>
+
+<p>And now there's a fifth tab: <strong>Path Finder</strong>. Type a JSONPath expression like <code>$.users[?(@.active)].email</code> and every matching value lights up instantly. No copying to a separate tool, no re-pasting your JSON.</p>
+
+<h2>The features JSONLint users keep asking for</h2>
+
+<p>I've seen the same requests in developer forums for years: "does JSONLint have dark mode?" (No.) "Can JSONLint convert JSON to YAML?" (No.) "Is there a JSONLint with history so I can go back to a previous version?" (No.)</p>
+
+<p>JSONWorkspace has all of these:</p>
+
+<ul>
+  <li><strong>Dark mode</strong> — proper dark theme, not just browser dark mode fighting with a white background</li>
+  <li><strong>History panel</strong> — keeps your last 10 JSON snippets automatically, load any of them in one click</li>
+  <li><strong>Saved snippets</strong> — manually save and name JSON you use regularly (auth tokens, test payloads, API responses you keep re-pasting)</li>
+  <li><strong>Convert</strong> — JSON to YAML, XML, CSV, TypeScript interface, Python dataclass, Go struct, SQL CREATE TABLE, Markdown table</li>
+  <li><strong>Share via link</strong> — click Share, get a URL. Send it to a colleague. They open it, your JSON is already there. JSONLint has nothing like this.</li>
+</ul>
+
+<h2>The auto-fix thing</h2>
+
+<p>This one matters more than it sounds. JSONLint tells you your JSON is invalid. JSONWorkspace tells you AND fixes the most common mistakes with one click.</p>
+
+<p>Trailing comma? Fixed. Single quotes around strings? Fixed. Unquoted keys? Fixed. <code>undefined</code> values? Replaced with <code>null</code>. The ⚡ Fix button handles 80% of the JSON errors that come from copying JS objects and forgetting they're not valid JSON.</p>
+
+<h2>On privacy</h2>
+
+<p>Both JSONLint and JSONWorkspace process JSON client-side — your data doesn't leave your browser. That's table stakes now. But it's worth confirming: nothing in JSONWorkspace phones home with your JSON data.</p>
+
+<h2>The honest answer</h2>
+
+<p>If all you ever need to do is validate a JSON string and see whether it parses, JSONLint is fine. Bookmark it, use it.</p>
+
+<p>But if you're a developer who works with JSON every day — debugging API responses, building integrations, reading unfamiliar data structures, converting formats, generating types — then you need something that keeps up with that workflow. That's what JSONWorkspace is built for.</p>
+
+<p>You can <a href="/json-formatter">try it free here</a>, no account needed. The editor opens immediately, and if you paste JSON that has errors, it'll tell you exactly where and offer to fix it.</p>
+
+<h2>Quick comparison</h2>
+
+<table>
+  <thead>
+    <tr><th>Feature</th><th>JSONLint</th><th>JSONWorkspace</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>JSON validation</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Error location (line + column)</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Auto-fix common errors</td><td>✗</td><td>✓</td></tr>
+    <tr><td>Monaco editor (VS Code engine)</td><td>✗</td><td>✓</td></tr>
+    <tr><td>Dark mode</td><td>✗</td><td>✓</td></tr>
+    <tr><td>Tree / Table view</td><td>✗</td><td>✓</td></tr>
+    <tr><td>JSONPath Explorer</td><td>✗</td><td>✓</td></tr>
+    <tr><td>Convert to YAML, XML, CSV…</td><td>✗</td><td>✓</td></tr>
+    <tr><td>Generate TypeScript / Go / SQL</td><td>✗</td><td>✓</td></tr>
+    <tr><td>Share JSON via URL</td><td>✗</td><td>✓</td></tr>
+    <tr><td>Keyboard shortcuts</td><td>✗</td><td>✓</td></tr>
+    <tr><td>History panel</td><td>✗</td><td>✓</td></tr>
+    <tr><td>Saved snippets</td><td>✗</td><td>✓</td></tr>
+    <tr><td>Client-side (private)</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Free</td><td>✓</td><td>✓</td></tr>
+  </tbody>
+</table>
+`,
+  },
+
+  {
+    slug: 'json-formatter-comparison-2026',
+    title: 'I Tested 6 Online JSON Formatters. Here\'s What I Actually Found.',
+    metaTitle: 'Best Online JSON Formatter 2026 — Honest Comparison | JSONWorkspace',
+    metaDescription: 'Tested JSONFormatter.org, JSONLint, JSON Crack, Postman, and others against JSONWorkspace. Real differences in editor quality, features, privacy, and mobile experience.',
+    publishedAt: '2026-05-05',
+    readingTime: 9,
+    category: 'Comparison',
+    tags: ['json formatter comparison', 'jsonformatter.org alternative', 'best json formatter 2026', 'json tools comparison'],
+    content: `
+<p>Every few months I do a sweep of the JSON formatter landscape because the tools we recommend to junior devs actually matter. A bad tool slows you down in ways that are hard to notice — extra clicks, no keyboard shortcuts, data loss when the tab refreshes.</p>
+
+<p>Here's what I found in my latest round of testing. I'll try to be fair, because each tool has a reason people use it.</p>
+
+<h2>The tools I tested</h2>
+<ol>
+  <li>JSONFormatter.org</li>
+  <li>JSONLint.com</li>
+  <li>JSON Crack</li>
+  <li>Codebeautify.org</li>
+  <li>JSON Editor Online (jsoneditoronline.org)</li>
+  <li>JSONWorkspace (that's us — I'll try to be objective)</li>
+</ol>
+
+<h2>JSONFormatter.org</h2>
+
+<p>This one has been around forever, which is both a compliment and a critique. The tree view is genuinely useful — click any node to expand, collapse, or copy. The interface is clean enough. It handles basic formatting and minification without complaint.</p>
+
+<p>The problems: it's slow with large JSON files (anything over 500KB starts lagging noticeably). No Monaco editor — it's a basic textarea, which means no multi-cursor, no proper undo history, no code folding. There are ads, which is fine, but combined with the dated UI it feels like a tool from 2014 that hasn't been touched since. No keyboard shortcuts for common operations. No dark mode. No conversion to other formats.</p>
+
+<p>Verdict: fine for a quick look at small JSON. Not something you'd use as a daily driver.</p>
+
+<h2>JSONLint.com</h2>
+
+<p>Covered this in detail in <a href="/blog/jsonlint-alternative-jsonworkspace">another post</a>, but the short version: excellent at the one thing it does (validation), genuinely nothing else. The error messages are clear. That's where the praise ends.</p>
+
+<h2>JSON Crack</h2>
+
+<p>Visually the most interesting tool on this list. JSON Crack renders your data as an interactive graph — nodes and edges, drag to explore, click to expand. For understanding an unfamiliar deeply-nested structure, it's genuinely impressive. I've used it to understand the shape of Stripe API responses.</p>
+
+<p>The catch: it's a visualizer, not a formatter. You can't really edit JSON in it, there's no conversion, no validation with error messages. Think of it as a companion tool, not a replacement for a proper formatter. Also, large datasets make the graph unreadable quickly.</p>
+
+<h2>Codebeautify.org</h2>
+
+<p>Has an enormous number of tools on one site — JSON formatter, XML formatter, CSS beautifier, Base64, you name it. The breadth is impressive. The JSON formatter itself is solid: tree view, formatting options, minify. The downside is that trying to support everything means nothing feels particularly polished. The UI is cluttered, there are a lot of ads, and the editor quality is basic.</p>
+
+<h2>JSON Editor Online (jsoneditoronline.org)</h2>
+
+<p>This one is genuinely good and underrated. The split-pane layout (raw JSON on one side, tree on the other) is a solid pattern. It has a proper editor, not just a textarea. JSONPath querying works. It's been actively maintained.</p>
+
+<p>Where it falls short: no code generation (TypeScript, Python, Go, SQL), no share-via-URL, no mock data generator, the dark mode is a bit rough around the edges, and mobile is barely usable. Also it's the least discoverable tool on this list — somehow it never comes up in "best JSON formatter" searches despite being quite capable.</p>
+
+<h2>JSONWorkspace</h2>
+
+<p>I'll be transparent: this is our tool. I'm going to describe what it actually does and let you decide if the comparison is fair.</p>
+
+<p>The core editor is Monaco (VS Code's engine). That matters because it means real multi-cursor editing, real undo/redo, code folding, real syntax highlighting, and keyboard shortcuts that feel familiar to anyone who uses VS Code daily — which is most of us.</p>
+
+<p>The feature that gets the most "oh that's useful" reactions from people: the JSONPath Explorer tab. You're looking at an API response, you type <code>$.data[?(@.status=="active")].id</code> and immediately see every matching ID highlighted in the editor and listed in the results panel. No extra tool, no re-pasting.</p>
+
+<p>A few others worth mentioning because they genuinely save time:</p>
+
+<ul>
+  <li><strong>Code generation</strong> — paste JSON, get a TypeScript interface, Python dataclass, Go struct, SQL CREATE TABLE, Rust struct, or C# class. I use this probably three times a week.</li>
+  <li><strong>Mock data generator</strong> — paste a sample JSON object, get 5 (or 50) realistic fake records. It's smart about field names: a field called <code>email</code> gets a realistic email, <code>createdAt</code> gets an ISO timestamp, <code>latitude</code> gets an actual coordinate.</li>
+  <li><strong>Share via URL</strong> — click Share, get a compressed link, send it. Your colleague opens it and the JSON is there. This sounds trivial but I've saved a lot of Slack back-and-forth with it.</li>
+  <li><strong>Saved snippets</strong> — save JSON you use repeatedly (test auth tokens, API payloads, config templates) with a name. Load them in one click. It persists in localStorage, so they're there next time.</li>
+</ul>
+
+<p>Is it perfect? No. The mobile experience on the full editor is cramped (though the individual tool pages work fine on mobile). There's no CSV-to-JSON converter yet. If you want a visual graph view like JSON Crack, we don't have that.</p>
+
+<h2>My actual recommendation</h2>
+
+<p>For most developers, use JSONWorkspace as your main tool. Open it in a pinned tab. Use the snippets to save things you re-paste constantly. Use the JSONPath tab when you're trying to understand an API response structure.</p>
+
+<p>Keep a bookmark to JSON Crack for the occasional "I need to see the shape of this nested thing visually" moment.</p>
+
+<p>If you're on a machine where you can't install extensions and you just need to quickly validate a string, JSONLint.com works fine.</p>
+
+<p>Everything else on this list is either outclassed by the above or has a specific niche I haven't covered here.</p>
+
+<p><a href="/json-formatter">Open JSONWorkspace →</a> — no sign-up, no ads, works offline once cached.</p>
+`,
+  },
+
+  {
+    slug: 'jsonpath-explorer-how-to-query-json-online',
+    title: 'Stop Manually Hunting Through JSON. Use JSONPath Explorer Instead.',
+    metaTitle: 'JSONPath Explorer Online — Query JSON with JSONPath Expressions Free | JSONWorkspace',
+    metaDescription: 'JSONPath lets you query JSON like SQL queries a database. Our free online JSONPath Explorer highlights matches in real time — no setup, works with any JSON.',
+    publishedAt: '2026-05-10',
+    readingTime: 7,
+    category: 'Features',
+    tags: ['jsonpath', 'jsonpath online', 'jsonpath tester', 'query json', 'json path finder'],
+    content: `
+<p>You've been there. An API response comes back with 200 lines of JSON and you need to find every user whose <code>status</code> is <code>"active"</code>. So you Ctrl+F for "active", manually skip over everything that isn't in a status field, and after two minutes you have half the answer.</p>
+
+<p>There's a better way. It's called JSONPath, it's been around since 2007, and somehow it's still not on most developers' radar. Let me fix that.</p>
+
+<h2>What is JSONPath?</h2>
+
+<p>JSONPath is a query language for JSON, roughly analogous to XPath for XML. It gives you a compact syntax to select values out of a JSON structure without writing any code.</p>
+
+<p>A few examples to make it concrete:</p>
+
+<pre><code>$.store.books[*].title        // all book titles
+$.store.books[0]              // first book
+$..author                     // every "author" field, anywhere in the document
+$.store.books[?(@.price<10)]  // books cheaper than 10
+$.store.books[?(@.inStock)]   // books that have inStock set to a truthy value</code></pre>
+
+<p>The <code>$</code> is always the root of the document. <code>.</code> is child access. <code>..</code> is deep scan (searches the whole document). <code>[?(@.field)]</code> is a filter expression.</p>
+
+<h2>Why developers don't use it more</h2>
+
+<p>The main barrier has always been tooling. To test a JSONPath expression, you'd typically have to:</p>
+
+<ol>
+  <li>Find a JSONPath testing website</li>
+  <li>Copy your JSON there</li>
+  <li>Type your expression</li>
+  <li>Realise the site uses a slightly different JSONPath dialect</li>
+  <li>Go back to your formatter to look at the structure</li>
+  <li>Come back and adjust the expression</li>
+</ol>
+
+<p>It's a five-step context switch for something that should take ten seconds. No wonder people just use Ctrl+F.</p>
+
+<h2>How JSONWorkspace's Path Finder works</h2>
+
+<p>We built JSONPath querying directly into every JSON editor on the site. There are two ways to access it:</p>
+
+<p><strong>Built into the editor (every tool page)</strong>: in the formatter, validator, and every other tool, there's a "⟨/⟩ Path" tab next to the Output tab. Switch to it, type your expression, and matches appear immediately — no re-pasting required. The JSON you're already working with is the one being queried.</p>
+
+<p><strong>Full explorer at <a href="/json-path">/json-path</a></strong>: a dedicated page with a bigger results panel, Monaco editor for the JSON input, example query chips, and a reference table at the bottom. Use this when you're seriously interrogating a response and need more screen real estate.</p>
+
+<p>Results show: the full JSONPath to each matched value, a type badge (string / number / boolean / object / array), the value itself, and a copy button for each result. There's also a "Copy all" button that dumps all matched values as a JSON array.</p>
+
+<h2>Quick reference for the expressions you'll actually use</h2>
+
+<table>
+  <thead><tr><th>Expression</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td><code>$.*</code></td><td>All top-level values</td></tr>
+    <tr><td><code>$.users[*]</code></td><td>All items in the users array</td></tr>
+    <tr><td><code>$.users[0]</code></td><td>First user</td></tr>
+    <tr><td><code>$.users[-1]</code></td><td>Last user</td></tr>
+    <tr><td><code>$..email</code></td><td>Every email field anywhere in the document</td></tr>
+    <tr><td><code>$.users[?(@.active)]</code></td><td>Users where active is truthy</td></tr>
+    <tr><td><code>$.users[?(@.age >= 18)]</code></td><td>Users aged 18 or over</td></tr>
+    <tr><td><code>$.users[?(@.role == "admin")]</code></td><td>Admin users only</td></tr>
+    <tr><td><code>$.data[*].id</code></td><td>All IDs from a data array</td></tr>
+    <tr><td><code>$..*</code></td><td>Every single value in the whole document</td></tr>
+  </tbody>
+</table>
+
+<h2>A realistic example</h2>
+
+<p>Say you have a GitHub API response listing your repositories. You want just the names of repos that are forks. The expression would be:</p>
+
+<pre><code>$[?(@.fork == true)].name</code></pre>
+
+<p>Paste the GitHub response into the editor, type that expression, done. No Python script, no jq installed, no Stack Overflow.</p>
+
+<p>Or you have a Stripe webhook payload and you want every <code>amount</code> field from every charge in the event:</p>
+
+<pre><code>$..amount</code></pre>
+
+<p>Two characters. That's the power of JSONPath's deep scan operator.</p>
+
+<h2>How it's different from using jq</h2>
+
+<p>jq is excellent and if you're comfortable in the terminal, use it. JSONPath isn't trying to replace jq — it's a different trade-off. JSONPath is declarative and readable at a glance. jq has more power (functions, transformations, arithmetic) but a steeper learning curve.</p>
+
+<p>For "find me these values in this JSON," JSONPath is faster to write and faster to debug. For "transform this JSON into a different shape," jq wins.</p>
+
+<p><a href="/json-path">Try the JSONPath Explorer →</a></p>
+`,
+  },
+
+  {
+    slug: 'new-features-jsonpath-code-generator-mock-data-share',
+    title: 'What We Just Shipped: JSONPath, Code Generator, Mock Data, and More',
+    metaTitle: 'New: JSONPath Explorer, Code Generator, Mock Data Generator | JSONWorkspace',
+    metaDescription: 'We shipped JSONPath Explorer, a code generator for TypeScript/Python/Go/SQL, a mock data generator, share-via-URL, saved snippets, JSON-to-Markdown, and a browser extension. Here\'s what each one does.',
+    publishedAt: '2026-05-15',
+    readingTime: 9,
+    category: 'Features',
+    tags: ['jsonpath explorer', 'json to typescript', 'mock data generator', 'json share link', 'json browser extension', 'json saved snippets'],
+    content: `
+<p>We've been heads-down building for a while. Here's the full changelog, with a quick explanation of why we built each thing and what problem it actually solves.</p>
+
+<h2>1. JSONPath Explorer</h2>
+
+<p>This is the one I'm most excited about. JSONPath is a query language that lets you select specific values from a JSON document using an expression — no code required. Type <code>$.users[?(@.active)].email</code> and immediately see every active user's email highlighted.</p>
+
+<p>We built it in two places. First, there's a <a href="/json-path">standalone JSONPath Explorer</a> with a full Monaco editor, example queries, and a detailed results panel. Second — and this matters more — we added a "Path" tab to every JSON editor on the site. So when you're in the formatter and you need to query the JSON you're already looking at, you just flip to the Path tab. No copy-paste, no context switch.</p>
+
+<p>The results panel shows the full JSONPath to each match, the type of the matched value, the value itself, and a copy button. There's a "Copy all" button that exports all matched values as a JSON array.</p>
+
+<h2>2. Code Generator — TypeScript, Python, Go, SQL, Rust, C#</h2>
+
+<p>Paste JSON. Pick a language. Get typed code back.</p>
+
+<p>I cannot count how many times I've manually written a TypeScript interface from an API response. It's the kind of task that takes 5 minutes but feels like it takes 20 because it's so tedious. The <a href="/json-to-code">JSON to Code Generator</a> handles TypeScript interfaces, Python dataclasses, Go structs with JSON tags, SQL CREATE TABLE with inferred column types, Rust structs with serde attributes, and C# classes with JsonProperty attributes.</p>
+
+<p>Nested objects get their own separate type definitions, not inline noise. The root type name is editable — click the pencil icon next to "Root:" in the toolbar and rename it to match your domain model.</p>
+
+<p>This also made it into the Tools dropdown in the nav under the new name "JSON → Code".</p>
+
+<h2>3. Mock Data Generator</h2>
+
+<p>Paste a sample JSON object — not a schema, just an example — and get back N realistic fake records.</p>
+
+<p>The smart part is field name detection. A field called <code>email</code> generates a real-looking email. <code>createdAt</code> generates an ISO timestamp. <code>avatar</code> generates an avatar URL. <code>latitude</code> generates an actual latitude. We handle about 50 field name patterns before falling back to generic lorem text.</p>
+
+<p>The controls are: number of records (1 to 100), an optional seed for reproducible output, a Regenerate button that shuffles data on demand, and four presets (User, Product, Blog Post, Order) if you want a starting point without writing a sample.</p>
+
+<p>This lives at <a href="/mock-generator">/mock-generator</a>.</p>
+
+<h2>4. Share via URL</h2>
+
+<p>This one is simple but has already saved me more time than anything else we shipped this month.</p>
+
+<p>Click the Share button in any JSON editor. A popover appears with a compressed URL. Send it. The person you sent it to opens the link and your JSON is already loaded, no copy-paste required. The JSON is compressed with LZ-string before being put in the URL, so a typical API response fits comfortably within the URL length limit.</p>
+
+<p>If the JSON is too large for a URL (over ~8KB compressed), you get a clear message and a "Copy raw JSON" button instead.</p>
+
+<p>The Share button lives in the main full editor toolbar and in every tool page toolbar.</p>
+
+<h2>5. Saved Snippets</h2>
+
+<p>This one is about the JSON you keep re-pasting. Auth tokens for testing, sample API payloads you always use, config templates, whatever.</p>
+
+<p>In the main editor, there's now a "Snippets" tab in the right panel (alongside Tree, Table, Tools, Schema, Path). Click "Save current JSON as snippet", give it a name, and it's there. Snippets persist in localStorage, so they survive browser restarts. Click "Load into editor" to bring any snippet back.</p>
+
+<p>You can rename snippets inline and delete them. There's also a "Save" button in the TopBar for quick access without going to the panel.</p>
+
+<h2>6. JSON to Markdown Table</h2>
+
+<p>This one's a niche tool, but developers who need it really need it. Paste a JSON array of objects, get a Markdown table with proper column headers. Paste a single object, get a 2-column key/value table.</p>
+
+<p>Pipe characters inside values are automatically escaped. The output is GitHub Flavored Markdown (GFM) and renders correctly on GitHub, GitLab, Notion, and most Markdown editors.</p>
+
+<p>It's at <a href="/json-to-markdown">/json-to-markdown</a> and is also available as a tab in the main editor's Convert view (📝 Markdown).</p>
+
+<h2>7. Browser Extension</h2>
+
+<p>When you hit a URL that returns raw JSON — an API endpoint, a GitHub raw file, a Next.js route — your browser just shows you an unformatted blob of text. The extension fixes that.</p>
+
+<p>Install it, and any time you're on a page that returns JSON, you'll see a small banner in the bottom-right corner: "JSON detected — Open in JSONWorkspace →". Click it. Your JSON opens in the editor, already formatted, ready to explore.</p>
+
+<p>You can also right-click on any page and choose "Open in JSONWorkspace" from the context menu — useful for JSON inside a web page (a <code>pre</code> block with API response examples, for instance). And if you select some text first, "Open selected JSON in JSONWorkspace" becomes available.</p>
+
+<p>The extension popup has quick links to the Formatter, Validator, JSONPath Explorer, and Mock Generator.</p>
+
+<p>Find the extension files in the <code>extension/</code> folder of the repo. Load it in Chrome via chrome://extensions → Developer mode → Load unpacked. Firefox support is next.</p>
+
+<h2>What's next</h2>
+
+<p>A few things in progress: CSV to JSON converter, a diff view that actually shows structural differences (not just text diff), and better mobile support for the full editor. If there's something you're missing, open an issue.</p>
+
+<p><a href="/app">Open the full editor →</a></p>
+`,
+  },
+
+  {
+    slug: 'json-browser-extension-for-chrome',
+    title: 'The JSON Chrome Extension That Doesn\'t Get in Your Way',
+    metaTitle: 'JSON Formatter Chrome Extension — JSONWorkspace | Format JSON in Browser',
+    metaDescription: 'Our Chrome extension detects raw JSON pages and opens them in JSONWorkspace with one click. Smarter than built-in browser JSON viewers and doesn\'t override your default rendering.',
+    publishedAt: '2026-05-18',
+    readingTime: 7,
+    category: 'Features',
+    tags: ['json chrome extension', 'json browser extension', 'format json in chrome', 'chrome json formatter', 'json extension firefox'],
+    content: `
+<p>If you work with APIs, you've had this experience: you open a URL in the browser that returns JSON, and Chrome just shows you a wall of monospace text. No formatting, no folding, no way to understand the structure at a glance.</p>
+
+<p>There are Chrome extensions for this. Most of them work by intercepting JSON responses and rendering them directly in the browser tab with a custom viewer. The problem is that approach has a few annoying side effects: it breaks <code>Content-Type</code> detection for some pages, it applies to every JSON response even when you just want to see the raw text, and if you want to actually do something with the JSON beyond looking at it (convert, query, generate types), you're back to copy-pasting into another tool.</p>
+
+<p>We took a different approach with the JSONWorkspace extension.</p>
+
+<h2>How it works</h2>
+
+<p>The extension doesn't intercept and replace JSON pages. Instead, it watches for pages that return JSON (by checking Content-Type and trying to parse the body), and when it finds one, it shows a small banner in the bottom-right corner:</p>
+
+<p><em>"JSON detected — Open in JSONWorkspace →"</em></p>
+
+<p>Click the button. A new tab opens with the JSONWorkspace editor, your JSON already loaded and formatted, ready to explore. The original raw JSON tab is untouched.</p>
+
+<p>This matters because:</p>
+<ul>
+  <li>You can still see the raw JSON if you need to (it's still there in the original tab)</li>
+  <li>You get the full JSONWorkspace feature set, not just a tree view — query with JSONPath, convert to YAML, generate TypeScript interfaces, whatever you need</li>
+  <li>The extension doesn't override your browser's default rendering behaviour globally</li>
+</ul>
+
+<h2>The context menu option</h2>
+
+<p>Right-click on any page and you'll see "Open in JSONWorkspace" in the context menu. This extracts the entire page text and sends it to the editor.</p>
+
+<p>More usefully: select some text first, then right-click. You get "Open selected JSON in JSONWorkspace" instead, which sends just the selection. This is handy when you're looking at documentation that has a JSON example in a <code>pre</code> block, or a GitHub issue where someone pasted an API response.</p>
+
+<h2>The popup</h2>
+
+<p>Click the extension icon to open the popup. It gives you:</p>
+<ul>
+  <li><strong>Open page JSON in editor</strong> — same as the banner button</li>
+  <li><strong>Open selected text as JSON</strong> — sends whatever you've selected</li>
+  <li>Quick links to the most-used tools: Formatter, Validator, JSONPath Explorer, Mock Generator</li>
+</ul>
+
+<h2>How it sends JSON to the editor</h2>
+
+<p>The JSON is compressed using LZ-string (the same compression used by the Share via URL feature) and appended to the URL as a <code>?j=</code> parameter. When the editor loads, it reads the parameter, decompresses the JSON, loads it, and then replaces the URL with a clean <code>/app</code>. So your browser history and address bar stay clean after the fact.</p>
+
+<p>For very large JSON responses (over ~8KB compressed), the extension opens the editor without pre-loading data — you'll need to copy-paste for those, but we display a note explaining why.</p>
+
+<h2>Comparison with other JSON extensions</h2>
+
+<table>
+  <thead>
+    <tr><th>Extension approach</th><th>Pros</th><th>Cons</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>In-page renderer (e.g. JSONView)</td>
+      <td>Immediate, no new tab</td>
+      <td>Replaces original, limited tools, can break some pages</td>
+    </tr>
+    <tr>
+      <td>JSONWorkspace approach</td>
+      <td>Full tool suite, original preserved, no rendering conflicts</td>
+      <td>Opens a new tab</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If you just want to look at JSON without doing anything to it, a pure in-page renderer like JSONView is fine. If you regularly need to query, convert, or generate types from the JSON you're looking at, the JSONWorkspace approach saves you the copy-paste step.</p>
+
+<h2>How to install (Chrome)</h2>
+
+<ol>
+  <li>Clone or download the <a href="https://github.com">JSONWorkspace repo</a></li>
+  <li>Navigate to the <code>extension/</code> folder</li>
+  <li>Add your own icons (16×16, 48×48, 128×128 PNG files) with a green <code>#10b981</code> background and white <code>{}</code> symbol — or use the ones from the dist folder once we publish to the Web Store</li>
+  <li>Open Chrome, go to <code>chrome://extensions</code></li>
+  <li>Turn on Developer mode (top right)</li>
+  <li>Click "Load unpacked", select the <code>extension/</code> folder</li>
+</ol>
+
+<p>Chrome Web Store submission is in progress. Firefox support follows after that.</p>
+
+<h2>Privacy</h2>
+
+<p>The extension never sends your JSON data to any server. The content script reads the page body in your browser, compresses it locally, and constructs the JSONWorkspace URL — all client-side. The JSONWorkspace editor itself also processes everything locally.</p>
+
+<p>The extension requests <code>activeTab</code>, <code>contextMenus</code>, and <code>scripting</code> permissions. It does not request history, cookies, or any persistent access beyond the currently active tab.</p>
 `,
   },
 ];

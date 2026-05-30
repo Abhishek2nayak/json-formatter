@@ -1,6 +1,6 @@
 export type Theme = 'dark' | 'light';
 export type ViewMode = 'editor' | 'tree' | 'table' | 'compare' | 'convert';
-export type ConvertFormat = 'yaml' | 'xml' | 'csv' | 'typescript' | 'python' | 'java' | 'env';
+export type ConvertFormat = 'yaml' | 'xml' | 'csv' | 'typescript' | 'python' | 'java' | 'env' | 'markdown';
 export type IndentSize = 2 | 4 | 'tab';
 
 export interface JsonError {
@@ -57,4 +57,12 @@ export interface SnippetType {
   language: string;
   label: string;
   code: string;
+}
+
+export interface SavedSnippet {
+  id: string;
+  name: string;
+  content: string;
+  createdAt: number;
+  size: number;
 }

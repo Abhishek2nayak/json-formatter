@@ -11,6 +11,10 @@ const TOOL_LINKS = [
   { label: 'JSON to YAML', href: '/json-to-yaml' },
   { label: 'JSON Compare', href: '/json-compare' },
   { label: 'Diff Checker', href: '/diff-checker' },
+  { label: 'JSONPath Explorer', href: '/json-path' },
+  { label: 'JSON → Code Generator', href: '/json-to-code' },
+  { label: 'Mock Data Generator', href: '/mock-generator' },
+  { label: 'JSON to Markdown', href: '/json-to-markdown' },
 ];
 
 const BLOG_LINKS = [
@@ -28,13 +32,12 @@ export function Footer() {
   return (
     <footer className={`border-t mt-16 ${isDark ? 'bg-[#0d0d0d] border-[#2d2d2d]' : 'bg-gray-50 border-gray-200'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {/* Brand */}
-          <div>
+          <div className="sm:col-span-2 md:col-span-1">
             <div className="mb-3">
-              <img src="/logo-with-name.png" alt="JSONWorkspace" className="w-auto" style={{
-                height: "100px"
-              }} />            </div>
+              <img src="/logo-with-name.png" alt="JSONWorkspace" className="h-8 w-auto" />
+            </div>
             <p className={`text-xs leading-relaxed ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
               The best free JSON formatter, validator, and converter for developers. Fast, private, and always free.
             </p>
@@ -48,7 +51,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className={`text-xs hover:text-blue-400 transition-colors ${isDark ? 'text-gray-500' : 'text-gray-600'}`}
+                    className={`text-xs hover:text-brand-400 transition-colors ${isDark ? 'text-gray-500' : 'text-gray-600'}`}
                   >
                     {link.label}
                   </Link>
@@ -65,14 +68,14 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className={`text-xs hover:text-blue-400 transition-colors ${isDark ? 'text-gray-500' : 'text-gray-600'}`}
+                    className={`text-xs hover:text-brand-400 transition-colors ${isDark ? 'text-gray-500' : 'text-gray-600'}`}
                   >
                     {link.label}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link to="/blog" className={`text-xs hover:text-blue-400 transition-colors ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>
+                <Link to="/blog" className={`text-xs hover:text-brand-400 transition-colors ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>
                   All Articles →
                 </Link>
               </li>
@@ -85,16 +88,16 @@ export function Footer() {
             <p className={`text-xs mb-3 ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>
               Get notified about new developer tools and JSON tips.
             </p>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <input
                 type="email"
                 placeholder="you@example.com"
-                className={`flex-1 text-xs px-3 py-2 rounded-md border outline-none focus:border-blue-500 ${isDark
+                className={`flex-1 min-w-0 text-xs px-3 py-2 rounded-md border outline-none focus:border-brand-500 ${isDark
                   ? 'bg-[#1e1e1e] border-[#3d3d3d] text-gray-200 placeholder-gray-600'
                   : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
                   }`}
               />
-              <button className="px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs rounded-md transition-colors whitespace-nowrap">
+              <button className="px-3 py-2 bg-brand-600 hover:bg-brand-500 text-white text-xs rounded-md transition-colors whitespace-nowrap">
                 Subscribe
               </button>
             </div>
@@ -102,11 +105,11 @@ export function Footer() {
         </div>
 
         <div className={`mt-10 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-3 ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>
-          <p className={`text-xs ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>
+          <p className={`text-xs text-center sm:text-left ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>
             © {new Date().getFullYear()} JSONWorkspace. All rights reserved. All processing is 100% client-side — your data never leaves your browser.
           </p>
           <div className="flex items-center gap-4">
-            <Link to="/sitemap.xml" className={`text-xs hover:text-blue-400 ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>Sitemap</Link>
+            <Link to="/sitemap.xml" className={`text-xs hover:text-brand-400 ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>Sitemap</Link>
           </div>
         </div>
       </div>

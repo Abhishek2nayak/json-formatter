@@ -7,6 +7,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store';
 import { formatJSON, minifyJSON, parseJSON, getJSONStats, suggestFix } from '../utils/json';
+import { ShareButton } from './ShareButton';
+import { SaveSnippetButton } from './SnippetsPanel';
 import type { IndentSize, ViewMode } from '../types';
 
 interface TopBarProps {
@@ -122,7 +124,7 @@ export function TopBar({ isFullscreen, onToggleFullscreen }: TopBarProps) {
 
       {/* Logo */}
       <div className="flex items-center gap-2 mr-2">
-        <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center">
+        <div className="w-7 h-7 rounded-lg bg-brand-600 flex items-center justify-center">
           <Braces size={14} className="text-white" />
         </div>
         <span className={`text-sm font-semibold hidden sm:block ${isDark ? 'text-white' : 'text-gray-900'}`}>
@@ -213,6 +215,12 @@ export function TopBar({ isFullscreen, onToggleFullscreen }: TopBarProps) {
         <span className="hidden sm:block">Fix</span>
       </button>
 
+      {/* Save snippet */}
+      <SaveSnippetButton />
+
+      {/* Share */}
+      <ShareButton json={jsonInput} basePath="/app" />
+
       {/* Indent selector */}
       <div className="relative">
         <button
@@ -229,7 +237,7 @@ export function TopBar({ isFullscreen, onToggleFullscreen }: TopBarProps) {
               <button
                 key={size}
                 onClick={() => { setIndentSize(size); setShowIndentMenu(false); }}
-                className={`block w-full text-left px-3 py-1.5 text-xs hover:bg-blue-500/20 ${indentSize === size ? 'text-blue-400' : isDark ? 'text-gray-300' : 'text-gray-700'
+                className={`block w-full text-left px-3 py-1.5 text-xs hover:bg-brand-500/20 ${indentSize === size ? 'text-brand-400' : isDark ? 'text-gray-300' : 'text-gray-700'
                   }`}
               >
                 {size === 'tab' ? 'Tab' : `${size} spaces`}
@@ -248,7 +256,7 @@ export function TopBar({ isFullscreen, onToggleFullscreen }: TopBarProps) {
             key={item.id}
             onClick={() => setViewMode(item.id)}
             className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-medium transition-all ${viewMode === item.id
-                ? isDark ? 'bg-[#3d3d3d] text-white' : 'bg-white text-gray-900 shadow-sm'
+                ? isDark ? 'bg-brand-600/20 text-brand-400 border border-brand-500/30' : 'bg-brand-50 text-brand-700 shadow-sm'
                 : isDark ? 'text-gray-500 hover:text-gray-300' : 'text-gray-500 hover:text-gray-700'
               }`}
           >
@@ -263,7 +271,7 @@ export function TopBar({ isFullscreen, onToggleFullscreen }: TopBarProps) {
       {/* History */}
       <button
         onClick={() => setShowHistory(!showHistory)}
-        className={`btn-icon ${showHistory ? 'text-blue-400' : ''} ${isDark ? '' : 'hover:bg-gray-100'}`}
+        className={`btn-icon ${showHistory ? 'text-brand-400' : ''} ${isDark ? '' : 'hover:bg-gray-100'}`}
         title="History (H)"
       >
         <History size={15} />

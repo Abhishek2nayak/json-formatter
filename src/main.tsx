@@ -19,6 +19,10 @@ import { Base64Page } from './pages/tools/Base64Page'
 import { UrlEncoderPage } from './pages/tools/UrlEncoderPage'
 import { RegexTesterPage } from './pages/tools/RegexTesterPage'
 import { JsonToZodPage } from './pages/tools/JsonToZodPage'
+import { JsonPathPage } from './pages/tools/JsonPathPage'
+import { JsonToCodePage } from './pages/tools/JsonToCodePage'
+import { MockGeneratorPage } from './pages/tools/MockGeneratorPage'
+import { JsonToMarkdownPage } from './pages/tools/JsonToMarkdownPage'
 import App from './App'
 import './index.css'
 
@@ -48,6 +52,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path="/url-encoder" element={<UrlEncoderPage />} />
         <Route path="/regex-tester" element={<RegexTesterPage />} />
         <Route path="/json-to-zod" element={<JsonToZodPage />} />
+        <Route path="/json-path" element={<JsonPathPage />} />
+        <Route path="/json-to-code" element={<JsonToCodePage />} />
+        <Route path="/mock-generator" element={<MockGeneratorPage />} />
+        <Route path="/json-to-markdown" element={<JsonToMarkdownPage />} />
 
         {/* Blog */}
         <Route path="/blog" element={<BlogIndexPage />} />

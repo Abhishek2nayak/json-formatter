@@ -92,7 +92,7 @@ export function QuickTools() {
   const transforms = [
     { icon: <Filter size={12} />, label: 'Remove nulls', description: 'Remove all null values', action: () => transform(removeNullValues), color: 'text-red-400' },
     { icon: <Trash2 size={12} />, label: 'Remove empty', description: 'Remove empty strings, arrays, objects', action: () => transform(removeEmptyValues), color: 'text-orange-400' },
-    { icon: <SortAsc size={12} />, label: 'Sort keys', description: 'Sort keys alphabetically (recursive)', action: () => transform(sortKeysAlphabetically), color: 'text-blue-400' },
+    { icon: <SortAsc size={12} />, label: 'Sort keys', description: 'Sort keys alphabetically (recursive)', action: () => transform(sortKeysAlphabetically), color: 'text-brand-400' },
     { icon: <Minimize size={12} />, label: 'Flatten', description: 'Flatten nested structure to dot notation', action: () => transform(v => flattenJSON(v)), color: 'text-green-400' },
     { icon: <Maximize size={12} />, label: 'Unflatten', description: 'Restore nested structure from dot notation', action: () => { if (!parsed || typeof parsed !== 'object') return; setJsonInput(JSON.stringify(unflattenJSON(parsed as Record<string, unknown>), null, 2)); }, color: 'text-teal-400' },
     { icon: <Unlock size={12} />, label: 'Decode Base64', description: 'Decode all base64 string values', action: () => transform(decodeBase64InJSON), color: 'text-purple-400' },
@@ -170,7 +170,7 @@ export function QuickTools() {
                 onClick={() => setRegexTarget(opt)}
                 className={`text-xs px-2 py-0.5 rounded-full border transition-all ${
                   regexTarget === opt
-                    ? isDark ? 'bg-blue-500/20 border-blue-500/50 text-blue-400' : 'bg-blue-50 border-blue-300 text-blue-600'
+                    ? isDark ? 'bg-brand-500/20 border-brand-500/50 text-brand-400' : 'bg-brand-50 border-brand-300 text-brand-600'
                     : isDark ? 'border-[#2d2d2d] text-gray-500' : 'border-gray-200 text-gray-400'
                 }`}
               >
@@ -180,7 +180,7 @@ export function QuickTools() {
             <button
               onClick={handleRegexFilter}
               disabled={!isValid || !regexPattern}
-              className="ml-auto text-xs px-2.5 py-1 rounded-md bg-blue-600 hover:bg-blue-500 text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="ml-auto text-xs px-2.5 py-1 rounded-md bg-brand-600 hover:bg-brand-500 text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Filter
             </button>
@@ -226,7 +226,7 @@ export function QuickTools() {
               }`}>
                 <div className="flex items-center gap-1.5 mb-1">
                   <Clock size={11} className="text-cyan-400" />
-                  <code className={`text-xs font-mono truncate ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>
+                  <code className={`text-xs font-mono truncate ${isDark ? 'text-brand-400' : 'text-blue-600'}`}>
                     {ts.path}
                   </code>
                 </div>
@@ -319,7 +319,7 @@ function PathFinder({
       <div className="space-y-0.5 max-h-40 overflow-y-auto scrollbar-thin">
         {filtered.map(path => (
           <div key={path} className={`group flex items-center justify-between gap-2 px-2 py-1 rounded text-xs font-mono hover:bg-white/5 ${
-            isDark ? 'text-blue-400' : 'text-blue-600'
+            isDark ? 'text-brand-400' : 'text-blue-600'
           }`}>
             <span className="truncate">{path}</span>
             <button

@@ -11,11 +11,14 @@ import { Footer } from '../components/layout/Footer';
 import { SEOHead } from '../components/layout/SEOHead';
 import { useStore } from '../store';
 import { parseJSON, formatJSON, minifyJSON, suggestFix } from '../utils/json';
-import { toYAML, toXML, toCSV } from '../utils/converters';
+import { toYAML, toXML, toCSV, toMarkdown } from '../utils/converters';
 import { useFullscreen } from '../hooks/useFullscreen';
+import { ShareButton } from '../components/ShareButton';
+import { PathFinderPanel } from '../components/PathFinderPanel';
+import { decodeJsonFromUrl } from '../utils/share';
 import { SITE_URL } from '../constants';
 
-export type ToolMode = 'format' | 'validate' | 'minify' | 'prettify' | 'to-csv' | 'to-xml' | 'to-yaml';
+export type ToolMode = 'format' | 'validate' | 'minify' | 'prettify' | 'to-csv' | 'to-xml' | 'to-yaml' | 'to-markdown';
 
 interface SEOContent {
   h1: string;
@@ -54,10 +57,11 @@ function processJSON(input: string, mode: ToolMode): { output: string; error: st
       case 'prettify':   return { output: formatJSON(input, 2), error: null };
       case 'validate':   return { output: '✓ Valid JSON — no errors found.', error: null };
       case 'minify':     return { output: minifyJSON(input), error: null };
-      case 'to-yaml':    return { output: toYAML(parsed), error: null };
-      case 'to-xml':     return { output: toXML(parsed), error: null };
-      case 'to-csv':     return { output: toCSV(parsed), error: null };
-      default:           return { output: formatJSON(input, 2), error: null };
+      case 'to-yaml':     return { output: toYAML(parsed), error: null };
+      case 'to-xml':      return { output: toXML(parsed), error: null };
+      case 'to-csv':      return { output: toCSV(parsed), error: null };
+      case 'to-markdown': return { output: toMarkdown(parsed), error: null };
+      default:            return { output: formatJSON(input, 2), error: null };
     }
   } catch (e) {
     return { output: '', error: (e as Error).message };
@@ -68,19 +72,22 @@ const ACTION_LABELS: Record<ToolMode, string> = {
   format: 'Format JSON', validate: 'Validate JSON', minify: 'Minify JSON',
   prettify: 'Prettify JSON', 'to-csv': 'Convert to CSV',
   'to-xml': 'Convert to XML', 'to-yaml': 'Convert to YAML',
+  'to-markdown': 'Convert to Markdown',
 };
 
 function getOutputLanguage(mode: ToolMode) {
-  if (mode === 'to-yaml') return 'yaml';
-  if (mode === 'to-xml') return 'xml';
-  if (mode === 'to-csv') return 'plaintext';
+  if (mode === 'to-yaml')     return 'yaml';
+  if (mode === 'to-xml')      return 'xml';
+  if (mode === 'to-csv')      return 'plaintext';
+  if (mode === 'to-markdown') return 'markdown';
   return 'json';
 }
 
 function getFileExt(mode: ToolMode) {
-  if (mode === 'to-yaml') return 'yaml';
-  if (mode === 'to-xml') return 'xml';
-  if (mode === 'to-csv') return 'csv';
+  if (mode === 'to-yaml')     return 'yaml';
+  if (mode === 'to-xml')      return 'xml';
+  if (mode === 'to-csv')      return 'csv';
+  if (mode === 'to-markdown') return 'md';
   return 'json';
 }
 
@@ -108,6 +115,7 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
   const [error, setError]       = useState<string | null>(null);
   const [copied, setCopied]     = useState(false);
   const [isValid, setIsValid]   = useState<boolean | null>(null);
+  const [outputTab, setOutputTab] = useState<'output' | 'path'>('output');
   const { isFullscreen, toggleFullscreen, showHint } = useFullscreen();
 
   // Lock body scroll in fullscreen
@@ -121,6 +129,20 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
     document.documentElement.classList.toggle('dark', isDark);
     document.documentElement.classList.toggle('light', !isDark);
   }, [isDark]);
+
+  // Load shared JSON from URL param ?j=<encoded>
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const encoded = params.get('j');
+    if (encoded) {
+      const decoded = decodeJsonFromUrl(encoded);
+      if (decoded) {
+        setInput(decoded);
+        run(decoded);
+        window.history.replaceState({}, '', seo.canonical);
+      }
+    }
+  }, []);
 
   const run = useCallback((value: string) => {
     const { output: out, error: err } = processJSON(value, mode);
@@ -184,7 +206,7 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
       </button>
 
       <button onClick={() => run(input)}
-        className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-md text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white transition-colors">
+        className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-md text-xs font-medium bg-brand-600 hover:bg-brand-500 text-white transition-colors">
         <Braces size={12} /> {ACTION_LABELS[mode]}
       </button>
 
@@ -205,6 +227,9 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
           {isValid ? 'Valid' : 'Invalid'}
         </span>
       )}
+
+      {/* Share */}
+      <ShareButton json={input} basePath={seo.canonical} />
 
       <div className="flex-1" />
 
@@ -256,12 +281,26 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
         </div>
       </div>
 
-      {/* Output */}
+      {/* Output panel — tabs: Output | Path */}
       <div className="flex flex-col">
-        <div className={`flex items-center justify-between px-3 py-2 border-b flex-shrink-0 ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>
-          <span className={`text-xs ${textMuted}`}>Output</span>
-          {output && (
-            <div className="flex items-center gap-1">
+        {/* Tab bar */}
+        <div className={`flex items-center border-b flex-shrink-0 ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>
+          {(['output', 'path'] as const).map(tab => (
+            <button
+              key={tab}
+              onClick={() => setOutputTab(tab)}
+              className={`px-4 py-2 text-xs font-medium transition-colors ${
+                outputTab === tab
+                  ? isDark ? 'text-white border-b-2 border-b-brand-500' : 'text-gray-900 border-b-2 border-b-brand-500'
+                  : isDark ? 'text-gray-500 hover:text-gray-300' : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              {tab === 'output' ? 'Output' : '⟨/⟩ Path'}
+            </button>
+          ))}
+          {/* Copy/Download shown only on Output tab */}
+          {outputTab === 'output' && output && (
+            <div className="flex items-center gap-1 ml-auto pr-2">
               <button onClick={handleCopy}
                 className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors ${
                   copied ? 'bg-green-500/20 text-green-400'
@@ -278,8 +317,11 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
             </div>
           )}
         </div>
-        <div className="flex-1" style={{ height }}>
-          {error ? (
+
+        <div className="flex-1 overflow-hidden" style={{ height }}>
+          {outputTab === 'path' ? (
+            <PathFinderPanel json={input} />
+          ) : error ? (
             <div className="p-4">
               <div className="flex items-start gap-2 p-3 rounded-lg bg-red-500/10 border border-red-500/20">
                 <AlertCircle size={14} className="text-red-400 mt-0.5 flex-shrink-0" />
@@ -350,7 +392,7 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
         <div className={`border-b ${isDark ? 'border-[#2d2d2d]' : 'border-gray-200'}`}>
           {Toolbar}
           {showHint && (
-            <div className={`flex items-center justify-between px-4 py-1.5 border-b text-xs ${isDark ? 'bg-blue-600/5 border-blue-600/15 text-blue-400' : 'bg-blue-50 border-blue-200 text-blue-600'}`}>
+            <div className={`flex items-center justify-between px-4 py-1.5 border-b text-xs ${isDark ? 'bg-brand-600/5 border-brand-600/15 text-brand-400' : 'bg-brand-50 border-brand-200 text-brand-600'}`}>
               <span>Open in fullscreen for the best editor experience</span>
               <button onClick={toggleFullscreen} className="font-medium underline whitespace-nowrap ml-4">
                 Go Fullscreen →
@@ -365,16 +407,16 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
         {/* Full editor CTA */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
           <div className={`p-4 rounded-lg border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${
-            isDark ? 'bg-blue-600/5 border-blue-600/20' : 'bg-blue-50 border-blue-200'
+            isDark ? 'bg-brand-600/5 border-brand-600/20' : 'bg-brand-50 border-brand-200'
           }`}>
             <div>
-              <p className={`text-sm font-medium ${isDark ? 'text-blue-300' : 'text-blue-800'}`}>Need more power?</p>
-              <p className={`text-xs mt-0.5 ${isDark ? 'text-blue-400/70' : 'text-blue-600'}`}>
+              <p className={`text-sm font-medium ${isDark ? 'text-brand-300' : 'text-brand-800'}`}>Need more power?</p>
+              <p className={`text-xs mt-0.5 ${isDark ? 'text-brand-400/70' : 'text-brand-600'}`}>
                 Tree view · Diff compare · Schema generator · 7 conversion formats · History panel
               </p>
             </div>
             <Link to="/app"
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium rounded-lg transition-colors whitespace-nowrap">
+              className="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white text-xs font-medium rounded-lg transition-colors whitespace-nowrap">
               Open Full Editor →
             </Link>
           </div>
@@ -391,7 +433,7 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
               <ol className="space-y-3">
                 {content.howTo.map((step, i) => (
                   <li key={i} className="flex gap-3">
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center font-medium">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-600 text-white text-xs flex items-center justify-center font-medium">
                       {i + 1}
                     </span>
                     <div>
@@ -434,8 +476,8 @@ export function ToolPage({ mode, seo, content }: ToolPageProps) {
                   <Link key={t.href} to={t.href}
                     className={`px-3 py-1.5 rounded-md text-xs font-medium border transition-colors ${
                       isDark
-                        ? 'border-[#3d3d3d] text-gray-400 hover:text-blue-400 hover:border-blue-500/40'
-                        : 'border-gray-200 text-gray-600 hover:text-blue-600 hover:border-blue-300'
+                        ? 'border-[#3d3d3d] text-gray-400 hover:text-brand-400 hover:border-brand-500/40'
+                        : 'border-gray-200 text-gray-600 hover:text-brand-600 hover:border-brand-300'
                     }`}>
                     {t.label}
                   </Link>

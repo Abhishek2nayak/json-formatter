@@ -12,7 +12,8 @@ const FORMATS: { id: ConvertFormat; label: string; ext: string; icon: string }[]
   { id: 'typescript', label: 'TypeScript', ext: 'ts', icon: '🔷' },
   { id: 'python', label: 'Python', ext: 'py', icon: '🐍' },
   { id: 'java', label: 'Java', ext: 'java', icon: '☕' },
-  { id: 'env', label: '.env', ext: 'env', icon: '⚙️' },
+  { id: 'env',      label: '.env',     ext: 'env', icon: '⚙️' },
+  { id: 'markdown', label: 'Markdown', ext: 'md',  icon: '📝' },
 ];
 
 export function ConvertView() {
@@ -59,7 +60,7 @@ export function ConvertView() {
             onClick={() => setConvertFormat(fmt.id)}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all whitespace-nowrap flex-shrink-0 ${
               convertFormat === fmt.id
-                ? 'bg-blue-600 text-white'
+                ? 'bg-brand-600 text-white'
                 : isDark
                   ? 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-200'

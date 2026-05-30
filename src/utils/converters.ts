@@ -251,16 +251,48 @@ export function toEnv(parsed: unknown, prefix: string = ''): string {
   return lines.join('\n');
 }
 
+export function toMarkdown(parsed: unknown): string {
+  // Flatten a single value for display
+  function cellStr(v: unknown): string {
+    if (v === null || v === undefined) return '';
+    if (typeof v === 'object') return JSON.stringify(v);
+    return String(v).replace(/\|/g, '\\|').replace(/\n/g, ' ');
+  }
+
+  // Array of objects → table
+  if (Array.isArray(parsed) && parsed.length > 0 && typeof parsed[0] === 'object' && parsed[0] !== null) {
+    const keys = Array.from(new Set(parsed.flatMap(row => Object.keys(row as object))));
+    const header = `| ${keys.join(' | ')} |`;
+    const sep    = `| ${keys.map(() => '---').join(' | ')} |`;
+    const rows   = parsed.map(row =>
+      `| ${keys.map(k => cellStr((row as Record<string, unknown>)[k])).join(' | ')} |`
+    );
+    return [header, sep, ...rows].join('\n');
+  }
+
+  // Single flat object → 2-column key/value table
+  if (typeof parsed === 'object' && parsed !== null && !Array.isArray(parsed)) {
+    const entries = Object.entries(parsed as Record<string, unknown>);
+    const header = `| Key | Value |`;
+    const sep    = `| --- | --- |`;
+    const rows   = entries.map(([k, v]) => `| ${k} | ${cellStr(v)} |`);
+    return [header, sep, ...rows].join('\n');
+  }
+
+  return `| Value |\n| --- |\n| ${cellStr(parsed)} |`;
+}
+
 export function convert(parsed: unknown, format: ConvertFormat): string {
   switch (format) {
-    case 'yaml': return toYAML(parsed);
-    case 'xml': return toXML(parsed);
-    case 'csv': return toCSV(parsed);
+    case 'yaml':     return toYAML(parsed);
+    case 'xml':      return toXML(parsed);
+    case 'csv':      return toCSV(parsed);
     case 'typescript': return toTypeScript(parsed);
-    case 'python': return toPython(parsed);
-    case 'java': return toJava(parsed);
-    case 'env': return toEnv(parsed);
-    default: return '';
+    case 'python':   return toPython(parsed);
+    case 'java':     return toJava(parsed);
+    case 'env':      return toEnv(parsed);
+    case 'markdown': return toMarkdown(parsed);
+    default:         return '';
   }
 }
 

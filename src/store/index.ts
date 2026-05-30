@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 // zustand v5 compatible
-import type { Theme, ViewMode, IndentSize, JsonError, JsonStats, HistoryEntry, ConvertFormat } from '../types';
+import type { Theme, ViewMode, IndentSize, JsonError, JsonStats, HistoryEntry, ConvertFormat, SavedSnippet } from '../types';
 
 interface AppState {
   // Theme
@@ -47,6 +47,13 @@ interface AppState {
   addToHistory: (content: string) => void;
   clearHistory: () => void;
   loadFromHistory: (id: string) => void;
+
+  // Saved snippets
+  snippets: SavedSnippet[];
+  saveSnippet: (name: string, content: string) => void;
+  deleteSnippet: (id: string) => void;
+  renameSnippet: (id: string, name: string) => void;
+  loadSnippet: (id: string) => void;
 
   // UI state
   showHistory: boolean;
@@ -136,6 +143,28 @@ export const useStore = create<AppState>()(
         if (entry) set({ jsonInput: entry.content });
       },
 
+      // Saved snippets
+      snippets: [],
+      saveSnippet: (name, content) => {
+        if (!content.trim()) return;
+        const entry: SavedSnippet = {
+          id: Date.now().toString(),
+          name: name.trim() || `Snippet ${Date.now()}`,
+          content,
+          createdAt: Date.now(),
+          size: content.length,
+        };
+        set(state => ({ snippets: [entry, ...state.snippets] }));
+      },
+      deleteSnippet: (id) => set(state => ({ snippets: state.snippets.filter(s => s.id !== id) })),
+      renameSnippet: (id, name) => set(state => ({
+        snippets: state.snippets.map(s => s.id === id ? { ...s, name } : s),
+      })),
+      loadSnippet: (id) => {
+        const s = get().snippets.find(s => s.id === id);
+        if (s) set({ jsonInput: s.content });
+      },
+
       // UI
       showHistory: false,
       setShowHistory: (show) => set({ showHistory: show }),
@@ -152,6 +181,7 @@ export const useStore = create<AppState>()(
         theme: state.theme,
         history: state.history,
         indentSize: state.indentSize,
+        snippets: state.snippets,
       }),
     }
   )
