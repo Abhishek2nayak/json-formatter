@@ -4,21 +4,6 @@
   status = 301
   force = true
 
-# Consolidate trailing-slash duplicates onto the canonical no-slash URL
-# (old crawled /route/ URLs, single-segment routes and /app)
-[[redirects]]
-  from = "/:path/"
-  to = "/:path"
-  status = 301
-  force = true
-
-# Consolidate trailing-slash duplicates for blog posts
-[[redirects]]
-  from = "/blog/:slug/"
-  to = "/blog/:slug"
-  status = 301
-  force = true
-
 # SPA fallback for unknown routes — real 404 status (all valid routes are
 # pre-rendered as static files by scripts/inject-meta.mjs and never reach this)
 [[redirects]]
