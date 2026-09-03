@@ -1,5 +1,10 @@
 # Force redirect old Netlify subdomain to custom domain
 https://jsonmaster.netlify.app/* https://jsonworkspace.mythosh.com/:splat 301!
 
-# SPA fallback for client-side routing
-/* /index.html 200
+# Consolidate trailing-slash duplicates onto the canonical no-slash URL
+/:path/ /:path 301!
+/blog/:slug/ /blog/:slug 301!
+
+# SPA fallback for unknown routes — real 404 status (all valid routes are
+# pre-rendered as static files and never reach this)
+/* /index.html 404

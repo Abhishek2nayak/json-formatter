@@ -1,9 +1,10 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Clock, ArrowLeft, ArrowRight } from 'lucide-react';
 import { SiteNav } from '../components/layout/SiteNav';
 import { Footer } from '../components/layout/Footer';
 import { SEOHead } from '../components/layout/SEOHead';
+import { NotFoundPage } from './NotFoundPage';
 import { useStore } from '../store';
 import { BLOG_POSTS, getBlogPost } from '../data/blog-posts';
 
@@ -19,7 +20,6 @@ export function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
   const { theme } = useStore();
   const isDark = theme === 'dark';
-  const navigate = useNavigate();
 
   const post = getBlogPost(slug ?? '');
   const currentIndex = BLOG_POSTS.findIndex(p => p.slug === slug);
@@ -31,11 +31,7 @@ export function BlogPostPage() {
     document.documentElement.classList.toggle('light', !isDark);
   }, [isDark]);
 
-  useEffect(() => {
-    if (!post) navigate('/blog', { replace: true });
-  }, [post, navigate]);
-
-  if (!post) return null;
+  if (!post) return <NotFoundPage />;
 
   const bg = isDark ? 'bg-[#141414] text-gray-200' : 'bg-gray-50 text-gray-900';
   const textMuted = isDark ? 'text-gray-500' : 'text-gray-500';

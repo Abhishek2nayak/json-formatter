@@ -39,18 +39,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/json-editor</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/json-viewer</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
 
   <!-- ========================================
        JSON CONVERTERS  (priority 0.8)
@@ -80,40 +68,14 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jsonworkspace.mythosh.com/json-to-typescript</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/json-to-table</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/csv-to-json</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/yaml-to-json</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/xml-to-json</loc>
-    <lastmod>2026-05-23</lastmod>
+    <loc>https://jsonworkspace.mythosh.com/json-to-markdown</loc>
+    <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- ========================================
        DEVELOPER TOOLS  (priority 0.8–0.9)
-       These target lower-competition keywords
-       — rank these FIRST as a new site
   ======================================== -->
   <url>
     <loc>https://jsonworkspace.mythosh.com/jwt-decoder</loc>
@@ -152,26 +114,20 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jsonworkspace.mythosh.com/json-path-tester</loc>
-    <lastmod>2026-05-23</lastmod>
+    <loc>https://jsonworkspace.mythosh.com/json-path</loc>
+    <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jsonworkspace.mythosh.com/json-schema-validator</loc>
-    <lastmod>2026-05-23</lastmod>
+    <loc>https://jsonworkspace.mythosh.com/json-to-code</loc>
+    <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jsonworkspace.mythosh.com/json-stringify</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/hash-generator</loc>
-    <lastmod>2026-05-23</lastmod>
+    <loc>https://jsonworkspace.mythosh.com/mock-generator</loc>
+    <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -187,9 +143,7 @@
   </url>
 
   <!-- ========================================
-       BLOG — EXISTING POSTS
-       Dates corrected to reflect real publish
-       times; set to actual content dates
+       BLOG POSTS
   ======================================== -->
   <url>
     <loc>https://jsonworkspace.mythosh.com/blog/what-is-json-and-how-it-works</loc>
@@ -217,7 +171,7 @@
   </url>
   <url>
     <loc>https://jsonworkspace.mythosh.com/blog/best-json-formatter-tools</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -269,113 +223,35 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- ========================================
-       BLOG — NEW POSTS TO WRITE
-       Targeting low-competition keywords that
-       a new site can realistically rank for
-  ======================================== -->
-
-  <!-- JWT / Auth cluster -->
   <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/what-is-jwt-and-how-to-decode-it</loc>
-    <lastmod>2026-05-23</lastmod>
+    <loc>https://jsonworkspace.mythosh.com/blog/jsonlint-alternative-jsonworkspace</loc>
+    <lastmod>2026-05-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/jwt-header-payload-signature-explained</loc>
-    <lastmod>2026-05-23</lastmod>
+    <loc>https://jsonworkspace.mythosh.com/blog/json-formatter-comparison-2026</loc>
+    <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/how-to-verify-jwt-token-online</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Base64 cluster -->
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/what-is-base64-encoding</loc>
-    <lastmod>2026-05-23</lastmod>
+    <loc>https://jsonworkspace.mythosh.com/blog/jsonpath-explorer-how-to-query-json-online</loc>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/base64-encode-decode-javascript</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Zod / TypeScript cluster -->
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/zod-schema-generator-guide</loc>
-    <lastmod>2026-05-23</lastmod>
+    <loc>https://jsonworkspace.mythosh.com/blog/new-features-jsonpath-code-generator-mock-data-share</loc>
+    <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/json-to-typescript-interface-guide</loc>
-    <lastmod>2026-05-23</lastmod>
+    <loc>https://jsonworkspace.mythosh.com/blog/json-browser-extension-for-chrome</loc>
+    <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/zod-vs-yup-schema-validation</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Regex cluster -->
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/regex-tutorial-for-developers</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/common-regex-patterns-for-validation</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- URL encoding cluster -->
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/what-is-url-encoding</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- JSON advanced cluster -->
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/json-path-guide-and-examples</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/how-to-compare-two-json-objects</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/json-to-yaml-conversion-guide</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://jsonworkspace.mythosh.com/blog/how-to-minify-json-for-production</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
 
 </urlset>

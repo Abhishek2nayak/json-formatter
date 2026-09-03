@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { HelmetProvider } from 'react-helmet-async'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { BlogIndexPage } from './pages/BlogIndexPage'
 import { BlogPostPage } from './pages/BlogPostPage'
 import { JsonFormatterPage } from './pages/tools/JsonFormatterPage'
@@ -61,8 +62,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path="/blog" element={<BlogIndexPage />} />
         <Route path="/blog/:slug" element={<BlogPostPage />} />
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* Fallback — real 404, not a redirect */}
+        <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </HelmetProvider>

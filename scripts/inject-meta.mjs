@@ -6,13 +6,17 @@
  * before JS runs — which it treats as duplicate content, blocking rankings.
  *
  * This script runs after `vite build` and copies dist/index.html to
- * dist/<route>/index.html for every known route, injecting the correct
+ * dist/<route>.html for every known route, injecting the correct
  * title, description, canonical, and OG tags into each copy.
  *
- * Netlify serves dist/<route>/index.html directly when the file exists,
- * so Googlebot gets unique, correct meta tags without executing any JS.
- * The `/* /index.html 200` SPA fallback in _redirects still handles
- * any unknown or dynamic routes.
+ * Netlify serves dist/<route>.html at /<route> directly when the file
+ * exists (clean URLs, no redirect), so Googlebot gets unique, correct
+ * meta tags without executing any JS. Deliberately NOT dist/<route>/index.html —
+ * Netlify's pretty-urls post-processing 301-redirects /<route> -> /<route>/
+ * when a directory+index.html exists, which caused "Page with redirect"
+ * and duplicate-canonical issues in Google Search Console.
+ * The `/* /index.html 404` SPA fallback in _redirects still handles
+ * any unknown route (see main.tsx NotFoundPage).
  */
 
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
@@ -53,9 +57,9 @@ function inject(html, { title, description, url }) {
 
 function writeRoute(slug, { title, description }) {
   const url = `${SITE}/${slug}`;
-  const dir = join(distDir, slug);
-  mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, 'index.html'), inject(template, { title, description, url }));
+  const filePath = join(distDir, `${slug}.html`);
+  mkdirSync(dirname(filePath), { recursive: true });
+  writeFileSync(filePath, inject(template, { title, description, url }));
   console.log(`  ✓ /${slug}`);
 }
 
@@ -142,6 +146,26 @@ const ROUTES = [
     title: 'JSON Blog — Developer Guides & Tutorials | JsonWorkspace',
     description: 'Learn JSON fundamentals, debugging tips, conversion guides, and best practices for developers. Free articles from the JsonWorkspace team.',
   },
+  {
+    slug: 'json-path',
+    title: 'JSONPath Explorer — Test & Run JSONPath Expressions Online | JsonWorkspace',
+    description: 'Test JSONPath expressions on real JSON. Instantly see matching values with path annotations. Free online JSONPath tester with Monaco Editor.',
+  },
+  {
+    slug: 'json-to-code',
+    title: 'JSON to Code Generator — TypeScript, Python, Go, SQL | JsonWorkspace',
+    description: 'Generate TypeScript interfaces, Python dataclasses, Go structs, SQL tables, Rust structs, and C# classes from any JSON. Free online code generator.',
+  },
+  {
+    slug: 'mock-generator',
+    title: 'JSON Mock Data Generator — Generate Fake Test Data | JsonWorkspace',
+    description: 'Generate realistic fake JSON test data instantly. Paste a sample JSON object and get N records with smart field detection using Faker.js.',
+  },
+  {
+    slug: 'json-to-markdown',
+    title: 'JSON to Markdown Table Converter Online Free | JsonWorkspace',
+    description: 'Convert JSON arrays to Markdown tables instantly. Paste a JSON array of objects and get a formatted Markdown table ready to paste into GitHub, Notion, or any Markdown editor.',
+  },
 ];
 
 // ─── Blog post routes ─────────────────────────────────────────────────────────
@@ -211,6 +235,31 @@ const BLOG_POSTS = [
     slug: 'blog/json-schema-validation-guide',
     title: 'JSON Schema Validation Guide — Types, Formats & Examples | JsonWorkspace',
     description: 'Learn JSON Schema validation from scratch. Covers types, required fields, string formats, numbers, arrays, nested objects, $ref, and how to validate in JavaScript.',
+  },
+  {
+    slug: 'blog/jsonlint-alternative-jsonworkspace',
+    title: 'JSONLint Alternative for Developers in 2026 | JSONWorkspace',
+    description: 'JSONLint is fine for basic validation, but if you want dark mode, a tree view, JSONPath queries, type generation, and history — you need JSONWorkspace. Here\'s the honest comparison.',
+  },
+  {
+    slug: 'blog/json-formatter-comparison-2026',
+    title: 'Best Online JSON Formatter 2026 — Honest Comparison | JSONWorkspace',
+    description: 'Tested JSONFormatter.org, JSONLint, JSON Crack, Postman, and others against JSONWorkspace. Real differences in editor quality, features, privacy, and mobile experience.',
+  },
+  {
+    slug: 'blog/jsonpath-explorer-how-to-query-json-online',
+    title: 'JSONPath Explorer Online — Query JSON with JSONPath Expressions Free | JSONWorkspace',
+    description: 'JSONPath lets you query JSON like SQL queries a database. Our free online JSONPath Explorer highlights matches in real time — no setup, works with any JSON.',
+  },
+  {
+    slug: 'blog/new-features-jsonpath-code-generator-mock-data-share',
+    title: 'New: JSONPath Explorer, Code Generator, Mock Data Generator | JSONWorkspace',
+    description: 'We shipped JSONPath Explorer, a code generator for TypeScript/Python/Go/SQL, a mock data generator, share-via-URL, saved snippets, JSON-to-Markdown, and a browser extension. Here\'s what each one does.',
+  },
+  {
+    slug: 'blog/json-browser-extension-for-chrome',
+    title: 'JSON Formatter Chrome Extension — JSONWorkspace | Format JSON in Browser',
+    description: 'Our Chrome extension detects raw JSON pages and opens them in JSONWorkspace with one click. Smarter than built-in browser JSON viewers and doesn\'t override your default rendering.',
   },
 ];
 
